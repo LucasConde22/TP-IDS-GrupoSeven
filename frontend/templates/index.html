@@ -50,7 +50,7 @@
     <!-- END nav -->
 
     <section class="home-slider owl-carousel">
-      <div class="slider-item" style="background-image:url(images/bg_1.jpg);">
+      <div class="slider-item" style="background-image:url({{url_for('static', filename = 'images/bg_1.jpg')}});">
       	<div class="overlay"></div>
         <div class="container">
           <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -64,7 +64,7 @@
         </div>
       </div>
 
-      <div class="slider-item" style="background-image:url(images/bg_2.jpg);">
+      <div class="slider-item" style="background-image:url({{url_for('static', filename = 'images/bg_2.jpg')}});">
       	<div class="overlay"></div>
         <div class="container">
           <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -154,8 +154,8 @@
     <section class="ftco-section ftc-no-pb ftc-no-pt">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-5 p-md-5 img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/bg_2.jpg);">
-						<a href="https://vimeo.com/45830194" class="icon popup-vimeo d-flex justify-content-center align-items-center">
+					<div class="col-md-5 p-md-5 img img-2 d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static', filename = 'images/bg_2.jpg')}});">
+						<a href="{{url_for('static', filename = 'images/video.mp4')}}" class="icon popup-vimeo d-flex justify-content-center align-items-center">
 							<span class="icon-play"></span>
 						</a>
 					</div>
@@ -251,7 +251,7 @@
     		<div class="row">
     			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
     				<div class="room">
-    					<a href="{{url_for('habitaciones')}}" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/room-1.jpg);">
+    					<a href="{{url_for('habitaciones')}}" class="img d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static', filename = 'images/room-1.jpg')}});">
     						<div class="icon d-flex justify-content-center align-items-center">
     							<span class="icon-search2"></span>
     						</div>
@@ -266,7 +266,7 @@
     			</div>
     			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
     				<div class="room">
-    					<a href="{{url_for('habitaciones')}}" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/room-2.jpg);">
+    					<a href="{{url_for('habitaciones')}}" class="img d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static', filename = 'images/room-2.jpg')}});">
     						<div class="icon d-flex justify-content-center align-items-center">
     							<span class="icon-search2"></span>
     						</div>
@@ -281,7 +281,7 @@
     			</div>
     			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
     				<div class="room">
-    					<a href="{{url_for('habitaciones')}}" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/room-3.jpg);">
+    					<a href="{{url_for('habitaciones')}}" class="img d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static', filename = 'images/room-3.jpg')}});">
     						<div class="icon d-flex justify-content-center align-items-center">
     							<span class="icon-search2"></span>
     						</div>
@@ -298,7 +298,7 @@
     	</div>
     </section>
 
-    <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(images/bg_1.jpg);">
+    <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url({{url_for('static', filename = 'images/bg_1.jpg')}});">
     	<div class="container">
     		<div class="row justify-content-center">
     			<div class="col-md-10">
@@ -351,7 +351,7 @@
 		            <div class="carousel-testimony owl-carousel ftco-owl">
 		              <div class="item">
 		                <div class="testimony-wrap py-4 pb-5">
-		                  <div class="user-img mb-4" style="background-image: url(images/person_1.jpg)">
+		                  <div class="user-img mb-4" style="background-image: url({{url_for('static', filename = 'images/person_1.jpg')}})">
 		                    <span class="quote d-flex align-items-center justify-content-center">
 		                      <i class="icon-quote-left"></i>
 		                    </span>
@@ -360,14 +360,14 @@
 		                    <p class="mb-4">"¡Una experiencia inolvidable! El Nexus Hotel superó todas mis expectativas. Desde la atención del personal hasta la comodidad de la habitación, todo fue simplemente perfecto."
 
 							</p>
-		                    <p class="name">Ana Sánchez</p>
+		                    <p class="name">Eduardo Sánchez</p>
 		                    <span class="position">Huespedes</span>
 		                  </div>
 		                </div>
 		              </div>
 		              <div class="item">
 		                <div class="testimony-wrap py-4 pb-5">
-		                  <div class="user-img mb-4" style="background-image: url(images/person_2.jpg)">
+		                  <div class="user-img mb-4" style="background-image: url({{url_for('static', filename = 'images/person_2.jpg')}})">
 		                    <span class="quote d-flex align-items-center justify-content-center">
 		                      <i class="icon-quote-left"></i>
 		                    </span>
@@ -381,35 +381,35 @@
 		              </div>
 		              <div class="item">
 		                <div class="testimony-wrap py-4 pb-5">
-		                  <div class="user-img mb-4" style="background-image: url(images/person_3.jpg)">
+		                  <div class="user-img mb-4" style="background-image: url({{url_for('static', filename = 'images/person_3.jpg')}})">
 		                    <span class="quote d-flex align-items-center justify-content-center">
 		                      <i class="icon-quote-left"></i>
 		                    </span>
 		                  </div>
 		                  <div class="text text-center">
 		                    <p class="mb-4">"¡Increíble! El spa del Nexus Hotel es un santuario de relajación. Los tratamientos son de alta calidad y el ambiente es simplemente mágico."</p>
-		                    <p class="name">María González</p>
+		                    <p class="name">Carlos González</p>
 		                    <span class="position">Huespedes</span>
 		                  </div>
 		                </div>
 		              </div>
 		              <div class="item">
 		                <div class="testimony-wrap py-4 pb-5">
-		                  <div class="user-img mb-4" style="background-image: url(images/person_1.jpg)">
+		                  <div class="user-img mb-4" style="background-image: url({{url_for('static', filename = 'images/person_4.jpg')}})">
 		                    <span class="quote d-flex align-items-center justify-content-center">
 		                      <i class="icon-quote-left"></i>
 		                    </span>
 		                  </div>
 		                  <div class="text text-center">
-		                    <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-		                    <p class="name">Nathan Smith</p>
+		                    <p class="mb-4">"El servicio de transporte del hotel hizo que mi estancia fuera aún más placentera. Rápido, eficiente y siempre con una sonrisa."</p>
+		                    <p class="name">Pedro Rodríguez:</p>
 		                    <span class="position">Huespedes</span>
 		                  </div>
 		                </div>
 		              </div>
 		              <div class="item">
 		                <div class="testimony-wrap py-4 pb-5">
-		                  <div class="user-img mb-4" style="background-image: url(images/person_1.jpg)">
+		                  <div class="user-img mb-4" style="background-image: url({{url_for('static', filename = 'images/person_5.jpg')}})">
 		                    <span class="quote d-flex align-items-center justify-content-center">
 		                      <i class="icon-quote-left"></i>
 		                    </span>
@@ -438,35 +438,35 @@
         </div>
         <div class="row no-gutters">
           <div class="col-sm-12 col-md ftco-animate">
-            <a href="{{url_for('static', filename = 'images/insta-1.jpg')}}"class="insta-img image-popup" style="background-image: url(images/insta-1.jpg);">
+            <a href="{{url_for('static', filename = 'images/insta-1.jpg')}}"class="insta-img image-popup" style="background-image: url({{url_for('static', filename = 'images/insta-1.jpg')}});">
               <div class="icon d-flex justify-content-center">
                 <span class="icon-instagram align-self-center"></span>
               </div>
             </a>
           </div>
           <div class="col-sm-12 col-md ftco-animate">
-            <a href="{{url_for('static', filename = 'images/insta-2.jpg')}}" class="insta-img image-popup" style="background-image: url(images/insta-2.jpg);">
+            <a href="{{url_for('static', filename = 'images/insta-2.jpg')}}" class="insta-img image-popup" style="background-image: url({{url_for('static', filename = 'images/insta-2.jpg')}});">
               <div class="icon d-flex justify-content-center">
                 <span class="icon-instagram align-self-center"></span>
               </div>
             </a>
           </div>
           <div class="col-sm-12 col-md ftco-animate">
-            <a href="{{url_for('static', filename = 'images/insta-3.jpg')}}" class="insta-img image-popup" style="background-image: url(images/insta-3.jpg);">
+            <a href="{{url_for('static', filename = 'images/insta-3.jpg')}}" class="insta-img image-popup" style="background-image: url({{url_for('static', filename = 'images/insta-3.jpg')}});">
               <div class="icon d-flex justify-content-center">
                 <span class="icon-instagram align-self-center"></span>
               </div>
             </a>
           </div>
           <div class="col-sm-12 col-md ftco-animate">
-            <a href="{{url_for('static', filename = 'images/insta-4.jpg')}}" class="insta-img image-popup" style="background-image: url(images/insta-4.jpg);">
+            <a href="{{url_for('static', filename = 'images/insta-4.jpg')}}" class="insta-img image-popup" style="background-image: url({{url_for('static', filename = 'images/insta-4.jpg')}});">
               <div class="icon d-flex justify-content-center">
                 <span class="icon-instagram align-self-center"></span>
               </div>
             </a>
           </div>
           <div class="col-sm-12 col-md ftco-animate">
-            <a href="{{url_for('static', filename = 'images/insta-5.jpg')}}" class="insta-img image-popup" style="background-image: url(images/insta-5.jpg);">
+            <a href="{{url_for('static', filename = 'images/insta-5.jpg')}}" class="insta-img image-popup" style="background-image: url({{url_for('static', filename = 'images/insta-5.jpg')}});">
               <div class="icon d-flex justify-content-center">
                 <span class="icon-instagram align-self-center"></span>
               </div>
