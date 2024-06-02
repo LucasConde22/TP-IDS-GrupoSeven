@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-06-2024 a las 03:50:48
+-- Tiempo de generación: 02-06-2024 a las 23:18:18
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -52,6 +52,21 @@ INSERT INTO `habitaciones` (`numero`, `tipo`) VALUES
 (106, 'simple'),
 (107, 'simple'),
 (108, 'simple');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reservas`
+--
+
+CREATE TABLE `reservas` (
+  `numero` int(11) NOT NULL,
+  `usuario` int(11) NOT NULL,
+  `habitacion` int(11) NOT NULL,
+  `entrada` date NOT NULL,
+  `salida` date NOT NULL,
+  `valor` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -108,6 +123,14 @@ ALTER TABLE `habitaciones`
   ADD KEY `tipo_fk` (`tipo`);
 
 --
+-- Indices de la tabla `reservas`
+--
+ALTER TABLE `reservas`
+  ADD PRIMARY KEY (`numero`),
+  ADD KEY `id_usuario` (`usuario`),
+  ADD KEY `numero_habitacion` (`habitacion`);
+
+--
 -- Indices de la tabla `tipos_habitaciones`
 --
 ALTER TABLE `tipos_habitaciones`
@@ -124,6 +147,12 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `reservas`
+--
+ALTER TABLE `reservas`
+  MODIFY `numero` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -138,6 +167,13 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `habitaciones`
   ADD CONSTRAINT `habitaciones_ibfk_1` FOREIGN KEY (`tipo`) REFERENCES `tipos_habitaciones` (`tipo`);
+
+--
+-- Filtros para la tabla `reservas`
+--
+ALTER TABLE `reservas`
+  ADD CONSTRAINT `reservas_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuarios` (`id`),
+  ADD CONSTRAINT `reservas_ibfk_2` FOREIGN KEY (`habitacion`) REFERENCES `habitaciones` (`numero`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
