@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Log in{% endblock %}
+{% block h1 %}Log in{% endblock %}
+{% block main_content %}
+
+<section class="ftco-section">
+<div class="container">
+
+<!-- Login Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+    <div class="row g-5">
+        <div class="col-lg-6">
+            <div class="wow fadeInUp" data-wow-delay="0.2s">
+                <form action="{{url_for('login')}}" method="post"> <!--Cambiar si necesario, link provisorio-->
+                    
+                        <div class="col-12">
+                            <div class="form-floating date" id="date4" data-target-input="nearest">
+                                <input name="usuario" type="text" class="form-control" placeholder="Usuario">
+                                <label for="#">Tu usuario</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating date" id="date4" data-target-input="nearest">
+                                <input name="usuario" type="text" class="form-control" placeholder="Contraseña">
+                                <label for="#">Tu contraseña</label>
+                            </div>
+                        </div>
+                        <div class="col-12" style="margin-top: 55px;">
+                            <button class="btn btn-primary w-100 py-3" type="submit">Ingresar</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+<!-- Login End -->
+
+{% endblock %}
