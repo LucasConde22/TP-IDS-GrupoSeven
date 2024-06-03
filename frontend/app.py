@@ -34,6 +34,10 @@ def habitacion_deluxe():
 def restaurante():
     return render_template("restaurant.html")
 
+@app.route("/reservaciones")
+def reservaciones():
+    return render_template("reservacion.html")
+
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("404.html"), 404
