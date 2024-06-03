@@ -11,32 +11,52 @@
           			<h2 class="mb-4">Habitación Master</h2>
           			<div class="single-slider owl-carousel">
           				<div class="item">
-          					<div class="room-img" style="background-image: url({{url_for('static',filename='images/room-2.jpg')}});"></div>
+          					<div class="room-img" style="background-image: url({{url_for('static',filename='images/room-8.jpg')}});"></div>
           				</div>
           				<div class="item">
-          					<div class="room-img" style="background-image: url({{url_for('static',filename='images/room-3.jpg')}});"></div>
+          					<div class="room-img" style="background-image: url({{url_for('static',filename='images/room-9.jpg')}});"></div>
           				</div>
           				<div class="item">
-          					<div class="room-img" style="background-image: url({{url_for('static',filename='images/room-1.jpg')}});"></div>
+          					<div class="room-img" style="background-image: url({{url_for('static',filename='images/bathroom-3.jpg')}});"></div>
           				</div>
           			</div>
           		</div>
           		<div class="col-md-12 room-single mt-4 mb-5 ftco-animate">
-    						<p>Poseen el espacio para alojar hasta cuatro personas, con una posible distribución
-                                en 2 camas matrimoniales o 4 individuales. Incluye todos los servicios ofrecidos por las
-                                habitaciones Simples, además de balcón que ofrece una hermosa vista al lago.</p>
+    						<p>Nuestra exclusiva Habitación Master es perfecta para hasta cuatro personas, con la flexibilidad de contar 
+								con 2 camas matrimoniales o 4 individuales. Este espacio excepcional ofrece todas las comodidades que puede necesitar, 
+								como baño privado, television por cable, Wi-Fi Gratis, teléfono, microondas y aire acondicionado. Además, las habitaciones 
+								Master poseen un balcón privado que brinda una vista impresionante al lago. 
+								Disfrute de una estancia inolvidable con acceso completo a todas las amenities del complejo, como el gimnasio 
+								y la piscina.</p>
     						<div class="d-md-flex mt-5 mb-5">
     							<ul class="list">
-	    							<li><span><strong>Max:</strong></span> 4 Personas</li>
+	    							<li><span><strong>Máxima Capacidad:</strong></span> 4 Personas</li>
 	    							<li><span><strong>Camas:</strong></span> 4 individuales o 2 matrimoniales</li>
 	    						</ul>
 						</div>
+						<div class="amenities">
+							<h3>Amenities</strong></h3>
+							<div class="columnas">
+								<ul class="list">
+									<li><img class="icons" src="{{ url_for('static', filename='images/icon-8.png') }}">Desayuno Incluido</li>
+									<li><img class="icons" src="{{ url_for('static', filename='images/icon-1.png') }}">Gimnasio</li>
+									<li><img class="icons" src="{{ url_for('static', filename='images/icon-2.png') }}">Atención 24hs</li>
+									<li><img class="icons" src="{{ url_for('static', filename='images/icon-3.png') }}">Televisión por cable</li>
+									<li><img class="icons" src="{{ url_for('static', filename='images/icon-4.png') }}">Comedor y Bar</li>
+									<li><img class="icons" src="{{ url_for('static', filename='images/icon-5.png') }}">Servicio de Limpieza</li>
+									<li><img class="icons" src="{{ url_for('static', filename='images/icon-6.png') }}">Wi-FI Gratis</li>
+									<li><img class="icons" src="{{ url_for('static', filename='images/icon-7.png') }}">Servicio de Transporte</li>
+									<li><img class="icons" src="{{ url_for('static', filename='images/icon-9.png') }}">Estacionamiento</li>
+
+								</ul>
+							</div>
+					</div>
           		<div class="col-md-12 room-single ftco-animate mb-5 mt-4">
           			<h3 class="mb-4">Tomemos un tour</h3>
           			<div class="block-16">
 		              <figure>
 		                <img src="{{url_for('static',filename='images/room-3.jpg')}}" alt="Image placeholder" class="img-fluid">
-		                <a href="https://vimeo.com/45830194" class="play-button popup-vimeo"><span class="icon-play"></span></a>
+		                <a href="{{url_for('static', filename='images/video-hab.mp4')}}" class="play-button popup-vimeo"><span class="icon-play"></span></a>
 		              </figure>
 		            </div>
           		</div>
@@ -46,7 +66,7 @@
           			<div class="row">
           				<div class="col-sm col-md-6 ftco-animate">
 				    				<div class="room">
-				    					<a href="{{url_for('habitacion_simple')}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static',filename='images/room-1.jpg')}});">
+				    					<a href="{{url_for('habitacion_simple')}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static',filename='images/room-7.jpg')}});">
 				    						<div class="icon d-flex justify-content-center align-items-center">
 				    							<span class="icon-search2"></span>
 				    						</div>
@@ -61,7 +81,7 @@
 				    			</div>
 				    			<div class="col-sm col-md-6 ftco-animate">
 				    				<div class="room">
-				    					<a href="{{url_for('habitacion_deluxe')}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static',filename='images/room-3.jpg')}});">
+				    					<a href="{{url_for('habitacion_deluxe')}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static',filename='images/room-2.jpg')}});">
 				    						<div class="icon d-flex justify-content-center align-items-center">
 				    							<span class="icon-search2"></span>
 				    						</div>
