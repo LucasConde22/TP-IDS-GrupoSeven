@@ -21,3 +21,6 @@ def habitaciones():
 @app.route("/restaurante")
 def restaurante():
     return render_template("restaurant.html")
+
+if __name__ == '__main__':
+    app.run(port=8000)
