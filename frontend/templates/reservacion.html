@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}Reservas{% endblock %}
+{% block h1 %}Reservas{% endblock %}
+{% block main_content %}
+
+<section class="ftco-section">
+<div class="container">
+
+<!-- Booking Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+    <div class="row g-5">
+        <div class="col-lg-6">
+            <div class="row g-3">
+                <div class="col-md-12 ftco-animate">
+                    <div class="single-slider owl-carousel">
+                        <div class="item">
+                            <div class="room-img" style="background-image: url({{url_for('static',filename='images/room-1.jpg')}});"></div>
+                        </div>
+                        <div class="item">
+                            <div class="room-img" style="background-image: url({{url_for('static',filename='images/room-2.jpg')}});"></div>
+                        </div>
+                        <div class="item">
+                            <div class="room-img" style="background-image: url({{url_for('static',filename='images/room-3.jpg')}});"></div>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="wow fadeInUp" data-wow-delay="0.2s">
+                <form action="{{url_for('reservaciones')}}" method="post"> <!--Cambiar si necesario, link provisorio-->
+                    
+                        <div class="col-12">
+                            <div class="form-floating date" id="date4" data-target-input="nearest">
+                                <input name="fecha-check-in" type="text" class="form-control checkin_date" placeholder="Check In">
+                                <label for="#">Fecha de Check In</label>
+                            </div>
+                        </div>
+                            
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating date" id="date4" data-target-input="nearest">
+                                <input name="fecha-check-out" type="text" class="form-control checkin_date" placeholder="Check Out">
+                                <label for="#">Fecha de Check Out</label>
+                            </div>
+                        </div>
+                        <div class="col-12"  style="margin-top: 40px;">
+                            <div class="form-floating">
+                                <select class="form-select" id="select1"> <!--Cambiar por type='number' ?-->
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                  <option value="3">3</option>
+                                  <option value="4">4</option>
+                                  <option value="5">5</option>
+                                  <option value="6">6</option>
+                                </select>
+                                <label for="select1">Cantidad de personas</label>
+                              </div>
+                        </div>
+                        
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <select class="form-select" id="select3">
+                                  <option value="1">Simple</option> <!--¿Cambiar valores por "simple", "master" y "deluxe"?-->>
+                                  <option value="2">Master</option>
+                                  <option value="3">Deluxe</option>
+                                </select>
+                                <label for="select3">Seleccioná el tipo de habitación</label>
+                              </div>
+                              
+                        </div>
+                        <div class="col-12" style="margin-top: 55px;">
+                            <button class="btn btn-primary w-100 py-3" type="submit">Reservar</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+<!-- Booking End -->
+
+{% endblock %}
