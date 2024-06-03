@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}Habitación Master{% endblock %}
+{% block h1 %}Master{% endblock %}
+{% block main_content %}
+    <section class="ftco-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+          	<div class="row">
+          		<div class="col-md-12 ftco-animate">
+          			<h2 class="mb-4">Habitación Master</h2>
+          			<div class="single-slider owl-carousel">
+          				<div class="item">
+          					<div class="room-img" style="background-image: url({{url_for('static',filename='images/room-2.jpg')}});"></div>
+          				</div>
+          				<div class="item">
+          					<div class="room-img" style="background-image: url({{url_for('static',filename='images/room-3.jpg')}});"></div>
+          				</div>
+          				<div class="item">
+          					<div class="room-img" style="background-image: url({{url_for('static',filename='images/room-1.jpg')}});"></div>
+          				</div>
+          			</div>
+          		</div>
+          		<div class="col-md-12 room-single mt-4 mb-5 ftco-animate">
+    						<p>Poseen el espacio para alojar hasta cuatro personas, con una posible distribución
+                                en 2 camas matrimoniales o 4 individuales. Incluye todos los servicios ofrecidos por las
+                                habitaciones Simples, además de balcón que ofrece una hermosa vista al lago.</p>
+    						<div class="d-md-flex mt-5 mb-5">
+    							<ul class="list">
+	    							<li><span><strong>Max:</strong></span> 4 Personas</li>
+	    							<li><span><strong>Camas:</strong></span> 4 individuales o 2 matrimoniales</li>
+	    						</ul>
+						</div>
+          		<div class="col-md-12 room-single ftco-animate mb-5 mt-4">
+          			<h3 class="mb-4">Tomemos un tour</h3>
+          			<div class="block-16">
+		              <figure>
+		                <img src="{{url_for('static',filename='images/room-3.jpg')}}" alt="Image placeholder" class="img-fluid">
+		                <a href="https://vimeo.com/45830194" class="play-button popup-vimeo"><span class="icon-play"></span></a>
+		              </figure>
+		            </div>
+          		</div>
+
+          		<div class="col-md-12 room-single ftco-animate mb-5 mt-5">
+          			<h4 class="mb-4">También te podrían interesar...</h4>
+          			<div class="row">
+          				<div class="col-sm col-md-6 ftco-animate">
+				    				<div class="room">
+				    					<a href="{{url_for('habitacion_simple')}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static',filename='images/room-1.jpg')}});">
+				    						<div class="icon d-flex justify-content-center align-items-center">
+				    							<span class="icon-search2"></span>
+				    						</div>
+				    					</a>
+				    					<div class="text p-3 text-center">
+				    						<h3 class="mb-3"><a href="{{url_for('habitacion_simple')}}"">Habitación Simple</a></h3>
+				    						<p><span class="price mr-2">$25.00</span> <span class="per">por noche</span></p>
+				    						<hr>
+				    						<p class="pt-1"><a href="{{url_for('habitacion_simple')}}" class="btn-custom">Ver detalles <span class="icon-long-arrow-right"></span></a></p>
+				    					</div>
+				    				</div>
+				    			</div>
+				    			<div class="col-sm col-md-6 ftco-animate">
+				    				<div class="room">
+				    					<a href="{{url_for('habitacion_deluxe')}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static',filename='images/room-3.jpg')}});">
+				    						<div class="icon d-flex justify-content-center align-items-center">
+				    							<span class="icon-search2"></span>
+				    						</div>
+				    					</a>
+				    					<div class="text p-3 text-center">
+				    						<h3 class="mb-3"><a href="{{url_for('habitacion_deluxe')}}">Habitación Deluxe</a></h3>
+				    						<p><span class="price mr-2">$80.00</span> <span class="per">por noche</span></p>
+				    						<hr>
+				    						<p class="pt-1"><a href="{{url_for('habitacion_deluxe')}}" class="btn-custom">Ver detalles <span class="icon-long-arrow-right"></span></a></p>
+				    					</div>
+				    				</div>
+				    			</div>
+          			</div>
+          		</div>
+
+          	</div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </section> 
+{% endblock %}
