@@ -18,6 +18,18 @@ def about():
 def habitaciones():
     return render_template("rooms.html")
 
+@app.route("/habitacion_simple")
+def habitacion_simple():
+    return render_template("habitacion-simple.html")
+
+@app.route("/habitacion_master")
+def habitacion_master():
+    return render_template("habitacion-master.html")
+
+@app.route("/habitacion_deluxe")
+def habitacion_deluxe():
+    return render_template("habitacion-deluxe.html")
+
 @app.route("/restaurante")
 def restaurante():
     return render_template("restaurant.html")
