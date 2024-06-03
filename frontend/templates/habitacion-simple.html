@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}Habitación Simple{% endblock %}
+{% block h1 %}Simple{% endblock %}
+{% block main_content %}
+    <section class="ftco-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+          	<div class="row">
+          		<div class="col-md-12 ftco-animate">
+          			<h2 class="mb-4">Habitación Simple</h2>
+          			<div class="single-slider owl-carousel">
+          				<div class="item">
+          					<div class="room-img" style="background-image: url({{url_for('static',filename='images/room-1.jpg')}});"></div>
+          				</div>
+          				<div class="item">
+          					<div class="room-img" style="background-image: url({{url_for('static',filename='images/room-2.jpg')}});"></div>
+          				</div>
+          				<div class="item">
+          					<div class="room-img" style="background-image: url({{url_for('static',filename='images/room-3.jpg')}});"></div>
+          				</div>
+          			</div>
+          		</div>
+          		<div class="col-md-12 room-single mt-4 mb-5 ftco-animate">
+    						<p>Permiten el alojamiento de hasta dos personas e incluyen una cama matrimonial
+								o dos individuales. Estas habitaciones son las más básicas: poseen baño propio, televisión
+								por cable, teléfono, aire acondicionado y microondas. Además, incluye acceso a todas las
+								amenities del complejo: gimnasio; pileta; sala de juegos; etc. En el edificio hay disponible
+								8 habitaciones de este tipo.</p>
+    						<div class="d-md-flex mt-5 mb-5">
+    							<ul class="list">
+	    							<li><span><strong>Max:</strong></span> 2 Personas</li>
+	    							<li><span><strong>Camas:</strong></span> 2 individuales o 1 matrimonial</li>
+	    						</ul>
+						</div>
+          		<div class="col-md-12 room-single ftco-animate mb-5 mt-4">
+          			<h3 class="mb-4">Tomemos un tour</h3>
+          			<div class="block-16">
+		              <figure>
+		                <img src="{{url_for('static',filename='images/room-3.jpg')}}" alt="Image placeholder" class="img-fluid">
+		                <a href="https://vimeo.com/45830194" class="play-button popup-vimeo"><span class="icon-play"></span></a>
+		              </figure>
+		            </div>
+          		</div>
+
+          		<div class="col-md-12 room-single ftco-animate mb-5 mt-5">
+          			<h4 class="mb-4">También te podrían interesar...</h4>
+          			<div class="row">
+          				<div class="col-sm col-md-6 ftco-animate">
+				    				<div class="room">
+				    					<a href="{{url_for('habitacion_master')}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static',filename='images/room-2.jpg')}});">
+				    						<div class="icon d-flex justify-content-center align-items-center">
+				    							<span class="icon-search2"></span>
+				    						</div>
+				    					</a>
+				    					<div class="text p-3 text-center">
+				    						<h3 class="mb-3"><a href="{{url_for('habitacion_master')}}"">Habitación Master</a></h3>
+				    						<p><span class="price mr-2">$35.00</span> <span class="per">por noche</span></p>
+				    						<hr>
+				    						<p class="pt-1"><a href="{{url_for('habitacion_master')}}" class="btn-custom">Ver detalles <span class="icon-long-arrow-right"></span></a></p>
+				    					</div>
+				    				</div>
+				    			</div>
+				    			<div class="col-sm col-md-6 ftco-animate">
+				    				<div class="room">
+				    					<a href="{{url_for('habitacion_deluxe')}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static',filename='images/room-3.jpg')}});">
+				    						<div class="icon d-flex justify-content-center align-items-center">
+				    							<span class="icon-search2"></span>
+				    						</div>
+				    					</a>
+				    					<div class="text p-3 text-center">
+				    						<h3 class="mb-3"><a href="{{url_for('habitacion_deluxe')}}">Habitación Deluxe</a></h3>
+				    						<p><span class="price mr-2">$80.00</span> <span class="per">por noche</span></p>
+				    						<hr>
+				    						<p class="pt-1"><a href="{{url_for('habitacion_deluxe')}}" class="btn-custom">Ver detalles <span class="icon-long-arrow-right"></span></a></p>
+				    					</div>
+				    				</div>
+				    			</div>
+          			</div>
+          		</div>
+
+          	</div>
+          </div> <!-- .col-md-8 -->
+          </div>
+        </div>
+      </div>
+    </section> <!-- .section -->
+{% endblock %}
