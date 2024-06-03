@@ -480,6 +480,16 @@ pre {
   margin-right: auto;
   margin-left: auto; }
 
+.columnas{
+  column-count: 3;
+    column-gap: 20px;
+    margin-bottom: 20px;
+}
+
+.icons{
+  width: 1cm;
+  margin-right: 0.3cm;
+}
 .row {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -6173,7 +6183,9 @@ button.bg-dark:focus {
 
 .mb-4,
 .my-4 {
-  margin-bottom: 1.5rem !important; }
+  margin-bottom: 1.5rem !important;
+  text-align: center;
+}
 
 .ml-4,
 .mx-4 {

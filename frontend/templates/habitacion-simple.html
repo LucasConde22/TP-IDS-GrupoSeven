@@ -11,34 +11,51 @@
           			<h2 class="mb-4">Habitación Simple</h2>
           			<div class="single-slider owl-carousel">
           				<div class="item">
+          					<div class="room-img" style="background-image: url({{url_for('static',filename='images/room-7.jpg')}});"></div>
+          				</div>
+          				<div class="item">
           					<div class="room-img" style="background-image: url({{url_for('static',filename='images/room-1.jpg')}});"></div>
           				</div>
           				<div class="item">
-          					<div class="room-img" style="background-image: url({{url_for('static',filename='images/room-2.jpg')}});"></div>
-          				</div>
-          				<div class="item">
-          					<div class="room-img" style="background-image: url({{url_for('static',filename='images/room-3.jpg')}});"></div>
+          					<div class="room-img" style="background-image: url({{url_for('static',filename='images/bathroom-1.jpg')}});"></div>
           				</div>
           			</div>
           		</div>
           		<div class="col-md-12 room-single mt-4 mb-5 ftco-animate">
-    						<p>Permiten el alojamiento de hasta dos personas e incluyen una cama matrimonial
-								o dos individuales. Estas habitaciones son las más básicas: poseen baño propio, televisión
-								por cable, teléfono, aire acondicionado y microondas. Además, incluye acceso a todas las
-								amenities del complejo: gimnasio; pileta; sala de juegos; etc. En el edificio hay disponible
-								8 habitaciones de este tipo.</p>
+    						<p>Estas habitaciones, adecuadas para hasta dos personas, ofrecen una cama matrimonial o dos individuales. Son consideradas 
+								las habitaciones estándar del complejo, equipadas con baño privado, televisión por cable, teléfono, WI-FI, aire acondicionado 
+								y microondas. Además, los huéspedes tienen acceso a todas las comodidades del complejo, desayuno incluido, el gimnasio, la piscina, 
+								la sala de juegos, entre otros. Nexus Hotel cuenta con un total de ocho habitaciones de este tipo.</p>
     						<div class="d-md-flex mt-5 mb-5">
     							<ul class="list">
-	    							<li><span><strong>Max:</strong></span> 2 Personas</li>
+	    							<li><span><strong>Máxima Capacidad:</strong></span> 2 Personas</li>
 	    							<li><span><strong>Camas:</strong></span> 2 individuales o 1 matrimonial</li>
 	    						</ul>
+
+						</div>							
+						<div class="amenities">
+								<h3>Amenities</strong></h3>
+								<div class="columnas">
+									<ul class="list">
+										<li><img class="icons" src="{{ url_for('static', filename='images/icon-8.png') }}">Desayuno Incluido</li>
+										<li><img class="icons" src="{{ url_for('static', filename='images/icon-1.png') }}">Gimnasio</li>
+										<li><img class="icons" src="{{ url_for('static', filename='images/icon-2.png') }}">Atención 24hs</li>
+										<li><img class="icons" src="{{ url_for('static', filename='images/icon-3.png') }}">Televisión por cable</li>
+										<li><img class="icons" src="{{ url_for('static', filename='images/icon-4.png') }}">Comedor y Bar</li>
+										<li><img class="icons" src="{{ url_for('static', filename='images/icon-5.png') }}">Servicio de Limpieza</li>
+										<li><img class="icons" src="{{ url_for('static', filename='images/icon-6.png') }}">Wi-FI Gratis</li>
+										<li><img class="icons" src="{{ url_for('static', filename='images/icon-7.png') }}">Servicio de Transporte</li>
+										<li><img class="icons" src="{{ url_for('static', filename='images/icon-9.png') }}">Estacionamiento</li>
+
+									</ul>
+								</div>
 						</div>
           		<div class="col-md-12 room-single ftco-animate mb-5 mt-4">
           			<h3 class="mb-4">Tomemos un tour</h3>
           			<div class="block-16">
 		              <figure>
-		                <img src="{{url_for('static',filename='images/room-3.jpg')}}" alt="Image placeholder" class="img-fluid">
-		                <a href="https://vimeo.com/45830194" class="play-button popup-vimeo"><span class="icon-play"></span></a>
+		                <img src="{{url_for('static',filename='images/room-5.jpg')}}" alt="Image placeholder" class="img-fluid">
+		                <a href="{{url_for('static', filename='images/video-hab.mp4')}}" class="play-button popup-vimeo"><span class="icon-play"></span></a>
 		              </figure>
 		            </div>
           		</div>
@@ -48,7 +65,7 @@
           			<div class="row">
           				<div class="col-sm col-md-6 ftco-animate">
 				    				<div class="room">
-				    					<a href="{{url_for('habitacion_master')}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static',filename='images/room-2.jpg')}});">
+				    					<a href="{{url_for('habitacion_master')}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static',filename='images/room-3.jpg')}});">
 				    						<div class="icon d-flex justify-content-center align-items-center">
 				    							<span class="icon-search2"></span>
 				    						</div>
@@ -63,7 +80,7 @@
 				    			</div>
 				    			<div class="col-sm col-md-6 ftco-animate">
 				    				<div class="room">
-				    					<a href="{{url_for('habitacion_deluxe')}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static',filename='images/room-3.jpg')}});">
+				    					<a href="{{url_for('habitacion_deluxe')}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static',filename='images/room-2.jpg')}});">
 				    						<div class="icon d-flex justify-content-center align-items-center">
 				    							<span class="icon-search2"></span>
 				    						</div>

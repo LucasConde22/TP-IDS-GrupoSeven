@@ -11,33 +11,52 @@
           			<h2 class="mb-4">Habitación Deluxe</h2>
           			<div class="single-slider owl-carousel">
           				<div class="item">
-          					<div class="room-img" style="background-image: url({{url_for('static',filename='images/room-3.jpg')}});"></div>
-          				</div>
-          				<div class="item">
-          					<div class="room-img" style="background-image: url({{url_for('static',filename='images/room-1.jpg')}});"></div>
-          				</div>
-          				<div class="item">
           					<div class="room-img" style="background-image: url({{url_for('static',filename='images/room-2.jpg')}});"></div>
+          				</div>
+          				<div class="item">
+          					<div class="room-img" style="background-image: url({{url_for('static',filename='images/bathroom-2.jpg')}});"></div>
+          				</div>
+          				<div class="item">
+          					<div class="room-img" style="background-image: url({{url_for('static',filename='images/room-6.jpg')}});"></div>
           				</div>
           			</div>
           		</div>
           		<div class="col-md-12 room-single mt-4 mb-5 ftco-animate">
-    						<p>Estas habitaciones incluyen todo lo que uno puede desear para pasar unas
-                                vacaciones de ensueño. Capacidad de hasta 6 personas, ofreciendo todo lo incluido en las
-                                habitaciones Master. Adicionalmente, poseen servicios como cocina completa, jacuzzi y
-                                ofrecen un acceso exclusivo al cerro, desde el cual se puede practicar deportes de nieve.</p>
+    						<p>Nuestras lujosas Habitaciones Deluxe ofrecen todo lo que necesita para unas vacaciones de ensueño.
+							Con capacidad para hasta 6 personas, estas habitaciones incluyen todas las comodidades que puede necesitar, 
+							como baño privado, television por cable, Wi-Fi Gratis, teléfono, microondas y aire acondicionado.
+							Además ofrecen impresionantes vistas al lago desde dos balcones privados. Disfrute de una cocina completa, 
+							jacuzzi privado y acceso exclusivo al cerro, donde podrá practicar deportes de nieve. 
+							Sumérjase en la experiencia definitiva de lujo y comodidad durante su estancia con nosotros. 
+							</p>
     						<div class="d-md-flex mt-5 mb-5">
     							<ul class="list">
-	    							<li><span><strong>Max:</strong></span> 6 Personas</li>
+	    							<li><span><strong>Máxima Capacidad:</strong></span> 6 Personas</li>
 	    							<li><span><strong>Camas:</strong></span> 6 individuales o 3 matrimonial</li>
 	    						</ul>
 						</div>
+						<div class="amenities">
+							<h3>Amenities</strong></h3>
+							<div class="columnas">
+								<ul class="list">
+									<li><img class="icons" src="{{ url_for('static', filename='images/icon-8.png') }}">Desayuno Incluido</li>
+									<li><img class="icons" src="{{ url_for('static', filename='images/icon-1.png') }}">Gimnasio</li>
+									<li><img class="icons" src="{{ url_for('static', filename='images/icon-2.png') }}">Atención 24hs</li>
+									<li><img class="icons" src="{{ url_for('static', filename='images/icon-3.png') }}">Televisión por cable</li>
+									<li><img class="icons" src="{{ url_for('static', filename='images/icon-4.png') }}">Comedor y Bar</li>
+									<li><img class="icons" src="{{ url_for('static', filename='images/icon-5.png') }}">Servicio de Limpieza</li>
+									<li><img class="icons" src="{{ url_for('static', filename='images/icon-6.png') }}">Wi-FI Gratis</li>
+									<li><img class="icons" src="{{ url_for('static', filename='images/icon-7.png') }}">Servicio de Transporte</li>
+									<li><img class="icons" src="{{ url_for('static', filename='images/icon-9.png') }}">Estacionamiento</li>
+
+								</ul>
+							</div>
           		<div class="col-md-12 room-single ftco-animate mb-5 mt-4">
           			<h3 class="mb-4">Tomemos un tour</h3>
           			<div class="block-16">
 		              <figure>
-		                <img src="{{url_for('static',filename='images/room-3.jpg')}}" alt="Image placeholder" class="img-fluid">
-		                <a href="https://vimeo.com/45830194" class="play-button popup-vimeo"><span class="icon-play"></span></a>
+		                <img src="{{url_for('static',filename='images/room-2.jpg')}}" alt="Image placeholder" class="img-fluid">
+		                <a href="{{url_for('static', filename='images/video-hab.mp4')}}" class="play-button popup-vimeo"><span class="icon-play"></span></a>
 		              </figure>
 		            </div>
           		</div>
@@ -47,7 +66,7 @@
           			<div class="row">
           				<div class="col-sm col-md-6 ftco-animate">
                                 <div class="room">
-                                    <a href="{{url_for('habitacion_simple')}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static',filename='images/room-1.jpg')}});">
+                                    <a href="{{url_for('habitacion_simple')}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static',filename='images/room-7.jpg')}});">
                                         <div class="icon d-flex justify-content-center align-items-center">
                                             <span class="icon-search2"></span>
                                         </div>
@@ -62,7 +81,7 @@
 				    			</div>
 				    			<div class="col-sm col-md-6 ftco-animate">
 				    				<div class="room">
-				    					<a href="{{url_for('habitacion_master')}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static',filename='images/room-2.jpg')}});">
+				    					<a href="{{url_for('habitacion_master')}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static',filename='images/room-8.jpg')}});">
 				    						<div class="icon d-flex justify-content-center align-items-center">
 				    							<span class="icon-search2"></span>
 				    						</div>
