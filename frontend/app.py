@@ -35,4 +35,4 @@ def restaurante():
     return render_template("restaurant.html")
 
 if __name__ == '__main__':
-    app.run(port=8000)
+    app.run("127.0.0.1",port=8000,debug=True)
