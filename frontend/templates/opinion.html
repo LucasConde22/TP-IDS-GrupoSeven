@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+<<<<<<< HEAD
 {% block title %}opiniones{% endblock %}
 {% block h1 %}Dejanos tu opinion{% endblock %}
 {% block main_content %}
@@ -28,6 +29,44 @@
         <button class="boton_enviar_opinion " type="submit">Enviar Opinión</button>
     </form>    
 </section>
+=======
+{% block h1 %} Dejanos tu opinion {% endblock %}
+{% block main_content %}
+    
+
+    <section class="ftco-section ftc-no-pb ftc-no-pt">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-5 p-md-5 img img-2 img-3 d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static', filename = 'images/bg_2.jpg')}});">
+						<a href="{{url_for('static', filename = 'images/video.mp4')}}" class="icon popup-vimeo d-flex justify-content-center align-items-center">
+							<span class="icon-play"></span>
+						</a>
+					</div>
+					<div class="col-md-7 py-5 wrap-about pb-md-5 ftco-animate">
+	          <div class="heading-section heading-section-wo-line pt-md-5 pl-md-5 mb-5">
+	          	<div class="ml-md-0">
+		            <h2 class="mb-4">Bienvendios a Nexus Hotel</h2>
+	            </div>
+	          </div>
+	          <div class="pb-md-5">
+							<p>Sumérgete en una experiencia única donde la tecnología y la hospitalidad se fusionan para crear momentos inolvidables. Descubre nuestras elegantes habitaciones y suites, equipadas con las comodidades más modernas para garantizar una estadia confortable y placentera. Nuestro compromiso con la excelencia se refleja en cada aspecto de tu visita, desde el impecable servicio hasta la deliciosa gastronomía que ofrece nuestro restaurante.
+                En el Nexus Hotel, no solo encontrarás un lugar para descansar, sino también un espacio para conectar con otros viajeros, explorar nuevas experiencias y crear recuerdos duraderos. Nuestro equipo está aquí para hacer de tu estadía una experiencia inolvidable, brindándote atención personalizada y cuidando cada detalle para que te sientas como en casa.</p>
+							<p>Bienvenido al lugar donde las conexiones cobran vida y los momentos se vuelven eternos! Estamos emocionados de tenerte aquí y esperamos que disfrutes de todo lo que tenemos para ofrecer.
+                ¡Tu aventura comienza aquí!.</p>
+							<ul class="ftco-social d-flex">
+                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+              </ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+
+>>>>>>> 79fd1e3 (boton opiniones y template opiniones creado (vacio))
 <div id="popup_overlay" class="popup_overlay"></div>
 
 <div id="success_message" class="success_message">
