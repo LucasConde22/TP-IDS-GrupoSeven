@@ -45,25 +45,26 @@
         </div>
         <div class="col-lg-6">
             <div class="wow fadeInUp" data-wow-delay="0.2s">
-                <form action="{{url_for('reservaciones')}}" method="post"> <!--Cambiar si necesario, link provisorio-->
-                    
+                {% if session['usuario'] %}
+                <form action="{{url_for('reservaciones')}}" method="post">
+                    <input name="usuario" type="text" value="{{ session['id'] }}" hidden> <!--No sacar!!!!-->
                         <div class="col-12">
                             <div class="form-floating date" id="date4" data-target-input="nearest">
-                                <input name="fecha-check-in" type="text" class="form-control checkin_date" placeholder="Check In">
                                 <label for="#">Fecha de Check In</label>
+                                <input name="entrada" type="date" placeholder="Check In">
                             </div>
                         </div>
                             
                         </div>
                         <div class="col-12">
                             <div class="form-floating date" id="date4" data-target-input="nearest">
-                                <input name="fecha-check-out" type="text" class="form-control checkin_date" placeholder="Check Out">
                                 <label for="#">Fecha de Check Out</label>
+                                <input name="salida" type="date" placeholder="Check Out">
                             </div>
                         </div>
                         <div class="col-12"  style="margin-top: 40px;">
                             <div class="form-floating" style="font-size: large;">
-                                <select class="form-select" id="select1" style="margin-right: 0.5cm;"> <!--Cambiar por type='number' ?-->
+                                <select class="form-select" id="select1" name="huespedes" style="margin-right: 0.5cm;">
                                   <option value="1">1</option>
                                   <option value="2">2</option>
                                   <option value="3">3</option>
@@ -77,19 +78,29 @@
                         
                         <div class="col-12">
                             <div class="form-floating" style="font-size: large;">
-                                <select class="form-select" id="select3" style="margin-right: 0.5cm;">
-                                  <option value="1">Simple</option> <!--¿Cambiar valores por "simple", "master" y "deluxe"?-->>
-                                  <option value="2">Master</option>
-                                  <option value="3">Deluxe</option>
+                                <select class="form-select" id="select3", name="tipo" style="margin-right: 0.5cm;">
+                                  <option value="simple">Simple</option> <!--¿Cambiar valores por "simple", "master" y "deluxe"?-->>
+                                  <option value="master">Master</option>
+                                  <option value="deluxe">Deluxe</option>
                                 </select>
                                 <label for="select3">Seleccioná el tipo de habitación</label>
                               </div>
-                              
+                              {% with mensajes = get_flashed_messages()%}
+                              {% if mensajes%}
+                                  {% for mensaje in mensajes%}
+                                  <h3>{{mensaje}}</h3>
+                                  {%endfor%}
+                                  {%endif%}
+                                  {%endwith%}     
                         </div>
                         <div class="col-12" style="margin-top: 55px;">
                             <button class="btn w-100 py-3" type="submit" style="background: #8d703b; color:#fff">Reservar</button>
                         </div>
                 </form>
+                {% else %}
+                <h2>Debe iniciar sesión para hacer una reserva:</h2>
+                <a href="{{ url_for('login') }}"><input type="submit" value="Iniciar sesión" class="btn btn-primary py-3 px-4 align-self-stretch"></a>
+                {% endif %}
             </div>
         </div>
     </div>
