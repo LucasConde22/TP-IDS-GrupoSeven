@@ -84,68 +84,10 @@
     	<div class="container">
     		<div class="row">
     			<div class="col-lg-12">
-    				<form action="#" class="booking-form">
-	        		<div class="row">
-	        			<div class="col-md-3 d-flex">
-	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
-	        					<div class="wrap">
-				    					<label for="#">Check-in</label>
-				    					<input type="text" class="form-control checkin_date" placeholder="Check-in">
-			    					</div>
-			    				</div>
-	        			</div>
-	        			<div class="col-md-3 d-flex">
-	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
-	        					<div class="wrap">
-				    					<label for="#">Check-out</label>
-				    					<input type="text" class="form-control checkout_date" placeholder="Check-out">
-			    				</div>
-			    				</div>
-	        			</div>
-	        			<div class="col-md d-flex">
-	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
-	        					<div class="wrap">
-			      					<label for="#">Habitaciones</label>
-			      					<div class="form-field">
-			        					<div class="select-wrap">
-			                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-			                    <select name="" id="" class="form-control">
-			                    	<option value="">Simple</option>
-			                      <option value="">Master</option>
-			                      <option value="">Deluxe</option>
-			                    </select>
-			                  </div>
-				              </div>
-				            </div>
-		              </div>
-	        			</div>
-	        			<div class="col-md d-flex">
-	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
-	        					<div class="wrap">
-			      					<label for="#">Customer</label>
-			      					<div class="form-field">
-			        					<div class="select-wrap">
-			                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-			                    <select name="" id="" class="form-control">
-			                    	<option value="">1 Persona</option>
-			                      <option value="">2 Personas</option>
-			                      <option value="">3 Personas</option>
-			                      <option value="">4 Personas</option>
-			                      <option value="">5 Personas</option>
-			                      <option value="">6 Personas</option>
-			                    </select>
-			                  </div>
-				              </div>
-				            </div>
-		              </div>
-	        			</div>
-	        			<div class="col-md d-flex">
-	        				<div class="form-group d-flex align-self-stretch">
-			              <input type="submit" value="Reservá!" class="btn btn-primary py-3 px-4 align-self-stretch">
-			            </div>
-	        			</div>
-	        		</div>
-	        	</form>
+				<div class="col-md d-flex">
+					<div class="form-group d-flex align-self-stretch">
+				  <a href="{{ url_for('reservaciones') }}"><input type="submit" value="Reservá!" class="btn btn-primary py-3 px-4 align-self-stretch"></a>
+				</div>
 	    		</div>
     		</div>
     	</div>
