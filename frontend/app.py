@@ -1,6 +1,8 @@
-from flask import Flask, url_for, render_template, request
+from flask import Flask, url_for, render_template, request, session, flash
+import requests
 
 app = Flask(__name__)
+app.secret_key = "qwerty"
 
 @app.route("/")
 def index():
@@ -38,8 +40,16 @@ def restaurante():
 def reservaciones():
     return render_template("reservacion.html")
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login():
+    if request.method == "POST":
+        info = request.form.to_dict(flat=True)
+        res = requests.post('http://localhost:5000/loguear_usuario', json=info)
+        if res.status_code == 201:
+            session["usuario"] = request.form.get("user")
+            return render_template("index.html")
+        else:
+            flash(res.text[16:-4])
     return render_template("login.html")
 
 @app.errorhandler(404)

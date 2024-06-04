@@ -71,13 +71,13 @@ def loguear_usuario():
             row = result.fetchone()
             if row is None:
                 conn.close()
-                return jsonify({'message': f"El usuario '{usuario["user"]}' no existe!"}), 404
+                return jsonify({'message': f"Error, el usuario ingresado es incorrecto!"}), 404
         if row[0] == usuario["contra"]:
             conn.close()
             return jsonify({'message': f"El usuario '{usuario["user"]}' es correcto!"}), 201
         else:
             conn.close()
-            return jsonify({'message': f"La contrasena es incorrecta!"}), 404
+            return jsonify({'message': f"Error, la contrasena es incorrecta!"}), 404
     except SQLAlchemyError as err:
         conn.close()
         return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
