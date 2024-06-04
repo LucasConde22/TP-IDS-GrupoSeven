@@ -1,6 +1,7 @@
 from flask import Flask, url_for, render_template, request, session, flash, redirect
 from datetime import timedelta
 import requests
+import json
 
 app = Flask(__name__)
 app.secret_key = "85BA285153AFBAA9A864AEB84A7EE" # Clave de encriptado de datos
@@ -46,7 +47,7 @@ def reservaciones():
         if res.status_code == 201:
             flash(res.text[16:-4]) # Muestra que se realizó la reserva
         else:
-            flash(res.text[16:-4])
+            flash(res.text[16:-4]) # Muestra mensaje de error
     return render_template("reservacion.html")
 
 @app.route("/login", methods=["GET", "POST"])
@@ -58,14 +59,18 @@ def login():
         res = requests.post('http://localhost:5000/loguear_usuario', json=info)
         if res.status_code == 201:
             session["usuario"] = request.form.get("user")
+            res = requests.get('http://localhost:5000/id', json=info)
+            res = res.json()
+            session["id"] = res["id"]
             return redirect(url_for("index"))
         else:
-            flash(res.text[16:-4]) # Muestra mensaje de error
+            flash(res.text[16:-4])
     return render_template("login.html")
 
 @app.route("/logout")
 def logout():
     session.pop("usuario", None)
+    session.pop("id", None)
     return redirect(url_for("index"))
 
 @app.errorhandler(404)

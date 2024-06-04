@@ -82,5 +82,21 @@ def loguear_usuario():
         conn.close()
         return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
 
+@app.route('/id', methods = ['GET'])
+def obtener_id():
+    conn = engine.connect()
+    usuario = request.get_json()
+    try:
+        result = conn.execute(text(f"SELECT id FROM usuarios WHERE email='{usuario["user"]}';"))
+        row = result.fetchone()
+        if row is None:
+            result = conn.execute(text(f"SELECT id FROM usuarios WHERE usuario='{usuario["user"]}';"))
+            row = result.fetchone()
+    except SQLAlchemyError as err:
+        conn.close()
+        return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
+    conn.close()
+    return jsonify({'id': row[0]}), 201
+
 if __name__ == "__main__":
     app.run("127.0.0.1", port="5000", debug=True)
