@@ -3,7 +3,7 @@ from datetime import timedelta
 import requests
 
 app = Flask(__name__)
-app.secret_key = "qwerty"
+app.secret_key = "85BA285153AFBAA9A864AEB84A7EE" # Clave de encriptado de datos
 app.permanent_session_lifetime = timedelta(minutes=60)
 
 @app.route("/")
@@ -38,8 +38,15 @@ def habitacion_deluxe():
 def restaurante():
     return render_template("restaurant.html")
 
-@app.route("/reservaciones")
+@app.route("/reservaciones", methods=["GET", "POST"])
 def reservaciones():
+    if request.method == "POST":
+        info = request.form.to_dict(flat=True)
+        res = requests.post('http://localhost:5000/reservar', json=info)
+        if res.status_code == 201:
+            flash(res.text[16:-4]) # Muestra que se realizó la reserva
+        else:
+            flash(res.text[16:-4])
     return render_template("reservacion.html")
 
 @app.route("/login", methods=["GET", "POST"])
@@ -53,7 +60,7 @@ def login():
             session["usuario"] = request.form.get("user")
             return redirect(url_for("index"))
         else:
-            flash(res.text[16:-4])
+            flash(res.text[16:-4]) # Muestra mensaje de error
     return render_template("login.html")
 
 @app.route("/logout")

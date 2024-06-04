@@ -57,7 +57,7 @@ def reservar():
         conn.close()
         return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
     conn.close()
-    return jsonify({'message': 'La reserva fue realizada!'}), 201
+    return jsonify({'message': 'La reserva fue realizada correctamente!'}), 201
 
 @app.route('/loguear_usuario', methods = ['POST'])
 def loguear_usuario():
