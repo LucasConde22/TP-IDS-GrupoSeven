@@ -417,6 +417,118 @@ mark,
   font-size: 90%;
   color: #6c757d; }
 
+.boton {
+  background-color: #8B6A3A; 
+  color: white;
+  padding: 20px 60px; 
+  text-align: center; 
+  text-decoration: none; 
+  display: inline-block; 
+  font-size: 25px;
+  font-family: 'Playfair Display', serif;
+  border-radius: 40px; 
+  border: 2px solid #8B6A3A; 
+  cursor: pointer; 
+  transition: border-color 0.3s, color 0.3s; 
+}
+
+.boton:hover {
+  border-color: #8B6A3A;  
+  color: #8B6A3A; 
+  background-color: transparent; 
+}
+
+.container_boton_opinion {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.opinion_container {
+  max-width: 600px;
+  margin: 0 auto;
+  margin-top: 60px;
+  padding: 20px;
+  border: 2px solid #8B6A3A;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.opinion_container h2 {
+  text-align: center;
+  color: #8B6A3A;
+}
+
+.opinion_container label {
+  display: block;
+  margin-bottom: 5px;
+  color: #8B6A3A;
+}
+
+.opinion_container input[type="text"],
+.opinion_container textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: 'Playfair Display', serif;
+}
+
+.star-rating {
+  direction: rtl;
+  display: flex;
+  justify-content: center; 
+  padding: 20px;
+  font-size: 20px;
+  white-space: nowrap; /* Evita que el contenido se divida en varias líneas */
+}
+
+.star-rating input[type="radio"] {
+  display: none;
+}
+
+.star-rating label {
+  color: #ddd;
+  font-size: 35px;
+  padding: 0;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.star-rating input[type="radio"]:checked ~ label {
+  color: #f2b600;
+}
+
+.star-rating input[type="radio"]:hover ~ label {
+  color: #f2b600;
+}
+
+.boton_enviar_opinion {
+  background-color: #8B6A3A;
+  color: white;
+  padding: 15px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border: 2px solid #8B6A3A;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: color 0.3s, border-color 0.3s;
+  font-family: 'Playfair Display', serif;
+}
+
+.boton_enviar_opinion:hover {
+  color: #8B6A3A;
+  background-color: transparent;
+  border-color: #8B6A3A;
+}
+
+.container_boton_opinion {
+  text-align: center; 
+  margin-top: 20px;
+}
+
 code,
 kbd,
 pre,
