@@ -2034,6 +2034,18 @@ a.btn.disabled,
 fieldset:disabled a.btn {
   pointer-events: none; }
 
+.btn-reserva{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-estilo{
+  width: 10cm;
+  height: 2cm;
+  font-size: 200%;
+}
+
 .btn-primary {
   color: #212529;
   background-color: #78d5ef;
@@ -2058,6 +2070,7 @@ fieldset:disabled a.btn {
     .show > .btn-primary.dropdown-toggle:focus {
       -webkit-box-shadow: 0 0 0 0.2rem rgba(120, 213, 239, 0.5);
       box-shadow: 0 0 0 0.2rem rgba(120, 213, 239, 0.5); }
+
 
 .btn-secondary {
   color: #fff;
@@ -3213,7 +3226,7 @@ input[type="button"].btn-block {
     border-top-right-radius: 0.25rem; }
     .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
       border-color: #e9ecef #e9ecef #dee2e6; }
-    .nav-tabs .nav-link.disabled {
+    .nav-tabs .nav-link.disabled { 
       color: #6c757d;
       background-color: transparent;
       border-color: transparent; }
@@ -7730,9 +7743,9 @@ h1, h2, h3, h4, h5,
     border: 1px solid #8d703b;
     color: #fff; }
     .btn.btn-primary:hover {
-      border: 1px solid #8d703b;
+      border: 1px solid #fff;
       background: transparent;
-      color: #8d703b; }
+      color: #fff; }
     .btn.btn-primary.btn-outline-primary {
       border: 1px solid #8d703b;
       background: transparent;
