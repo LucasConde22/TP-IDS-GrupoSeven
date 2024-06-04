@@ -57,7 +57,7 @@ def reservar():
         conn.close()
         return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
     conn.close()
-    return jsonify({'message': 'La reserva fue realizada!'}), 201
+    return jsonify({'message': 'La reserva fue realizada correctamente!'}), 201
 
 @app.route('/loguear_usuario', methods = ['POST'])
 def loguear_usuario():
@@ -71,16 +71,32 @@ def loguear_usuario():
             row = result.fetchone()
             if row is None:
                 conn.close()
-                return jsonify({'message': f"El usuario '{usuario["user"]}' no existe!"}), 404
+                return jsonify({'message': f"Error, el usuario ingresado es incorrecto!"}), 404
         if row[0] == usuario["contra"]:
             conn.close()
             return jsonify({'message': f"El usuario '{usuario["user"]}' es correcto!"}), 201
         else:
             conn.close()
-            return jsonify({'message': f"La contrasena es incorrecta!"}), 404
+            return jsonify({'message': f"Error, la contrasena es incorrecta!"}), 404
     except SQLAlchemyError as err:
         conn.close()
         return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
+
+@app.route('/id', methods = ['GET'])
+def obtener_id():
+    conn = engine.connect()
+    usuario = request.get_json()
+    try:
+        result = conn.execute(text(f"SELECT id FROM usuarios WHERE email='{usuario["user"]}';"))
+        row = result.fetchone()
+        if row is None:
+            result = conn.execute(text(f"SELECT id FROM usuarios WHERE usuario='{usuario["user"]}';"))
+            row = result.fetchone()
+    except SQLAlchemyError as err:
+        conn.close()
+        return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
+    conn.close()
+    return jsonify({'id': row[0]}), 201
 
 if __name__ == "__main__":
     app.run("127.0.0.1", port="5000", debug=True)
