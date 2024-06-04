@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-06-2024 a las 23:18:18
+-- Tiempo de generación: 04-06-2024 a las 02:17:38
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -67,6 +67,17 @@ CREATE TABLE `reservas` (
   `salida` date NOT NULL,
   `valor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `reservas`
+--
+
+INSERT INTO `reservas` (`numero`, `usuario`, `habitacion`, `entrada`, `salida`, `valor`) VALUES
+(14, 1, 101, '2024-10-01', '2024-10-10', 25),
+(15, 1, 102, '2024-10-01', '2024-10-10', 25),
+(16, 1, 301, '2024-10-20', '2024-10-30', 80),
+(17, 1, 302, '2024-10-20', '2024-10-30', 80),
+(21, 1, 201, '2024-10-15', '2024-10-25', 350);
 
 -- --------------------------------------------------------
 
@@ -150,7 +161,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `numero` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `numero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
