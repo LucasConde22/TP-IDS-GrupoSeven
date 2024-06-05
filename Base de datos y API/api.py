@@ -13,6 +13,26 @@ def calcular_noches(entrada, salida):
 app = Flask(__name__)
 engine = create_engine("mysql+mysqlconnector://root@localhost/tp_ids")
 
+@app.route('/habitaciones', methods = ['GET'])
+def obtener_habitaciones():
+    conn = engine.connect()
+    try:
+        result = conn.execute(text("SELECT * FROM tipos_habitaciones"))
+    except SQLAlchemyError as err:
+        conn.close()
+        return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
+    
+    data = []
+    for row in result:
+        entity = {}
+        entity['tipo'] = row.tipo
+        entity['caracteristicas'] = row.caracteristicas
+        entity['capacidad'] = row.capacidad
+        entity['precio'] = row.precio
+        data.append(entity)
+    return jsonify(data), 201
+
+
 @app.route('/reservar', methods = ['POST'])
 def reservar():
     conn = engine.connect()
