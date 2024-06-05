@@ -45,9 +45,11 @@ def reservaciones():
         info = request.form.to_dict(flat=True)
         res = requests.post('http://localhost:5000/reservar', json=info)
         if res.status_code == 201:
-            flash(res.text[16:-4]) # Muestra que se realizó la reserva
+            res = res.json()
+            flash(res["message"]) # Muestra que se realizó la reserva
         else:
-            flash(res.text[16:-4]) # Muestra mensaje de error
+            res = res.json()
+            flash(res["message"]) # Muestra mensaje de error
     return render_template("reservacion.html")
 
 @app.route("/login", methods=["GET", "POST"])
