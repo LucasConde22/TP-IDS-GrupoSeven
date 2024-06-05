@@ -36,7 +36,16 @@ def reservar():
     
     habitacion = result.fetchone()
     if habitacion is None:
-        return jsonify({'message': f"No hay habitaciones disponibles para esas fechas"}), 404
+        return jsonify({'message': f"No hay habitaciones de tipo {reserva["tipo"]} disponibles para esas fechas!"}), 404
+
+    try:
+        result = conn.execute(text(f"SELECT capacidad FROM tipos_habitaciones WHERE tipo = '{reserva['tipo']}'"))
+    except SQLAlchemyError as err:
+        conn.close()
+        return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
+    capacidad = result.fetchone()
+    if int(capacidad[0]) < int(reserva["huespedes"]):
+        return jsonify({'message': f"En una habitación de tipo {reserva["tipo"]} solo entran hasta {capacidad[0]} personas!"}), 404
 
     try:
         result = conn.execute(text(f"SELECT precio FROM tipos_habitaciones WHERE tipo = '{reserva['tipo']}'"))
@@ -48,8 +57,8 @@ def reservar():
     valor_reserva = precio[0] * noches
 
     query = text(f"""
-            INSERT INTO reservas (usuario, habitacion, entrada, salida, valor)
-            VALUES ({reserva['usuario']}, {habitacion[0]}, '{reserva['entrada']}', '{reserva['salida']}', '{valor_reserva}')""")
+            INSERT INTO reservas (usuario, habitacion, entrada, salida, valor, huespedes)
+            VALUES ({reserva['usuario']}, {habitacion[0]}, '{reserva['entrada']}', '{reserva['salida']}', '{valor_reserva}', {reserva["huespedes"]})""")
     try:
         conn.execute(query)
         conn.commit()
