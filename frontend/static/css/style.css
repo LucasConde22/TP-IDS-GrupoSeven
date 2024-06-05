@@ -440,8 +440,9 @@ mark,
 
 .container_boton_opinion {
   text-align: center;
-  margin-top: 100px;
+  margin-top: 80px;
 }
+
 
 .opinion_container {
   max-width: 600px;
@@ -480,7 +481,7 @@ mark,
   justify-content: center; 
   padding: 20px;
   font-size: 20px;
-  white-space: nowrap; /* Evita que el contenido se divida en varias líneas */
+  white-space: nowrap;
 }
 
 .star-rating input[type="radio"] {
@@ -524,9 +525,53 @@ mark,
   border-color: #8B6A3A;
 }
 
-.container_boton_opinion {
-  text-align: center; 
-  margin-top: 20px;
+.popup_overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 1000;
+}
+
+.success_message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: none;
+  z-index: 1001;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 25px;
+}
+
+.success_message p {
+  margin-bottom: 20px;
+}
+
+.success_message button {
+  background-color: #8B6A3A;
+  color: white;
+  padding: 20px 60px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  border-color: #8B6A3A;
+}
+
+.success_message button:hover {
+  color: #8B6A3A;
+  background-color: transparent;
+  border-color: #8B6A3A;
 }
 
 code,
