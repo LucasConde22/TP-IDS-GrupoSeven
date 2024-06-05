@@ -29,6 +29,11 @@ def obtener_habitaciones():
         entity['caracteristicas'] = row.caracteristicas
         entity['capacidad'] = row.capacidad
         entity['precio'] = row.precio
+        entity['foto1'] = row.foto1
+        entity['foto2'] = row.foto2
+        entity['foto3'] = row.foto3
+        entity['video'] = row.video
+
         data.append(entity)
     return jsonify(data), 201
 
