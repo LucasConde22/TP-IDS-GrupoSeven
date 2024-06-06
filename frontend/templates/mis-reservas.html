@@ -2,136 +2,29 @@
 {% block title %}Mis Reservas{% endblock %}
 {% block h1 %}Mis Reservas{% endblock %}
 {% block main_content %}
-
     <section class="ftco-section bg-light">
-    	<div class="container">
-    		<div class="row">
-	        	<div class="col-lg-9">
-		    		<div class="row">
-		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
-		    				<div class="room">
-		    					<a href="{{url_for('habitacion_simple')}}" class="img d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static',filename='images/room-7.jpg')}});">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3 text-center">
-		    						<h3 class="mb-3"><a href="{{url_for('habitacion_simple')}}">Simple</a></h3>
-		    						<p><span class="price mr-2">$25.00</span> <span class="per">por noche</span></p>
-		    						<ul class="list">
-		    							<li><span>Max:</span> 2 Personas</li>
-		    							<li><span>Camas:</span> 2 individuales o 1 matrimonial </li>
-		    						</ul>
-		    						<hr>
-		    						<p class="pt-1"><a href="{{url_for('habitacion_simple')}}" class="btn-custom">Reservar <span class="icon-long-arrow-right"></span></a></p>
-		    					</div>
-		    				</div>
-		    			</div>
-		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
-		    				<div class="room">
-		    					<a href="{{url_for('habitacion_master')}}" class="img d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static',filename='images/room-8.jpg')}});">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3 text-center">
-		    						<h3 class="mb-3"><a href="{{url_for('habitacion_master')}}">Master</a></h3>
-		    						<p><span class="price mr-2">$35.00</span> <span class="per">por noche</span></p>
-		    						<ul class="list">
-		    							<li><span>Max:</span> 4 Personas</li>
-		    							<li><span>Camas:</span> 4 individuales o 2 matrimonial</li>
-		    						</ul>
-		    						<hr>
-		    						<p class="pt-1"><a href="{{url_for('habitacion_master')}}" class="btn-custom">Reservar <span class="icon-long-arrow-right"></span></a></p>
-		    					</div>
-		    				</div>
-		    			</div>
-		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
-		    				<div class="room">
-		    					<a href="{{url_for('habitacion_deluxe')}}" class="img d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static',filename='images/room-2.jpg')}});">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3 text-center">
-		    						<h3 class="mb-3"><a href="{{url_for('habitacion_deluxe')}}">Deluxe</a></h3>
-		    						<p><span class="price mr-2">$80.00</span> <span class="per">por noche</span></p>
-		    						<ul class="list">
-		    							<li><span>Max:</span> 6 Personas</li>
-		    							<li><span>Camas:</span> 6 individuales o 3 matrimoniales</li>
-		    						</ul>
-		    						<hr>
-		    						<p class="pt-1"><a href="{{url_for('habitacion_deluxe')}}" class="btn-custom">Reservar <span class="icon-long-arrow-right"></span></a></p>
-		    					</div>
-								
-		    				</div>
-		    			</div>
-		    		</div>
-	        	</div>
-		    </div>
-    	</div>
+        <div class="container">
+            {% if reservas %}
+                <div class="row">
+                    {% for reserva in reservas %}
+                        <div class="col-md-4 ftco-animate">
+                            <div class="room">
+                                <!-- Aquí puedes mostrar los detalles de la reserva -->
+                                <div class="text p-3 text-center">
+                                    <h3 class="mb-3">{{ reserva.tipo_habitacion }}</h3>
+                                    <p>Habitación: {{ reserva.habitacion }}</p>
+                                    <p>Entrada: {{ reserva.entrada }}</p>
+                                    <p>Salida: {{ reserva.salida }}</p>
+                                    <p>Valor: ${{ reserva.valor }}</p>
+                                    <p>Huéspedes: {{ reserva.huespedes }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No tienes reservas actualmente.</p>
+            {% endif %}
+        </div>
     </section>
-	<section class="ftco-section">
-		<div class="container">
-			<div class="heading-section heading-section-wo-line pt-md-5 pl-md-5 mb-5">
-				<div class="ml-md-0">
-				  <h2 class="mb-4" id="titulo-centrado">Nuestros servicios</h2>
-			  </div>
-			</div>
-		  <div class="row d-flex">
-			<div class="col-md-3 d-flex align-self-stretch ftco-animate">
-			  <div class="media block-6 services py-4 d-block text-center">
-				<div class="d-flex justify-content-center">
-					<div class="icon d-flex align-items-center justify-content-center">
-						<span class="flaticon-reception-bell"></span>
-					</div>
-				</div>
-				<div class="media-body p-2 mt-2">
-				  <h3 class="heading mb-3">Atencion las 24 horas</h3>
-				  <p>Nuestro equipo busca su total comodidad a toda hora y en todo momento.</p>
-				</div>
-			  </div>      
-			</div>
-			<div class="col-md-3 d-flex align-self-stretch ftco-animate">
-			  <div class="media block-6 services py-4 d-block text-center">
-				<div class="d-flex justify-content-center">
-					<div class="icon d-flex align-items-center justify-content-center">
-						<span class="flaticon-serving-dish"></span>
-					</div>
-				</div>
-				<div class="media-body p-2 mt-2">
-				  <h3 class="heading mb-3">Restaurante</h3>
-				  <p>Descubre una experiencia culinaria excepcional en el restaurante del Nexus Hotel.</p>
-				</div>
-			  </div>    
-			</div>
-			<div class="col-md-3 d-flex align-sel Searchf-stretch ftco-animate">
-			  <div class="media block-6 services py-4 d-block text-center">
-				<div class="d-flex justify-content-center">
-					<div class="icon d-flex align-items-center justify-content-center">
-						<span class="flaticon-car"></span>
-					</div>
-				</div>
-				<div class="media-body p-2 mt-2">
-				  <h3 class="heading mb-3">Transporte</h3>
-				  <p>Transpórtate con facilidad y comodidad con nuestro servicio exclusivo de transporte.</p>
-				</div>
-			  </div>      
-			</div>
-			<div class="col-md-3 d-flex align-self-stretch ftco-animate">
-			  <div class="media block-6 services py-4 d-block text-center">
-				<div class="d-flex justify-content-center">
-					<div class="icon d-flex align-items-center justify-content-center">
-						<span class="flaticon-spa"></span>
-					</div>
-				</div>
-				<div class="media-body p-2 mt-2">
-				  <h3 class="heading mb-3">Spa</h3>
-				  <p>Sumérgete en un oasis de tranquilidad y rejuvenecimiento en nuestro spa.</p>
-				</div>
-			  </div>      
-			</div>
-		  </div>
-		</div>
-	  </section>
 {% endblock %}
