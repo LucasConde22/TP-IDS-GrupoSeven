@@ -45,10 +45,10 @@ def reservar():
     
     query = text(f"""
             SELECT h.numero FROM habitaciones h
-            WHERE h.tipo = '{reserva["tipo"]}'
+            WHERE h.tipo = '{reserva['tipo']}'
             AND h.numero NOT IN (
                 SELECT r.habitacion FROM reservas r
-                WHERE '{reserva["entrada"]}' < r.salida AND '{reserva["salida"]}' > r.entrada
+                WHERE '{reserva['entrada']}' < r.salida AND '{reserva['salida']}' > r.entrada
             )
             LIMIT 1
         """)
@@ -61,7 +61,7 @@ def reservar():
     
     habitacion = result.fetchone()
     if habitacion is None:
-        return jsonify({'message': f"No hay habitaciones de tipo {reserva["tipo"]} disponibles para esas fechas!"}), 404
+        return jsonify({'message': f"No hay habitaciones de tipo {reserva['tipo']} disponibles para esas fechas!"}), 404
 
     try:
         result = conn.execute(text(f"SELECT capacidad FROM tipos_habitaciones WHERE tipo = '{reserva['tipo']}'"))
@@ -70,7 +70,7 @@ def reservar():
         return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
     capacidad = result.fetchone()
     if int(capacidad[0]) < int(reserva["huespedes"]):
-        return jsonify({'message': f"En una habitación de tipo {reserva["tipo"]} solo entran hasta {capacidad[0]} personas!"}), 404
+        return jsonify({'message': f"En una habitación de tipo {reserva['tipo']} solo entran hasta {capacidad[0]} personas!"}), 404
 
     try:
         result = conn.execute(text(f"SELECT precio FROM tipos_habitaciones WHERE tipo = '{reserva['tipo']}'"))
@@ -83,7 +83,7 @@ def reservar():
 
     query = text(f"""
             INSERT INTO reservas (usuario, tipo_habitacion, habitacion, entrada, salida, valor, huespedes)
-            VALUES ({reserva['usuario']}, '{reserva['tipo']}', {habitacion[0]}, '{reserva['entrada']}', '{reserva['salida']}', '{valor_reserva}', {reserva["huespedes"]})""")
+            VALUES ({reserva['usuario']}, '{reserva['tipo']}', {habitacion[0]}, '{reserva['entrada']}', '{reserva['salida']}', '{valor_reserva}', {reserva['huespedes']})""")
     try:
         conn.execute(query)
         conn.commit()
@@ -99,7 +99,7 @@ def obtener_info_reservas():
     usuario = request.get_json()
 
     try:
-        result = conn.execute(text(f"SELECT * FROM reservas WHERE usuario='{usuario["id"]}"))
+        result = conn.execute(text(f"SELECT * FROM reservas WHERE usuario='{usuario['id']}"))
     except SQLAlchemyError as err:
         conn.close()
         return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
@@ -123,17 +123,17 @@ def loguear_usuario():
     conn = engine.connect()
     usuario = request.get_json()
     try:
-        result = conn.execute(text(f"SELECT contra FROM usuarios WHERE email='{usuario["user"]}';"))
+        result = conn.execute(text(f"SELECT contra FROM usuarios WHERE email='{usuario['user']}';"))
         row = result.fetchone()
         if row is None:
-            result = conn.execute(text(f"SELECT contra FROM usuarios WHERE usuario='{usuario["user"]}';"))
+            result = conn.execute(text(f"SELECT contra FROM usuarios WHERE usuario='{usuario['user']}';"))
             row = result.fetchone()
             if row is None:
                 conn.close()
                 return jsonify({'message': f"Error, el usuario ingresado es incorrecto!"}), 404
         if row[0] == usuario["contra"]:
             conn.close()
-            return jsonify({'message': f"El usuario '{usuario["user"]}' es correcto!"}), 201
+            return jsonify({'message': f"El usuario '{usuario['user']}' es correcto!"}), 201
         else:
             conn.close()
             return jsonify({'message': f"Error, la contrasena es incorrecta!"}), 404
@@ -146,10 +146,10 @@ def obtener_id():
     conn = engine.connect()
     usuario = request.get_json()
     try:
-        result = conn.execute(text(f"SELECT id FROM usuarios WHERE email='{usuario["user"]}';"))
+        result = conn.execute(text(f"SELECT id FROM usuarios WHERE email='{usuario['user']}';"))
         row = result.fetchone()
         if row is None:
-            result = conn.execute(text(f"SELECT id FROM usuarios WHERE usuario='{usuario["user"]}';"))
+            result = conn.execute(text(f"SELECT id FROM usuarios WHERE usuario='{usuario['user']}';"))
             row = result.fetchone()
     except SQLAlchemyError as err:
         conn.close()
