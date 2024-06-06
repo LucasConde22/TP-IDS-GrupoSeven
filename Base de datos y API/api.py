@@ -11,7 +11,7 @@ def calcular_noches(entrada, salida):
     return (datetime.strptime(salida, '%Y-%m-%d') - datetime.strptime(entrada, '%Y-%m-%d')).days
 
 app = Flask(__name__)
-engine = create_engine("mysql+mysqlconnector://root@localhost/tp_ids")
+engine = create_engine("mysql+mysqlconnector://sql10712305:MP6V7fqkm6@sql10.freemysqlhosting.net:3306/sql10712305")
 
 @app.route('/habitaciones', methods = ['GET'])
 def obtener_habitaciones():
@@ -45,10 +45,10 @@ def reservar():
     
     query = text(f"""
             SELECT h.numero FROM habitaciones h
-            WHERE h.tipo = '{reserva["tipo"]}'
+            WHERE h.tipo = '{reserva['tipo']}'
             AND h.numero NOT IN (
                 SELECT r.habitacion FROM reservas r
-                WHERE '{reserva["entrada"]}' < r.salida AND '{reserva["salida"]}' > r.entrada
+                WHERE '{reserva['entrada']}' < r.salida AND '{reserva['salida']}' > r.entrada
             )
             LIMIT 1
         """)
@@ -83,7 +83,7 @@ def reservar():
 
     query = text(f"""
             INSERT INTO reservas (usuario, tipo_habitacion, habitacion, entrada, salida, valor, huespedes)
-            VALUES ({reserva['usuario']}, '{reserva['tipo']}', {habitacion[0]}, '{reserva['entrada']}', '{reserva['salida']}', '{valor_reserva}', {reserva["huespedes"]})""")
+            VALUES ({reserva['usuario']}, '{reserva['tipo']}', {habitacion[0]}, '{reserva['entrada']}', '{reserva['salida']}', '{valor_reserva}', {reserva['huespedes']})""")
     try:
         conn.execute(query)
         conn.commit()
