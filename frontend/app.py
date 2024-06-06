@@ -77,7 +77,10 @@ def logout():
 
 @app.route("/mis_reservas")
 def mis_reservas():
-    return render_template("mis-reservas.html")
+    if 'usuario' not in session:
+        return redirect(url_for('login'))
+    reservas = obtener_reservas_usuario(session['id'])
+    return render_template('mis-reservas.html', reservas=reservas)
 
 @app.errorhandler(404)
 def page_not_found(e):
