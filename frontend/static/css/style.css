@@ -7900,10 +7900,19 @@ h1, h2, h3, h4, h5,
     background: #8d703b;
     border: 1px solid #8d703b;
     color: #fff; }
+    .btn.btn-primary.btn-blanco{
+      background: #8d703b;
+      border: 1px solid #8d703b;
+      color: #fff;
+      font-size: 130%; }
     .btn.btn-primary:hover {
       border: 1px solid #fff;
       background: transparent;
       color: #fff; }
+      .btn.btn-primary.btn-blanco:hover {
+        border: 1px solid #8d703b;
+        background: transparent;
+        color: #8d703b; }
     .btn.btn-primary.btn-outline-primary {
       border: 1px solid #8d703b;
       background: transparent;
