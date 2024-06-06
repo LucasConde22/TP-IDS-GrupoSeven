@@ -82,8 +82,8 @@ def reservar():
     valor_reserva = precio[0] * noches
 
     query = text(f"""
-            INSERT INTO reservas (usuario, habitacion, entrada, salida, valor, huespedes)
-            VALUES ({reserva['usuario']}, {habitacion[0]}, '{reserva['entrada']}', '{reserva['salida']}', '{valor_reserva}', {reserva["huespedes"]})""")
+            INSERT INTO reservas (usuario, tipo_habitacion, habitacion, entrada, salida, valor, huespedes)
+            VALUES ({reserva['usuario']}, '{reserva['tipo']}', {habitacion[0]}, '{reserva['entrada']}', '{reserva['salida']}', '{valor_reserva}', {reserva["huespedes"]})""")
     try:
         conn.execute(query)
         conn.commit()
@@ -92,6 +92,31 @@ def reservar():
         return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
     conn.close()
     return jsonify({'message': 'La reserva fue realizada correctamente!'}), 201
+
+@app.route("/reservas", methods = ['GET'])
+def obtener_info_reservas():
+    conn = engine.connect()
+    usuario = request.get_json()
+
+    try:
+        result = conn.execute(text(f"SELECT * FROM reservas WHERE usuario='{usuario["id"]}"))
+    except SQLAlchemyError as err:
+        conn.close()
+        return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
+    
+    data = []
+    for row in result:
+        entity = {}
+        entity['numero'] = row.numero
+        entity['usuario'] = row.usuario
+        entity['tipo_habitacion'] = row.tipo_habitacion
+        entity['habitacion'] = row.habitacion
+        entity['entrada'] = row.entrada
+        entity['salida'] = row.salida
+        entity['valor'] = row.valor
+        entity['huespedes'] = row.huespedes
+        data.append(entity)
+    return jsonify(data), 201
 
 @app.route('/loguear_usuario', methods = ['POST'])
 def loguear_usuario():

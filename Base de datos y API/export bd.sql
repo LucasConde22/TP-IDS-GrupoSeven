@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-06-2024 a las 03:01:10
+-- Tiempo de generación: 06-06-2024 a las 03:08:31
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -62,6 +62,7 @@ INSERT INTO `habitaciones` (`numero`, `tipo`) VALUES
 CREATE TABLE `reservas` (
   `numero` int(11) NOT NULL,
   `usuario` int(11) NOT NULL,
+  `tipo_habitacion` varchar(20) NOT NULL,
   `habitacion` int(11) NOT NULL,
   `entrada` date NOT NULL,
   `salida` date NOT NULL,
@@ -73,20 +74,8 @@ CREATE TABLE `reservas` (
 -- Volcado de datos para la tabla `reservas`
 --
 
-INSERT INTO `reservas` (`numero`, `usuario`, `habitacion`, `entrada`, `salida`, `valor`, `huespedes`) VALUES
-(14, 1, 101, '2024-10-01', '2024-10-10', 25, 0),
-(15, 1, 102, '2024-10-01', '2024-10-10', 25, 0),
-(16, 1, 301, '2024-10-20', '2024-10-30', 80, 0),
-(17, 1, 302, '2024-10-20', '2024-10-30', 80, 0),
-(21, 1, 201, '2024-10-15', '2024-10-25', 350, 0),
-(22, 1, 202, '2024-10-15', '2024-10-25', 350, 0),
-(23, 1, 101, '2024-06-24', '2024-06-30', 150, 0),
-(24, 1, 201, '2024-07-10', '2024-07-17', 245, 0),
-(25, 1, 101, '2024-05-30', '2024-06-05', 150, 0),
-(26, 2, 103, '2024-09-13', '2024-10-16', 825, 0),
-(27, 2, 301, '2024-06-05', '2024-06-07', 160, 0),
-(28, 2, 201, '2024-06-12', '2024-07-04', 770, 2),
-(29, 2, 202, '2024-06-06', '2024-06-22', 560, 1);
+INSERT INTO `reservas` (`numero`, `usuario`, `tipo_habitacion`, `habitacion`, `entrada`, `salida`, `valor`, `huespedes`) VALUES
+(31, 1, 'master', 201, '2024-06-07', '2024-06-18', 385, 2);
 
 -- --------------------------------------------------------
 
@@ -154,7 +143,8 @@ ALTER TABLE `habitaciones`
 ALTER TABLE `reservas`
   ADD PRIMARY KEY (`numero`),
   ADD KEY `id_usuario` (`usuario`),
-  ADD KEY `numero_habitacion` (`habitacion`);
+  ADD KEY `numero_habitacion` (`habitacion`),
+  ADD KEY `tipo` (`tipo_habitacion`);
 
 --
 -- Indices de la tabla `tipos_habitaciones`
@@ -176,7 +166,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `numero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `numero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -199,7 +189,8 @@ ALTER TABLE `habitaciones`
 --
 ALTER TABLE `reservas`
   ADD CONSTRAINT `reservas_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuarios` (`id`),
-  ADD CONSTRAINT `reservas_ibfk_2` FOREIGN KEY (`habitacion`) REFERENCES `habitaciones` (`numero`);
+  ADD CONSTRAINT `reservas_ibfk_2` FOREIGN KEY (`habitacion`) REFERENCES `habitaciones` (`numero`),
+  ADD CONSTRAINT `reservas_ibfk_3` FOREIGN KEY (`tipo_habitacion`) REFERENCES `tipos_habitaciones` (`tipo`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
