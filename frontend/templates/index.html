@@ -43,6 +43,7 @@
 	          <li class="nav-item"><a href="{{url_for('restaurante')}}" class="nav-link">Restaurante</a></li>
 	          <li class="nav-item"><a href="{{url_for('about')}}" class="nav-link">About</a></li>
 	          <li class="nav-item"><a href="{{url_for('contacto')}}" class="nav-link">Contacto</a></li>
+			  <li class="nav-item {% if request.endpoint == 'mis_reservas' %}active{% endif %}"><a href="{{url_for('mis_reservas')}}" class="nav-link">Mis Reservas</a></li>
 		{% if session['usuario'] %}
 			  <li class="nav-item"><a href="{{url_for('logout')}}" class="nav-link">Cerrar sesión</a></li>
 		{% else %}
