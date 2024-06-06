@@ -75,6 +75,10 @@ def logout():
     session.pop("id", None)
     return redirect(url_for("index"))
 
+@app.route("/mis_reservas")
+def mis_reservas():
+    return render_template("mis-reservas.html")
+
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("404.html"), 404
