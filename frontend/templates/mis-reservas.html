@@ -6,20 +6,23 @@
         <div class="container">
             {% if reservas %}
                 <div class="row">
-                    {% for reserva in reservas %}
+                    {% for info in reservas %}
                         <div class="col-md-4 ftco-animate">
                             <div class="room">
                                 <!-- Aquí puedes mostrar los detalles de la reserva -->
                                 <div class="text p-3 text-center">
-                                    <h3 class="mb-3">{{ reserva.tipo_habitacion }}</h3>
-                                    <p>Habitación: {{ reserva.habitacion }}</p>
-                                    <p>Entrada: {{ reserva.entrada }}</p>
-                                    <p>Salida: {{ reserva.salida }}</p>
-                                    <p>Valor: ${{ reserva.valor }}</p>
-                                    <p>Huéspedes: {{ reserva.huespedes }}</p>
+                                    <h3 class="mb-3">Reserva Nº{{ loop.index }}</h3>
+                                    <p>Tipo habitación: {{ info['tipo_habitacion'] }}</p>
+                                    <p>Habitación: {{ info['habitacion'] }}</p>
+                                    <p>Entrada: {{ info['entrada'][:-13] }}</p>
+                                    <p>Salida: {{ info['salida'][:-13] }}</p>
+                                    <p>Valor: ${{ info['valor'] }} US</p>
+                                    <p>Huéspedes: {{ info['huespedes'] }}</p>
+                                    <a style="color: red" href="">Cancelar reserva</a>
                                 </div>
                             </div>
                         </div>
+                        
                     {% endfor %}
                 </div>
             {% else %}
