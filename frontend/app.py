@@ -64,7 +64,7 @@ def signup():
         else:
             res = res.json()
             flash(res["message"])
-    return render_template("registro.html")
+    return render_template("signup.html")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
