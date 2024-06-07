@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Sign up{% endblock %}
+{% block h1 %}Sign up{% endblock %}
+{% block main_content %}
+
+<section class="ftco-section">
+<div class="container">
+
+<!-- Login Start -->
+<div class="container-xxl py-5">
+    <img class="logo" src="{{url_for('static', filename='images/logo-1.png')}}">
+    <div class="container">
+    <div class="row g-5">
+        <div class="col-lg-6">
+            <div class="wow fadeInUp" data-wow-delay="0.2s">
+                <form action="{{ url_for('signup') }}" method="post">
+                    {% with mensajes = get_flashed_messages()%}
+                    {% if mensajes%}
+                        {% for mensaje in mensajes%}
+                        <p>{{mensaje}}</p>
+                        {%endfor%}
+                        {%endif%}
+                        {%endwith%}
+                        <div class="col-12">
+                            <div class="form-floating date" id="date4" data-target-input="nearest">
+                                <input name="email" type="text" class="form-control" placeholder="Usuario">
+                                <label for="#">Correo electrónico</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating date" id="date4" data-target-input="nearest">
+                                <input name="user" type="text" class="form-control" placeholder="Usuario">
+                                <label for="#">Nombre de usuario</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating date" id="date4" data-target-input="nearest">
+                                <input name="nombre" type="text" class="form-control" placeholder="Usuario">
+                                <label for="#">Nombre completo</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating date" id="date4" data-target-input="nearest">
+                                <input name="contra" type="text" class="form-control" placeholder="Contraseña">
+                                <label for="#">Contraseña</label>
+                            </div>
+                        </div>
+                        <div class="col-12" style="margin-top: 55px;">
+                            <button class="btn btn-primary w-100 py-3 btn-blanco" type="submit">Registrarme</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+<!-- Login End -->
+
+{% endblock %}
