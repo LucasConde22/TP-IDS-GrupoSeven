@@ -141,6 +141,19 @@ def loguear_usuario():
         conn.close()
         return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
 
+@app.route('/registrar', methods = ['POST'])
+def registrar_usuario():
+    conn = engine.connect()
+    usuario = request.get_json()
+    try:
+        result = conn.execute(text(f"""INSERT INTO usuarios (nombre, usuario, email, contra) VALUES 
+                                   ('{usuario['nombre']}', '{usuario['user']}', '{usuario['email']}', '{usuario['contra']}');"""))
+        conn.commit()
+    except SQLAlchemyError as err:
+        conn.close()
+        return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
+    return jsonify({'message': f"Usuario creado correctamente!"}), 201
+
 @app.route('/id', methods = ['GET'])
 def obtener_id():
     conn = engine.connect()
