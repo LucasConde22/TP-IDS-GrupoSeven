@@ -13,3 +13,20 @@ document.getElementById('form_opinion').addEventListener('submit', function(even
 
     mostrarPopup();
 });
+
+function openModal() {
+    var modal = document.getElementById("authModal");
+    modal.style.display = "block";
+}
+
+function closeModal() {
+    var modal = document.getElementById("authModal");
+    modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    var modal = document.getElementById("authModal");
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}

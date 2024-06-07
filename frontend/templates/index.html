@@ -407,12 +407,34 @@
           </div>
         </div>
       </div>
-	  <div class="container_boton_opinion">
-		<a href="{{ url_for('opinion') }}">
-			<button class="boton">Dejanos tu opinión!</button>
-		</a>
-	  </div>
+	  <div id="authModal" class="modal">
+    		<div class="modal-content">
+        		<span class="close" onclick="closeModal()">&times;</span>
+       				 <p id="authMessage">Debes iniciar sesión para dejar tu opinión.</p>
+					 	<div class="containter_is_opin">
+								<a href="{{ url_for('login') }}">
+									<button class="boton_iniciar_sesion_opin">Iniciar sesión</button>
+								</a>
+						</div>
+						<div class="container_cc_opin">
+							<p class="crear_cuenta_opin">No tienes una cuenta? creala!</p>
+      					    <a href="{{ url_for('login') }}">Crear cuenta</a>
+						</div>
+    		</div>
+	   </div>
+		{% if session['usuario'] %}
+    		<div class="container_boton_opinion">
+        		<a href="{{ url_for('opinion') }}">
+            		<button class="boton">Dejanos tu opinión!</button>
+        		</a>
+    		</div>
+	   {% else %}
+    		<div class="container_boton_opinion">
+        		<button class="boton" onclick="openModal()">Dejanos tu opinión!</button>
+    		</div>
+	   {% endif %}
     </section>
+
     <section class="instagram">
       <div class="container-fluid">
         <div class="row no-gutters justify-content-center pb-5">
@@ -528,6 +550,7 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="{{url_for('static', filename = 'js/google-map.js')}}"></script>
   <script src="{{url_for('static', filename = 'js/main.js')}}"></script>
+  <script src="{{url_for('static', filename = 'js/jsopin.js')}}"></script>
     
   </body>
 </html>
