@@ -146,13 +146,26 @@ def registrar_usuario():
     conn = engine.connect()
     usuario = request.get_json()
     try:
-        result = conn.execute(text(f"""INSERT INTO usuarios (nombre, usuario, email, contra) VALUES 
+        result = conn.execute(text(f"SELECT id FROM usuarios WHERE email='{usuario['email']}';"))
+        row = result.fetchone()
+        if row is None:
+            result = conn.execute(text(f"SELECT id FROM usuarios WHERE usuario='{usuario['user']}';"))
+            row = result.fetchone()
+            if row is None:
+                result = conn.execute(text(f"""INSERT INTO usuarios (nombre, usuario, email, contra) VALUES 
                                    ('{usuario['nombre']}', '{usuario['user']}', '{usuario['email']}', '{usuario['contra']}');"""))
-        conn.commit()
+                conn.commit()
+            else:
+                conn.close()
+                return jsonify({'message': "Error, un usuario ya se encuentra registrado con ese nombre de usuario!"}), 404
+        else:
+            conn.close()
+            return jsonify({'message': "Error, un usuario ya se encuentra registrado con ese correo electrónico!"}), 404
     except SQLAlchemyError as err:
         conn.close()
-        return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
-    return jsonify({'message': f"Usuario creado correctamente!"}), 201
+        return jsonify({'message': 'Se ha producido un error'}), 500
+    conn.close()
+    return jsonify({'message': "Usuario creado correctamente!"}), 201
 
 @app.route('/id', methods = ['GET'])
 def obtener_id():
