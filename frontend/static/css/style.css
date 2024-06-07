@@ -438,6 +438,75 @@ mark,
   background-color: transparent; 
 }
 
+.modal {
+  display: flex; 
+  position: fixed;
+  z-index: 1; 
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgba(0,0,0,0.4);
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  top: 22%;
+  background-color: #fff;
+  width: 100%;
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  text-align: center; 
+}
+
+.close {
+  color: #8B6A3A;
+  font-size: 24px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.boton_iniciar_sesion_opin {
+  background-color: #8B6A3A; 
+  color: white;
+  padding: 10px 50px; 
+  text-align: center; 
+  text-decoration: none; 
+  display: inline-block; 
+  font-size: 16px;
+  font-family: 'Playfair Display', serif;
+  border-radius: 50px; 
+  border: 2px solid #8B6A3A; 
+  cursor: pointer; 
+  transition: border-color 0.3s, color 0.3s; 
+}
+
+.boton_iniciar_sesion_opin:hover {
+  background-color: transparent;
+  color: #8B6A3A; /* Cambia el color del texto al pasar el mouse */
+}
+
+.crear_cuenta_opin {
+  font-size: small;
+  margin-top: 20px; /* Añade espacio superior */
+}
+
+.crear_cuenta_opin a {
+  color: #8B6A3A;
+  text-decoration: none;
+}
+
+.crear_cuenta_opin a:hover {
+  text-decoration: underline; /* Añade subrayado al pasar el mouse */
+}
+
 .container_boton_opinion {
   text-align: center;
   margin-top: 80px;
