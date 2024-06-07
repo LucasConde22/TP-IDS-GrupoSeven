@@ -52,6 +52,20 @@ def reservaciones():
             flash(res["message"]) # Muestra mensaje de error
     return render_template("reservacion.html")
 
+@app.route("/signup", methods=["GET", "POST"])
+def signup():
+    if "usuario" in session:
+            return redirect(url_for("index"))
+    if request.method == "POST":
+        info = request.form.to_dict(flat=True)
+        res = requests.post('http://localhost:5000/registrar', json=info)
+        if res.status_code == 201:
+            return redirect(url_for("login"))
+        else:
+            res = res.json()
+            flash(res["message"])
+    return render_template("registro.html")
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
