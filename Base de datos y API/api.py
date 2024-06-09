@@ -99,7 +99,8 @@ def obtener_info_reservas():
     usuario = request.get_json()
 
     try:
-        result = conn.execute(text(f"SELECT * FROM reservas WHERE usuario='{usuario['id']}'"))
+        result = conn.execute(text(f"""SELECT numero, tipo_habitacion, habitacion, entrada, salida, valor, huespedes
+                                   FROM reservas WHERE usuario='{usuario['id']}'"""))
     except SQLAlchemyError as err:
         conn.close()
         return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
@@ -108,7 +109,6 @@ def obtener_info_reservas():
     for row in result:
         entity = {}
         entity['numero'] = row.numero
-        entity['usuario'] = row.usuario
         entity['tipo_habitacion'] = row.tipo_habitacion
         entity['habitacion'] = row.habitacion
         entity['entrada'] = row.entrada
