@@ -60,6 +60,8 @@ def signup():
         info = request.form.to_dict(flat=True)
         res = requests.post('http://localhost:5000/registrar', json=info)
         if res.status_code == 201:
+            res = res.json()
+            flash(res["message"])
             return redirect(url_for("login"))
         else:
             res = res.json()
