@@ -118,6 +118,19 @@ def obtener_info_reservas():
         data.append(entity)
     return jsonify(data), 201
 
+@app.route('/eliminar_reserva', methods=['DELETE'])
+def eliminar_reserva():
+    conn = engine.connect()
+    reserva = request.get_json()
+    try:
+        result = conn.execute(text(f"DELETE FROM reservas WHERE numero='{reserva['numero']}';"))
+        conn.commit()
+    except SQLAlchemyError as err:
+        conn.close()
+        return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
+    conn.close()
+    return jsonify({'message': f"La reserva fue cancelada correctamente!"}), 201
+
 @app.route('/loguear_usuario', methods = ['POST'])
 def loguear_usuario():
     conn = engine.connect()
