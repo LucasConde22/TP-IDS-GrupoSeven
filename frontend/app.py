@@ -43,7 +43,7 @@ def restaurante():
 def reservaciones():
     if request.method == "POST":
         info = request.form.to_dict(flat=True)
-        res = requests.post('http://localhost:5000/reservar', json=info)
+        res = requests.post('http://localhost:5001/reservar', json=info)
         if res.status_code == 201:
             res = res.json()
             flash(res["message"]) # Muestra que se realizó la reserva
@@ -58,7 +58,7 @@ def signup():
             return redirect(url_for("index"))
     if request.method == "POST":
         info = request.form.to_dict(flat=True)
-        res = requests.post('http://localhost:5000/registrar', json=info)
+        res = requests.post('http://localhost:5001/registrar', json=info)
         if res.status_code == 201:
             res = res.json()
             flash(res["message"])
@@ -74,10 +74,10 @@ def login():
         if "usuario" in session:
             return redirect(url_for("index"))
         info = request.form.to_dict(flat=True)
-        res = requests.post('http://localhost:5000/loguear_usuario', json=info)
+        res = requests.post('http://localhost:5001/loguear_usuario', json=info)
         if res.status_code == 201:
             session["usuario"] = request.form.get("user")
-            res = requests.get('http://localhost:5000/id', json=info)
+            res = requests.get('http://localhost:5001/id', json=info)
             res = res.json()
             session["id"] = res["id"]
             return redirect(url_for("index"))
@@ -96,7 +96,7 @@ def mis_reservas():
     if not 'usuario' in session:
         return redirect(url_for('index'))
     data = {"id": session['id']}
-    res = requests.get('http://localhost:5000/mis_reservas', json=data)
+    res = requests.get('http://localhost:5001/mis_reservas', json=data)
     res = res.json()
     return render_template('mis-reservas.html', reservas=res)
 
@@ -122,4 +122,4 @@ def opinion():
     return render_template("opinion.html")
 
 if __name__ == '__main__':
-    app.run("127.0.0.1",port=8000,debug=True)
+    app.run("0.0.0.0",port=8000,debug=True)
