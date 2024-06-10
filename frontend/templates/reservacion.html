@@ -79,7 +79,7 @@
                         <div class="col-12">
                             <div class="form-floating" style="font-size: large;">
                                 <select class="form-select" id="select3", name="tipo" style="margin-right: 0.5cm;">
-                                  <option value="simple">Simple</option> <!--¿Cambiar valores por "simple", "master" y "deluxe"?-->>
+                                  <option value="simple">Simple</option> <!--¿Cambiar valores por "simple", "master" y "deluxe"?-->
                                   <option value="master">Master</option>
                                   <option value="deluxe">Deluxe</option>
                                 </select>
@@ -88,7 +88,15 @@
                               {% with mensajes = get_flashed_messages()%}
                               {% if mensajes%}
                                   {% for mensaje in mensajes%}
-                                  <h3>{{mensaje}}</h3>
+                                    {% if mensaje == 'La reserva fue realizada correctamente!' %}
+                                        <div class="alert alert-success" role="alert" style="margin-top: 1cm; margin-bottom: 0px;">
+                                            {{ mensaje }}
+                                        </div>
+                                    {% else %}
+                                        <div class="alert alert-warning" role="alert" style="margin-top: 1cm; margin-bottom: 0px;">
+                                            {{ mensaje }}
+                                        </div>
+                                    {%endif%}
                                   {%endfor%}
                                   {%endif%}
                                   {%endwith%}     
