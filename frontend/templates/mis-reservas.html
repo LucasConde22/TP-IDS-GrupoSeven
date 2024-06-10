@@ -2,6 +2,9 @@
 {% block title %}Mis Reservas{% endblock %}
 {% block h1 %}Mis Reservas{% endblock %}
 {% block main_content %}
+
+
+
     <section class="ftco-section bg-light">
         {% with mensajes = get_flashed_messages()%}
             {% if mensajes%}
@@ -12,20 +15,33 @@
         {%endwith%}
         <div class="container">
             {% if reservas %}
+                <div class="mensaje">
+                    <p style="text-align: center;">Si tiene consultas sobre su reserva no dude en <a href="{{url_for('contacto')}}" style="text-decoration: underline;">contactarnos</a></p>
+                </div>
+                <br>
                 <div class="row">
                     {% for info in reservas %}
                         <div class="col-md-4 ftco-animate">
                             <div class="room">
+                                {% if info['tipo_habitacion'] == 'simple' %}
+                                    <a href="{{url_for('habitacion_simple')}}" class="img img-reserva d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static',filename='images/room-7.jpg')}});"></a>
+                                {% elif info['tipo_habitacion'] == 'master' %}
+                                    <a href="{{url_for('habitacion_master')}}" class="img img-reserva d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static',filename='images/room-8.jpg')}});"></a>
+                                {% elif info['tipo_habitacion'] == 'deluxe' %}
+                                    <a href="{{url_for('habitacion_deluxe')}}" class="img img-reserva d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static',filename='images/room-2.jpg')}});"></a>
+                                {%endif%}
                                 <!-- Aquí puedes mostrar los detalles de la reserva -->
                                 <div class="text p-3 text-center">
                                     <h3 class="mb-3">Reserva Nº{{ loop.index }}</h3>
-                                    <p>Tipo habitación: {{ info['tipo_habitacion'] }}</p>
-                                    <p>Habitación: {{ info['habitacion'] }}</p>
-                                    <p>Entrada: {{ info['entrada'][:-13] }}</p>
-                                    <p>Salida: {{ info['salida'][:-13] }}</p>
-                                    <p>Valor: ${{ info['valor'] }} US</p>
-                                    <p>Huéspedes: {{ info['huespedes'] }}</p>
-                                    <a style="color: red" href="{{url_for('cancelar_reserva' ,id=info['numero'])}}">Cancelar reserva</a>
+                                    <hr>
+                                    <p><strong>Tipo de habitación:</strong> {{ info['tipo_habitacion'] }}</p>
+                                    <p><strong>Habitación: </strong>{{ info['habitacion'] }}</p>
+                                    <p><strong>Check-In: </strong>{{ info['entrada'][:-13] }}</p>
+                                    <p><strong>Check-Out: </strong>{{ info['salida'][:-13] }}</p>
+                                    <p><strong>Valor: </strong>US${{ info['valor'] }}</p>
+                                    <p><strong>Huéspedes: </strong>{{ info['huespedes'] }}</p>
+                                    <hr>
+                                    <a style="color: red" href="{{url_for('cancelar_reserva' ,id=info['numero'])}}">Cancelar reserva </a><i style="color: red" class="bi bi-x-circle"></i>
                                 </div>
                             </div>
                         </div>
