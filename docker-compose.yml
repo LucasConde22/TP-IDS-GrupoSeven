@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: MP6V7fqkm6
+      MYSQL_DATABASE: sql10712305
+      MYSQL_USER: sql10712305
+      MYSQL_PASSWORD: MP6V7fqkm6
+
+  python_app:
+    build: .
+    ports:
+      - "8000:8000"
+      - "5001:5001"
+    volumes:
+      - .:/app
+    depends_on:
+      - mysql
+    command: /app/start.sh
