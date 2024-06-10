@@ -28,8 +28,9 @@
                             </div>
                         </div>
                         <div class="col-12">
-                            <div class="form-floating date" id="date4" data-target-input="nearest">
-                                <input name="contra" type="text" class="form-control" placeholder="Contraseña">
+                            <div class="password-container" id="date4" data-target-input="nearest">
+                                <input name="contra" type="password" class="form-control" placeholder="Contraseña" id="password">
+                                <button type="button" id="togglePassword" class="btn btn-secondary">Mostrar</button>
                                 <label for="#">Tu contraseña</label>
                             </div>
                         </div>
@@ -45,5 +46,7 @@
 </div>
 </section>
 <!-- Login End -->
+
+<script src="{{url_for('static',filename='js/jspassw.js')}}"></script>
 
 {% endblock %}

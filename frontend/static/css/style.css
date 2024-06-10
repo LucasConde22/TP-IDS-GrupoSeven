@@ -490,12 +490,12 @@ mark,
 
 .boton_iniciar_sesion_opin:hover {
   background-color: transparent;
-  color: #8B6A3A; /* Cambia el color del texto al pasar el mouse */
+  color: #8B6A3A; 
 }
 
 .crear_cuenta_opin {
   font-size: small;
-  margin-top: 20px; /* Añade espacio superior */
+  margin-top: 20px; 
 }
 
 .crear_cuenta_opin a {
@@ -504,7 +504,7 @@ mark,
 }
 
 .crear_cuenta_opin a:hover {
-  text-decoration: underline; /* Añade subrayado al pasar el mouse */
+  text-decoration: underline; 
 }
 
 .container_boton_opinion {
@@ -643,6 +643,38 @@ mark,
   background-color: transparent;
   border-color: #8B6A3A;
 }
+
+.password-container {
+  position: relative;
+  width: 100%;
+  max-width: 500px; 
+  height: 52px;
+  margin: 0 auto; 
+}
+
+#password {
+  width: calc(100% - 80px); 
+  height: 40px;
+  padding-right: 10px; 
+  box-sizing: border-box;
+}
+
+#togglePassword {
+  color: #000;
+  position: absolute;
+  right: 5px; 
+  top: 5px;
+  padding: 1px 10px;
+  font-size: 12px;
+  background-color: transparent;
+  border: transparent;
+  border-left: none; 
+  border-radius: 0 3px 3px 0; 
+  cursor: pointer;
+  height: calc(100% - 10px); 
+  z-index: 1; 
+}
+
 
 code,
 kbd,
