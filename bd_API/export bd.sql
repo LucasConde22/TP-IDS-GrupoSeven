@@ -132,10 +132,19 @@ INSERT INTO `usuarios` (`id`, `nombre`, `usuario`, `email`, `contra`) VALUES
 --
 
 CREATE TABLE `opiniones` (
+  `id_opin` int(11) NOT NULL,
   `usuario` varchar(30) NOT NULL,
   `resena` varchar(400) NOT NULL,
   `rating` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `opiniones`
+--
+
+INSERT INTO `opiniones` (`id_opin`, `usuario`, `resena`, `rating`) VALUES
+(1, 'test_usuario1', 'El hotel es muy lindo', 4),
+(2, 'test_usuario2', 'Hermosa experiencia muy lindo lugar.', 5);
 
 --
 -- Índices para tablas volcadas
@@ -174,7 +183,7 @@ ALTER TABLE `usuarios`
 --
 
 ALTER TABLE `opiniones`
-  ADD PRIMARY KEY (`usuario`),
+  ADD PRIMARY KEY (`id_opin`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -189,8 +198,17 @@ ALTER TABLE `reservas`
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
+
 ALTER TABLE `usuarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+
+--
+-- AUTO_INCREMENT de la tabla `opinion`
+--
+
+ALTER TABLE `opiniones`
+  MODIFY `id_opin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas

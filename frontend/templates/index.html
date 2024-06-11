@@ -292,123 +292,41 @@
     </section>
 
 
-    <section class="ftco-section testimony-section bg-light">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-md-8 ftco-animate">
-          	<div class="row ftco-animate">
-		          <div class="col-md-12">
-		            <div class="carousel-testimony owl-carousel ftco-owl">
-		              <div class="item">
-		                <div class="testimony-wrap py-4 pb-5">
-		                  <div class="user-img mb-4" style="background-image: url({{url_for('static', filename = 'images/person_1.jpg')}})">
-		                    <span class="quote d-flex align-items-center justify-content-center">
-		                      <i class="icon-quote-left"></i>
-		                    </span>
-		                  </div>
-		                  <div class="text text-center">
-		                    <p class="mb-4">"¡Una experiencia inolvidable! El Nexus Hotel superó todas mis expectativas. Desde la atención del personal hasta la comodidad de la habitación, todo fue simplemente perfecto."
-								<div class="rating">
-									<span class="star">&#9733;</span>
-									<span class="star">&#9733;</span>
-									<span class="star">&#9733;</span>
-									<span class="star">&#9733;</span>
-									<span class="star">&#9733;</span>
-								  </div>
-							</p>
-		                    <p class="name">Eduardo Sánchez</p>
-		                    <span class="position">Huéspedes</span>
-		                  </div>
-		                </div>
-		              </div>
-		              <div class="item">
-		                <div class="testimony-wrap py-4 pb-5">
-		                  <div class="user-img mb-4" style="background-image: url({{url_for('static', filename = 'images/person_2.jpg')}})">
-		                    <span class="quote d-flex align-items-center justify-content-center">
-		                      <i class="icon-quote-left"></i>
-		                    </span>
-		                  </div>
-		                  <div class="text text-center">
-		                    <p class="mb-4">"Excelente servicio y ubicación estratégica. El restaurante del hotel ofrece una variedad de platos deliciosos. Definitivamente regresaré en mi próximo viaje."</p>
-		                    <p class="name">Juan Martínez</p>
-							<div class="rating">
-								<span class="star">&#9733;</span>
-								<span class="star">&#9733;</span>
-								<span class="star">&#9733;</span>
-								<span class="star">&#9733;</span>
-							  </div>
-		                    <span class="position">Huéspedes</span>
-		                  </div>
-		                </div>
-		              </div>
-		              <div class="item">
-		                <div class="testimony-wrap py-4 pb-5">
-		                  <div class="user-img mb-4" style="background-image: url({{url_for('static', filename = 'images/person_3.jpg')}})">
-		                    <span class="quote d-flex align-items-center justify-content-center">
-		                      <i class="icon-quote-left"></i>
-		                    </span>
-		                  </div>
-		                  <div class="text text-center">
-		                    <p class="mb-4">"¡Increíble! El spa del Nexus Hotel es un santuario de relajación. Los tratamientos son de alta calidad y el ambiente es simplemente mágico."</p>
-		                    <p class="name">Carla González</p>
-							<div class="rating">
-								<span class="star">&#9733;</span>
-								<span class="star">&#9733;</span>
-								<span class="star">&#9733;</span>
-								<span class="star">&#9733;</span>
-							  </div>
-		                    <span class="position">Huéspedes</span>
-		                  </div>
-		                </div>
-		              </div>
-		              <div class="item">
-		                <div class="testimony-wrap py-4 pb-5">
-		                  <div class="user-img mb-4" style="background-image: url({{url_for('static', filename = 'images/person_4.jpg')}})">
-		                    <span class="quote d-flex align-items-center justify-content-center">
-		                      <i class="icon-quote-left"></i>
-		                    </span>
-		                  </div>
-		                  <div class="text text-center">
-		                    <p class="mb-4">"El servicio de transporte del hotel hizo que mi estadía fuera aún más placentera. Rápido, eficiente y siempre con una sonrisa."</p>
-		                    <p class="name">Pedro Rodríguez</p>
-							<div class="rating">
-								<span class="star">&#9733;</span>
-								<span class="star">&#9733;</span>
-								<span class="star">&#9733;</span>
-								<span class="star">&#9733;</span>
-								<span class="star">&#9733;</span>
-							  </div>
-		                    <span class="position">Huéspedes</span>
-		                  </div>
-		                </div>
-		              </div>
-		              <div class="item">
-		                <div class="testimony-wrap py-4 pb-5">
-		                  <div class="user-img mb-4" style="background-image: url({{url_for('static', filename = 'images/person_5.jpg')}})">
-		                    <span class="quote d-flex align-items-center justify-content-center">
-		                      <i class="icon-quote-left"></i>
-		                    </span>
-		                  </div>
-		                  <div class="text text-center">
-		                    <p class="mb-4">"Una estadía fantástica en el Nexus Hotel. Las habitaciones son elegantes y cómodas, y el personal es muy atento y servicial. ¡Altamente recomendado!"</p>
-		                    <p class="name">Laura Pérez</p>
-							<div class="rating">
-								<span class="star">&#9733;</span>
-								<span class="star">&#9733;</span>
-								<span class="star">&#9733;</span>
-								<span class="star">&#9733;</span>
-								<span class="star">&#9733;</span>
-							  </div>
-		                    <span class="position">Huéspedes</span>
-		                  </div>
-		                </div>
-		              </div>
+<section class="ftco-section testimony-section bg-light">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-8 ftco-animate">
+				<div class="row ftco-animate">
+					<div class="col-md-12">
+						<div class="carousel-testimony owl-carousel ftco-owl">
+							{% for opinion in opiniones %}
+							<div class="item">
+								<div class="testimony-wrap py-4 pb-5">
+									<div class="user-img mb-4" style="background-image: url({{url_for('static', filename = 'images/user.jpg')}});">
+										<span class="quote d-flex align-items-center justify-content-center">
+											<i class="icon-quote-left"></i>
+										</span>
+									</div>
+									<div class="text text-center">
+										<p class="mb-4">"{{ opinion.resena }}"
+											<div class="rating">
+												{% for _ in range(opinion.rating) %}
+												<span class="star">&#9733;</span>
+												{% endfor %}
+											</div>
+										</p>
+										<p class="name">{{ opinion.usuario }}</p>
+										<span class="position">Huéspedes</span>
+									</div>
+								</div>
+							</div>
+							{% endfor %}
 		            </div>
 		          </div>
-		        </div>
-          </div>
+            </div>
         </div>
       </div>
+	  </div>
 	  <div id="authModal" class="modal">
     		<div class="modal-content">
         		<span class="close" onclick="closeModal()">&times;</span>
