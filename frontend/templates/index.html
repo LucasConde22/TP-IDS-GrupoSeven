@@ -248,48 +248,6 @@
     	</div>
     </section>
 
-    <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url({{url_for('static', filename = 'images/bg_1.jpg')}});">
-    	<div class="container">
-    		<div class="row justify-content-center">
-    			<div class="col-md-10">
-		    		<div class="row">
-		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-		            <div class="block-18 text-center">
-		              <div class="text">
-		                <strong class="number" data-number="50000">0</strong>
-		                <span>Nuestros clientes</span>
-		              </div>
-		            </div>
-		          </div>
-		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-		            <div class="block-18 text-center">
-		              <div class="text">
-		                <strong class="number" data-number="3000">0</strong>
-		                <span>Habitaciones</span>
-		              </div>
-		            </div>
-		          </div>
-		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-		            <div class="block-18 text-center">
-		              <div class="text">
-		                <strong class="number" data-number="1000">0</strong>
-		                <span>Staff</span>
-		              </div>
-		            </div>
-		          </div>
-		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-		            <div class="block-18 text-center">
-		              <div class="text">
-		                <strong class="number" data-number="100">0</strong>
-		                <span>Sucursales</span>
-		              </div>
-		            </div>
-		          </div>
-		        </div>
-	        </div>
-        </div>
-    	</div>
-    </section>
 
 
 <section class="ftco-section testimony-section bg-light">
@@ -345,12 +303,12 @@
 		{% if session['usuario'] %}
     		<div class="container_boton_opinion">
         		<a href="{{ url_for('opinion') }}">
-            		<button class="boton">Dejanos tu opinión!</button>
+            		<button class="boton">¡Dejanos tu opinión!</button>
         		</a>
     		</div>
 	   {% else %}
     		<div class="container_boton_opinion">
-        		<button class="boton" onclick="openModal()">Dejanos tu opinión!</button>
+        		<button class="boton" onclick="openModal()">¡Dejanos tu opinión!</button>
     		</div>
 	   {% endif %}
     </section>
@@ -423,7 +381,7 @@
                 <li><a href="{{url_for('habitaciones')}}" class="py-2 d-block">Habitaciones</a></li>
 				<li><a href="{{url_for('restaurante')}}" class="py-2 d-block">Restaurante</a></li>
                 <li><a href="{{url_for('about')}}" class="py-2 d-block">Sobre nosotros</a></li>
-                <li><a href="{{url_for('contacto')}}" class="py-2 d-block">Contactanos!</a></li>
+                <li><a href="{{url_for('contacto')}}" class="py-2 d-block">¡Contactanos!</a></li>
               </ul>
             </div>
           </div>
@@ -432,8 +390,8 @@
             	<h2 class="ftco-heading-2">¿Tenés preguntas?</h2>
             	<div class="block-23 mb-3">
 	              <ul>
-	                <li><span class="icon icon-map-marker"></span><span class="text">Av. Paseo Colón 850, Buenos Aires, Argentina</span></li>
-	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+	                <li><span class="icon icon-map-marker"></span><span class="text">Eduardo Elordi 325, San Martin de los Andes, Neuquén, Argentina</span></li>
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+0294 15 480 1896</span></a></li>
 	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">hotelnexus@ids.com</span></a></li>
 	              </ul>
 	            </div>
