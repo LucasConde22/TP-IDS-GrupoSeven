@@ -11,8 +11,7 @@ def calcular_noches(entrada, salida):
     return (datetime.strptime(salida, '%Y-%m-%d') - datetime.strptime(entrada, '%Y-%m-%d')).days
 
 app = Flask(__name__)
-# engine = create_engine("mysql+mysqlconnector://sql10712305:MP6V7fqkm6@sql10.freemysqlhosting.net:3306/sql10712305") 
-engine = create_engine("mysql+mysqlconnector://root:46113324@localhost/tp_ids")
+engine = create_engine("mysql+mysqlconnector://sql10712305:MP6V7fqkm6@sql10.freemysqlhosting.net:3306/sql10712305") 
 
 @app.route('/habitaciones', methods = ['GET'])
 def obtener_habitaciones():
