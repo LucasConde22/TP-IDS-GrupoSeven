@@ -5,35 +5,33 @@
 
 <section class="opinion_container">
     <h2>Tu opinion nos ayuda a mejorar</h2>
-    <form id="form_opinion" onsubmit="enviarOpinion(event)">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" required>
-        <br>
+    <p>Tu respuesta se registrará como '{{ session['usuario'] }}'</p>
+    <form method="post" id="form_opinion" onsubmit="enviarOpinion(event)" action="{{ url_for('opinion') }}">
         <label for="resena">Reseña:</label>
-        <textarea id="resena" rows="4" required></textarea>
+        <textarea name="resena" id="resena" rows="4" required></textarea>
         <br>
         <div class="star-rating">
-            <input type="radio" id="5-stars" name="rating" value="5" required>
+            <input type="radio" id="5-stars" name="rating" value=5 required>
             <label for="5-stars" class="star">&#9733;</label>
-            <input type="radio" id="4-stars" name="rating" value="4">
+            <input type="radio" id="4-stars" name="rating" value=4>
             <label for="4-stars" class="star">&#9733;</label>
-            <input type="radio" id="3-stars" name="rating" value="3">
+            <input type="radio" id="3-stars" name="rating" value=3>
             <label for="3-stars" class="star">&#9733;</label>
-            <input type="radio" id="2-stars" name="rating" value="2">
+            <input type="radio" id="2-stars" name="rating" value=2>
             <label for="2-stars" class="star">&#9733;</label>
-            <input type="radio" id="1-star" name="rating" value="1">
+            <input type="radio" id="1-star" name="rating" value=1>
             <label for="1-star" class="star">&#9733;</label>
         </div>
         <br>
-        <button class="boton_enviar_opinion " type="submit">Enviar Opinión</button>
+        <button class="boton_enviar_opinion" type="submit">Enviar Opinión</button>
     </form>    
+    {% if opinion_enviada %}
+    <div id="popup_overlay" class="popup_overlay"></div>
+    <div id="success_message" class="success_message">
+        <p>¡Gracias por tu opinión!</p>
+        <a href="{{ url_for('index') }}"><button>Volver a la página de inicio</button></a>
+    </div>
+    {% endif %}
 </section>
-<div id="popup_overlay" class="popup_overlay"></div>
-
-<div id="success_message" class="success_message">
-    <p>¡Gracias por tu opinión!</p>
-    <a href="{{ url_for('index') }}"><button>Volver a la página de inicio</button></a>
-</div>
-
 <script src="{{url_for('static', filename = 'js/jsopin.js')}}"></script>
 {% endblock %}

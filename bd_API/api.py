@@ -11,7 +11,8 @@ def calcular_noches(entrada, salida):
     return (datetime.strptime(salida, '%Y-%m-%d') - datetime.strptime(entrada, '%Y-%m-%d')).days
 
 app = Flask(__name__)
-engine = create_engine("mysql+mysqlconnector://sql10712305:MP6V7fqkm6@sql10.freemysqlhosting.net:3306/sql10712305")
+# engine = create_engine("mysql+mysqlconnector://sql10712305:MP6V7fqkm6@sql10.freemysqlhosting.net:3306/sql10712305") 
+engine = create_engine("mysql+mysqlconnector://root:46113324@localhost/tp_ids")
 
 @app.route('/habitaciones', methods = ['GET'])
 def obtener_habitaciones():
@@ -182,6 +183,27 @@ def obtener_id():
         return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
     conn.close()
     return jsonify({'id': row[0]}), 201
+
+@app.route('/guardar_opinion', methods=['POST'])
+def guardar_opinion():
+    try:
+        opinion = request.get_json()
+        usuario = opinion.get('usuario')
+        resena = opinion.get('resena')
+        rating = int(opinion.get('rating'))
+    
+        conn = engine.connect()
+        conn.execute(
+            text("INSERT INTO opiniones (usuario, resena, rating) VALUES (:usuario, :resena, :rating)"),
+            {"usuario": usuario, "resena": resena, "rating": rating}
+        )
+        conn.commit()
+        conn.close()
+        return jsonify({"message": "Opinión guardada correctamente."}), 201
+    except SQLAlchemyError as err:
+        return jsonify({'message': 'Se ha producido un error al guardar la opinión.'}), 500
+    except Exception as e:
+        return jsonify({'message': 'Se ha producido un error inesperado.'}), 500
 
 if __name__ == "__main__":
     app.run("0.0.0.0", port="5001", debug=True)
