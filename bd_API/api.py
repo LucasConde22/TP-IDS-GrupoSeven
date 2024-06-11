@@ -217,6 +217,17 @@ def obtener_ultimas_opiniones():
         app.logger.error("Error al ejecutar la consulta SQL: %s", err)
         return jsonify({'message': 'Se ha producido un error en el servidor'}), 500
 
+@app.route('/eliminar_reserva/<id>', methods=['DELETE'])
+def eliminar_reserva(id):
+    conn = engine.connect()
+    try:
+        conn.execute(text(f"DELETE FROM reservas WHERE numero='{id}';"))
+        conn.commit()
+    except SQLAlchemyError as err:
+        conn.close()
+        return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
+    conn.close()
+    return jsonify({'message': "La reserva fue cancelada correctamente!"}), 201
 
 if __name__ == "__main__":
     app.run("0.0.0.0", port="5001", debug=True)
