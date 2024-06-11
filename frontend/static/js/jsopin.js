@@ -8,9 +8,7 @@ function cerrarPopup() {
     document.getElementById('success_message').style.display = 'none';
 }
 
-document.getElementById('form_opinion').addEventListener('submit', function(event) {
-    event.preventDefault();
-
+window.addEventListener('load', function() {
     mostrarPopup();
 });
 

@@ -109,6 +109,27 @@ def cancelar_reserva(id):
     flash(res["message"])
     return redirect(url_for("mis_reservas"))
 
+@app.route("/opiniones", methods=["GET", "POST"])
+def opinion():
+    if request.method == "POST":
+        usuario = session.get("usuario")
+        resena = request.form.get("resena")
+        rating = request.form.get("rating")
+        opinion = {
+            "usuario": usuario,
+            "resena": resena,
+            "rating": rating
+        }
+        res = requests.post('http://localhost:5001/guardar_opinion', json=opinion)
+        if res.status_code == 201:
+            res = res.json()
+            return render_template("opinion.html", opinion_enviada = True, success="Opinión guardada correctamente.")
+        else:
+            return render_template("opinion.html", opinion_enviada = False, error="Error al guardar la opinión")
+
+    return render_template("opinion.html")
+
+
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("404.html"), 404
@@ -117,9 +138,6 @@ def page_not_found(e):
 def server_error(e):
     return render_template("500.html"), 500
 
-@app.route("/opiniones")
-def opinion():
-    return render_template("opinion.html")
 
 if __name__ == '__main__':
     app.run("0.0.0.0",port=8000,debug=True)

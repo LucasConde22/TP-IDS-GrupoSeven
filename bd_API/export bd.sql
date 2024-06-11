@@ -126,6 +126,17 @@ INSERT INTO `usuarios` (`id`, `nombre`, `usuario`, `email`, `contra`) VALUES
 (1, 'Usuario De Prueba', 'test_usuario1', 'test_usuario1@ids.com', '12345678'),
 (2, 'Usuario De Prueba 2', 'test_usuario2', 'abcd@qwerty.com', '12345678');
 
+
+--
+-- Estructura de la tabla `opiniones`
+--
+
+CREATE TABLE `opiniones` (
+  `usuario` varchar(30) NOT NULL,
+  `resena` varchar(400) NOT NULL,
+  `rating` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Índices para tablas volcadas
 --
@@ -157,6 +168,13 @@ ALTER TABLE `tipos_habitaciones`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `opiniones`
+--
+
+ALTER TABLE `opiniones`
+  ADD PRIMARY KEY (`usuario`),
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
