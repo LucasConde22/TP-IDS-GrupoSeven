@@ -110,7 +110,7 @@ def mis_reservas():
 def cancelar_reserva(id):
     if not 'usuario' in session:
         return redirect(url_for('index'))
-    res = requests.delete(f"http://localhost:5000/eliminar_reserva/{id}")
+    res = requests.delete(f"http://localhost:5001/eliminar_reserva/{id}")
     res = res.json()
     flash(res["message"])
     return redirect(url_for("mis_reservas"))
