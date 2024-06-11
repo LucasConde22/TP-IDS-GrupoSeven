@@ -200,9 +200,23 @@ def guardar_opinion():
         conn.close()
         return jsonify({"message": "Opinión guardada correctamente."}), 201
     except SQLAlchemyError as err:
+        print("Error al ejecutar la consulta SQL:", err)
         return jsonify({'message': 'Se ha producido un error al guardar la opinión.'}), 500
-    except Exception as e:
+    except Exception as err:
+        print("Error al ejecutar la consulta SQL:", err)
         return jsonify({'message': 'Se ha producido un error inesperado.'}), 500
+
+@app.route('/obtener_ultimas_opiniones', methods=['GET'])
+def obtener_ultimas_opiniones():
+    try:
+        with engine.connect() as conn:
+            result = conn.execute(text("SELECT usuario, resena, rating FROM opiniones ORDER BY id_opin DESC LIMIT 5"))
+            opiniones = [{'usuario': row[0], 'resena': row[1], 'rating': row[2]} for row in result]
+        return jsonify(opiniones), 200
+    except SQLAlchemyError as err:
+        app.logger.error("Error al ejecutar la consulta SQL: %s", err)
+        return jsonify({'message': 'Se ha producido un error en el servidor'}), 500
+
 
 if __name__ == "__main__":
     app.run("0.0.0.0", port="5001", debug=True)

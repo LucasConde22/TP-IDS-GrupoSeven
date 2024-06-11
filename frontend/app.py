@@ -4,12 +4,18 @@ import requests
 import json
 
 app = Flask(__name__)
-app.secret_key = "85BA285153AFBAA9A864AEB84A7EE" # Clave de encriptado de datos
+app.secret_key = "85BA285153AFBAA9A864AEB84A7EE"
 app.permanent_session_lifetime = timedelta(minutes=60)
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    res = requests.get('http://localhost:5001/obtener_ultimas_opiniones')
+    if res.status_code == 200:
+        opiniones = res.json()
+        return render_template("index.html", opiniones=opiniones)
+    else:
+        flash("Error al obtener las últimas opiniones")
+        return render_template("index.html")
 
 @app.route("/contacto")
 def contacto():
