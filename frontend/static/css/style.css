@@ -472,7 +472,16 @@ mark,
   right: 10px;
   cursor: pointer;
 }
+.mensaje {
+  display: block;
+  border: 2px solid #8B6A3A;
+  border-radius: 20px;
+  width: 15cm;
+  height: 1cm;
+  margin-left: auto;
+  margin-right: auto;
 
+}
 .boton_iniciar_sesion_opin {
   background-color: #8B6A3A; 
   color: white;
@@ -660,7 +669,7 @@ mark,
 }
 
 #togglePassword {
-  color: #000;
+  color: #8B6A3A;
   position: absolute;
   right: 5px; 
   top: 5px;
@@ -8201,6 +8210,10 @@ h1, h2, h3, h4, h5,
   .room .img {
     display: block;
     height: 250px; }
+  .room .img-reserva {
+    display: block;
+    height: 150px; 
+  }
   .room .icon {
     width: 60px;
     height: 60px;
