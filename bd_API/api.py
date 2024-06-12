@@ -217,6 +217,19 @@ def obtener_ultimas_opiniones():
     except SQLAlchemyError as err:
         app.logger.error("Error al ejecutar la consulta SQL: %s", err)
         return jsonify({'message': 'Se ha producido un error en el servidor'}), 500
+    
+@app.route('/realizar_contacto', methods=['POST'])
+def realizar_contacto():
+    conn = engine.connect()
+    info = request.get_json()
+    try:
+        conn.execute(text(f"INSERT INTO contacto (nombre, email, asunto, mensaje) VALUES ('{info['nombre']}', '{info['email']}', '{info['asunto']}', '{info['mensaje']}')"))
+        conn.commit()
+    except SQLAlchemyError as err:
+        conn.close()
+        return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
+    conn.close()
+    return jsonify({'message': 'Su consulta fue enviada correctamente!'}), 201
 
 @app.route('/eliminar_reserva/<id>', methods=['DELETE'])
 def eliminar_reserva(id):
