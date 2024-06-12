@@ -12,20 +12,12 @@
           <div class="w-100"></div>
           <div class="col-md-3 d-flex">
           	<div class="info bg-white p-4">
-<<<<<<< HEAD
-	            <p><span>Direccion:</span>Eduardo Elordi 325, San Martin de los Andes, Neuquén, Argentina</p>
-=======
 	            <p><span>Dirección:</span> Eduardo Elordi 325, Q8370 San Martín de los Andes, Neuquén </p>
->>>>>>> 2aa30d6 (Actualizacion de la direccion en index.html y contact.html y corecciones ortograficas. Corresponden a la tarea #73.)
 	          </div>
           </div>
           <div class="col-md-3 d-flex">
           	<div class="info bg-white p-4">
-<<<<<<< HEAD
-	            <p><span>Telefono:</span> <a href="tel://1234567920">+0294 15 480 1896</a></p>
-=======
 	            <p><span>Teléfono:</span> <a href="tel://1234567920">+2 392 3929 210</a></p>
->>>>>>> 2aa30d6 (Actualizacion de la direccion en index.html y contact.html y corecciones ortograficas. Corresponden a la tarea #73.)
 	          </div>
           </div>
           <div class="col-md-3 d-flex">
@@ -41,15 +33,22 @@
         </div>
         <div class="row block-9">
           <div class="col-md-6 order-md-last d-flex">
+            {% with mensajes = get_flashed_messages()%}
+            {% if mensajes%}
+                {% for mensaje in mensajes%}
+                    <h2>{{mensaje}}</h2>
+                {%endfor%}
+            {%endif%}
+          {%endwith%}
             <form action="{{url_for('contacto')}}" class="bg-white p-5 contact-form" method="post">
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="Nombre" name="nombre">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Email" name="mail">
+                <input type="text" class="form-control" placeholder="Email" name="email">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Sujeto" name="sujeto">
+                <input type="text" class="form-control" placeholder="Asunto" name="asunto">
               </div>
               <div class="form-group">
                 <textarea  id="" cols="30" rows="7" class="form-control" placeholder="Mensaje" name="mensaje"></textarea>
