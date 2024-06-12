@@ -117,6 +117,8 @@ def cancelar_reserva(id):
 
 @app.route("/opiniones", methods=["GET", "POST"])
 def opinion():
+    if not 'usuario' in session:
+        return redirect(url_for('index'))
     if request.method == "POST":
         resena = request.form.get("resena")
         rating = request.form.get("rating")
