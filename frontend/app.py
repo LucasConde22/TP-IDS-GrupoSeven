@@ -17,10 +17,6 @@ def index():
         flash("Error al obtener las últimas opiniones")
         return render_template("index.html")
 
-@app.route("/contacto")
-def contacto():
-    return render_template("contact.html")
-
 @app.route("/about")
 def about():
     return render_template("about.html")
@@ -44,6 +40,19 @@ def habitacion_deluxe():
 @app.route("/restaurante")
 def restaurante():
     return render_template("restaurant.html")
+
+@app.route("/contacto", methods=["GET", "POST"])
+def contacto():
+    if request.method == "POST":
+        info = request.form.to_dict(flat=True)
+        res = requests.post('http://localhost:5001/realizar_contacto', json=info)
+        if res.status_code == 201:
+            res = res.json()
+            flash(res["message"])
+        else:
+            res = res.json()
+            flash(res["message"])
+    return render_template("contact.html")
 
 @app.route("/reservaciones", methods=["GET", "POST"])
 def reservaciones():
@@ -133,9 +142,7 @@ def opinion():
             return render_template("opinion.html", opinion_enviada = True, success="Opinión guardada correctamente.")
         else:
             return render_template("opinion.html", opinion_enviada = False, error="Error al guardar la opinión")
-
     return render_template("opinion.html")
-
 
 @app.errorhandler(404)
 def page_not_found(e):
