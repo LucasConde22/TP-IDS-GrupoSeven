@@ -652,7 +652,22 @@ mark,
   background-color: transparent;
   border-color: #8B6A3A;
 }
+.boton-mapa{
+  color: white;
+  background-color: #8B6A3A;
+  border-radius: 45px;
+  border-color: transparent;
+  padding: 10px 35px 10px 35px;
+  margin-top: 50px;
+  transition: cubic-bezier(0.165, 0.84, 0.4);
+  transition-duration: 0.3s;
+}
 
+.boton-mapa:hover {
+  color: #8B6A3A;
+  background-color: transparent;
+  border-color: #8B6A3A;
+}
 .password-container {
   position: relative;
   width: 100%;
@@ -683,8 +698,6 @@ mark,
   height: calc(100% - 10px); 
   z-index: 1; 
 }
-
-
 code,
 kbd,
 pre,
@@ -1175,7 +1188,7 @@ pre {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 25%;
     flex: 0 0 25%;
-    max-width: 25%; }
+    max-width: 30%; }
   .col-md-4 {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 33.33333%;
