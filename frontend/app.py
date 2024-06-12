@@ -9,12 +9,12 @@ app.permanent_session_lifetime = timedelta(minutes=60)
 
 @app.route("/")
 def index():
-    res = requests.get('http://localhost:5001/obtener_ultimas_opiniones')
-    if res.status_code == 200:
-        opiniones = res.json()
-        return render_template("index.html", opiniones=opiniones)
+    res = requests.get('http://localhost:5001/obtener_ultimas_opiniones')   #Solicitud a API para obtener datos de la BDD
+    if res.status_code == 200:  #Verifica que la solicitud fue exitosa
+        opiniones = res.json()  #Pasamos la respuesta a json para poder manipular la información
+        return render_template("index.html", opiniones=opiniones)   #Renderizamos la pagina principal pasándole por parametro las opiniones de la web
     else:
-        flash("Error al obtener las últimas opiniones")
+        flash("Error al obtener las últimas opiniones") #Utilizamos flash para enviar un mensaje temporal de error al usuario
         return render_template("index.html")
 
 @app.route("/about")
@@ -44,14 +44,15 @@ def restaurante():
 @app.route("/contacto", methods=["GET", "POST"])
 def contacto():
     if request.method == "POST":
-        info = request.form.to_dict(flat=True)
-        res = requests.post('http://localhost:5001/realizar_contacto', json=info)
+        info = request.form.to_dict(flat=True)  #request.form almacena los datos del formulario
+                                                #.to_dict(flat=True) los convierte en un dicc de python donde cada clave es el nombre del campo del formulario
+        res = requests.post('http://localhost:5001/realizar_contacto', json=info)   #Envia los datos de info como un json a la API
         if res.status_code == 201:
-            res = res.json()
-            flash(res["message"])
+            res = res.json()    #La api devuelve un dicc con la key 'message', el valor puede ser una resppuesta exitosa o un error
+            flash(res["message"]).to_dict(flat=True)    #Si la res venia acompañada del status_code 201 sabemos que el mensaje sera exitoso, lo imprimimos
         else:
             res = res.json()
-            flash(res["message"])
+            flash(res["message"])   #Caso contrario, si hubo un error entrara en este else e imprimimos el mensaje de error
     return render_template("contact.html")
 
 @app.route("/reservaciones", methods=["GET", "POST"])
@@ -61,17 +62,17 @@ def reservaciones():
         res = requests.post('http://localhost:5001/reservar', json=info)
         if res.status_code == 201:
             res = res.json()
-            flash(res["message"]) # Muestra que se realizó la reserva
+            flash(res["message"])
         else:
             res = res.json()
-            flash(res["message"]) # Muestra mensaje de error
+            flash(res["message"])
     return render_template("reservacion.html")
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
-    if "usuario" in session:
-            return redirect(url_for("index"))
-    if request.method == "POST":
+    if "usuario" in session:    #Verifica si hay un usuario logeado actualmente en session
+            return redirect(url_for("index"))   #Si ya hay un usuario logeado lo devuelve a la pag principal
+    if request.method == "POST":    #Si no lo hay, toma los valores de inicio de sesion del template /signup
         info = request.form.to_dict(flat=True)
         res = requests.post('http://localhost:5001/registrar', json=info)
         if res.status_code == 201:
@@ -85,6 +86,8 @@ def signup():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    if "usuario" in session:
+            return redirect(url_for("index"))
     if request.method == "POST":
         if "usuario" in session:
             return redirect(url_for("index"))

@@ -1,3 +1,3 @@
 #!/bin/bash
-python /app/frontend/app.py &
-python /app/bd_API/api.py
+python3 ./frontend/app.py &
+python3 ./bd_API/api.py
