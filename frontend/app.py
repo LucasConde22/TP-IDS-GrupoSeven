@@ -56,7 +56,7 @@ def contacto():
     return render_template("contact.html")
 
 @app.route("/reservaciones", methods=["GET", "POST"])
-def reservaciones():
+def reservaciones():    #Misma logica que la funcion ya comentada 'contacto'
     if request.method == "POST":
         info = request.form.to_dict(flat=True)
         res = requests.post('http://localhost:5001/reservar', json=info)
@@ -71,26 +71,24 @@ def reservaciones():
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     if "usuario" in session:    #Verifica si hay un usuario logeado actualmente en session
-            return redirect(url_for("index"))   #Si ya hay un usuario logeado lo devuelve a la pag principal
-    if request.method == "POST":    #Si no lo hay, toma los valores de inicio de sesion del template /signup
+            return redirect(url_for("index"))   #Si ya hay un usuario logeado lo devuelve a la pagina principal
+    if request.method == "POST":    #Si no lo hay, toma los valores de registro del template /signup
         info = request.form.to_dict(flat=True)
         res = requests.post('http://localhost:5001/registrar', json=info)
         if res.status_code == 201:
             res = res.json()
             flash(res["message"])
-            return redirect(url_for("login"))
+            return redirect(url_for("login"))   #Si se registra con exito lo manda a la pagina principal
         else:
             res = res.json()
             flash(res["message"])
-    return render_template("signup.html")
+    return render_template("signup.html")   #Si hay un error se imprime en la linea anterior y se mantiene en /signup
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if "usuario" in session:
             return redirect(url_for("index"))
     if request.method == "POST":
-        if "usuario" in session:
-            return redirect(url_for("index"))
         info = request.form.to_dict(flat=True)
         res = requests.post('http://localhost:5001/loguear_usuario', json=info)
         if res.status_code == 201:
