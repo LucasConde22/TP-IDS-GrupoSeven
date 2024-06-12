@@ -118,11 +118,10 @@ def cancelar_reserva(id):
 @app.route("/opiniones", methods=["GET", "POST"])
 def opinion():
     if request.method == "POST":
-        usuario = session.get("usuario")
         resena = request.form.get("resena")
         rating = request.form.get("rating")
         opinion = {
-            "usuario": usuario,
+            "id": session['id'],
             "resena": resena,
             "rating": rating
         }

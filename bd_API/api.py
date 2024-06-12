@@ -185,16 +185,17 @@ def obtener_id():
 
 @app.route('/guardar_opinion', methods=['POST'])
 def guardar_opinion():
+    conn = engine.connect()
     try:
         opinion = request.get_json()
-        usuario = opinion.get('usuario')
         resena = opinion.get('resena')
         rating = int(opinion.get('rating'))
-    
-        conn = engine.connect()
+        result = conn.execute(text(f"SELECT nombre FROM usuarios WHERE id='{opinion.get('id')}';"))
+        usuario = result.fetchone()
+
         conn.execute(
             text("INSERT INTO opiniones (usuario, resena, rating) VALUES (:usuario, :resena, :rating)"),
-            {"usuario": usuario, "resena": resena, "rating": rating}
+            {"usuario": usuario[0], "resena": resena, "rating": rating}
         )
         conn.commit()
         conn.close()
