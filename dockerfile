@@ -1,14 +1,15 @@
 FROM python:3.9
 
-# Establece el directorio de trabajo en /app
+# establece el directorio de trabajo en /app
 WORKDIR /app
 
-# Copia todos los archivos 
+# copia todos los archivos del directorio TP_IDS
 COPY . .
 
-# Instala los requisitos del proyecto
+# instala los requisitos del proyecto
 RUN pip install -r frontend/src/requirements.txt
 
+# copia el archivo start que corre la app.py y la api.py y le da permisos
 COPY frontend/start.sh /app/start.sh
 RUN chmod +x /app/start.sh
 
@@ -16,6 +17,5 @@ RUN chmod +x /app/start.sh
 EXPOSE 8000
 EXPOSE 5001
 
-RUN ls -l /app
-
+# se corre la pagina
 CMD ["/app/start.sh"]
