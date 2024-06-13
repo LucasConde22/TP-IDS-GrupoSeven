@@ -47,9 +47,10 @@ def contacto():
         info = request.form.to_dict(flat=True)  #request.form almacena los datos del formulario
                                                 #.to_dict(flat=True) los convierte en un dicc de python donde cada clave es el nombre del campo del formulario
         res = requests.post('http://localhost:5001/realizar_contacto', json=info)   #Envia los datos de info como un json a la API
+        #La api devuelve un json con la key 'message', el valor puede ser una respuesta exitosa o un error
         if res.status_code == 201:
-            res = res.json()    #La api devuelve un dicc con la key 'message', el valor puede ser una resppuesta exitosa o un error
-            flash(res["message"]).to_dict(flat=True)    #Si la res venia acompañada del status_code 201 sabemos que el mensaje sera exitoso, lo imprimimos
+            res = res.json()    #Convierte la respuesta json en un dicc de python
+            flash(res["message"])   #Si la res venia acompanada del status_code 201 sabemos que el mensaje sera exitoso, lo imprimimos
         else:
             res = res.json()
             flash(res["message"])   #Caso contrario, si hubo un error entrara en este else e imprimimos el mensaje de error
@@ -72,9 +73,9 @@ def reservaciones():    #Misma logica que la funcion ya comentada 'contacto'
 def signup():
     if "usuario" in session:    #Verifica si hay un usuario logeado actualmente en session
             return redirect(url_for("index"))   #Si ya hay un usuario logeado lo devuelve a la pagina principal
-    if request.method == "POST":    #Si no lo hay, toma los valores de registro del template /signup
-        info = request.form.to_dict(flat=True)
-        res = requests.post('http://localhost:5001/registrar', json=info)
+    if request.method == "POST":
+        info = request.form.to_dict(flat=True)  #Si no lo hay, toma los valores de registro del template /signup
+        res = requests.post('http://localhost:5001/registrar', json=info)   #Manda los valores a la API para registrarlo en la BDD
         if res.status_code == 201:
             res = res.json()
             flash(res["message"])
@@ -90,39 +91,40 @@ def login():
             return redirect(url_for("index"))
     if request.method == "POST":
         info = request.form.to_dict(flat=True)
-        res = requests.post('http://localhost:5001/loguear_usuario', json=info)
-        if res.status_code == 201:
-            session["usuario"] = request.form.get("user")
-            res = requests.get('http://localhost:5001/id', json=info)
+        res = requests.post('http://localhost:5001/loguear_usuario', json=info) #Manda la info del login a la API para verificar al usuario
+        if res.status_code == 201:  #Si el usuario existe y es correcta la contraseña entra en este if
+            session["usuario"] = request.form.get("user")   #Guarda el usuario/mail que se haya completado en el login
+            res = requests.get('http://localhost:5001/id', json=info)   #Busca la id del usuario ingresado
             res = res.json()
-            session["id"] = res["id"]
+            session["id"] = res["id"]   #Guarda la id encontrada en el objeto (diccionario) session
             return redirect(url_for("index"))
         else:
-            flash(res.text[16:-4])
+            flash(res.text[16:-4])  #Si hubo un error en el request post imprime un mensaje de error
     return render_template("login.html")
 
 @app.route("/logout")
-def logout():
+def logout():   #Limpia el usuario e id del objeto session para que al querer loguear otro usuario detecte que no hay usuario en session y lo permita
     session.pop("usuario", None)
     session.pop("id", None)
     return redirect(url_for("index"))
 
 @app.route("/mis_reservas")
 def mis_reservas():
-    if not 'usuario' in session:
+    #Si no hay una sesion iniciada no deberia aparecer la pestana de mis reservas
+    if not 'usuario' in session:    #Aun asi si un usuario no logueado pone la url /mis_reservas lo envia a la pagina principal
         return redirect(url_for('index'))
-    data = {"id": session['id']}
-    res = requests.get('http://localhost:5001/mis_reservas', json=data)
+    data = {"id": session['id']}    #Crea un dicc con la key 'id' y de value el id del usuario en sesion
+    res = requests.get('http://localhost:5001/mis_reservas', json=data) #Manda el dicc con el id del usuario para buscar sus reservas
     res = res.json()
-    return render_template('mis-reservas.html', reservas=res)
+    return render_template('mis-reservas.html', reservas=res)   #Renderiza el template mis-reservas y le envía por parametro las reservas obtenidas de la BDD
 
 @app.route("/cancelar_reserva/<id>")
 def cancelar_reserva(id):
     if not 'usuario' in session:
         return redirect(url_for('index'))
-    res = requests.delete(f"http://localhost:5001/eliminar_reserva/{id}")
+    res = requests.delete(f"http://localhost:5001/eliminar_reserva/{id}")   #Envia una request delete a la API con el parametro id (de la reserva)
     res = res.json()
-    flash(res["message"])
+    flash(res["message"])   #Imprime la respuesta de la solicitud, puede ser un mensaje exitoso o de error
     return redirect(url_for("mis_reservas"))
 
 @app.route("/opiniones", methods=["GET", "POST"])
@@ -130,26 +132,27 @@ def opinion():
     if not 'usuario' in session:
         return redirect(url_for('index'))
     if request.method == "POST":
+        #Obtiene texto de resena y numero (del 1 al 5) de rating del formulario
         resena = request.form.get("resena")
         rating = request.form.get("rating")
-        opinion = {
+        opinion = { #Declara un diccionario con el id del usuario, su resena y su rating
             "id": session['id'],
             "resena": resena,
             "rating": rating
         }
-        res = requests.post('http://localhost:5001/guardar_opinion', json=opinion)
+        res = requests.post('http://localhost:5001/guardar_opinion', json=opinion)  #Manda el dicc opinion a la API para que la guarde en la BDD
         if res.status_code == 201:
             res = res.json()
             return render_template("opinion.html", opinion_enviada = True, success="Opinión guardada correctamente.")
-        else:
+        else:   #Envia la variable opinion_enviada como parametro y en opinion.html verifica si es true o false para imprimir un mensaje de exito
             return render_template("opinion.html", opinion_enviada = False, error="Error al guardar la opinión")
     return render_template("opinion.html")
 
-@app.errorhandler(404)
+@app.errorhandler(404)  #Este template se utiliza para adornar el mensaje de error 404 en caso de solicitar una url incorrecta
 def page_not_found(e):
     return render_template("404.html"), 404
 
-@app.errorhandler(500)
+@app.errorhandler(500)  #Este template se utiliza para adornar el mensaje de error 500 en caso de haber un problema interno en el servidor
 def server_error(e):
     return render_template("500.html"), 500
 
