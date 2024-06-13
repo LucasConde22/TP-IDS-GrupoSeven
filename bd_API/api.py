@@ -70,14 +70,23 @@ def reservar():
     if int(capacidad[0]) < int(reserva["huespedes"]):   #Si la capacidad de la habitacion es menor a la solicitada por el usuario devuelve el siguiente mensaje
         return jsonify({'message': f"En una habitación de tipo {reserva['tipo']} solo entran hasta {capacidad[0]} personas!"}), 404
 
-    try:    #Busca el precio para la habitacion especificada
-        result = conn.execute(text(f"SELECT precio FROM tipos_habitaciones WHERE tipo = '{reserva['tipo']}'"))
+    try:
+        #Busca un descuento correspondiente al código ingresado y verifica su validez (en caso contrario devuelve 0)
+        descuento = conn.execute(text(f"""SELECT 
+                                      COALESCE(MAX(descuento), 0) AS descuento 
+                                      FROM promociones 
+                                      WHERE 
+                                      codigo = '{reserva['codigo']}' 
+                                      AND tipo_habitacion = '{reserva['tipo']}' 
+                                      AND NOW() BETWEEN inicio AND fin;"""))
+        result = conn.execute(text(f"SELECT precio FROM tipos_habitaciones WHERE tipo = '{reserva['tipo']}'")) #Busca el precio para la habitacion especificada
     except SQLAlchemyError as err:
         conn.close()
         return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
+    descuento = descuento.fetchone()
     precio = result.fetchone()
     noches = calcular_noches(reserva['entrada'], reserva['salida']) #Llama a funcion aux 'calcular_noches'
-    valor_reserva = precio[0] * noches  #Multiplica el precio de la habitacion por la cantidad de noches y obtiene valor total de la reserva
+    valor_reserva = precio[0] * noches - (precio[0] * noches * descuento[0] * 0.01)  #Multiplica el precio de la habitacion por la cantidad de noches, hace el descuento correspondiente, y obtiene valor total de la reserva
     
     #Modifica la query con un nuevo texto de consulta SQL que va a insertar la nueva reserva en la BDD
     query = text(f"""
