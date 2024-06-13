@@ -50,11 +50,15 @@
                         <div class="col-12">
                             <div class="form-floating" style="font-size: large;">
                                 <select class="form-select" id="select3", name="tipo" style="margin-right: 0.5cm;">
-                                  <option value="simple">Simple</option> <!--¿Cambiar valores por "simple", "master" y "deluxe"?-->
+                                  <option value="simple">Simple</option>
                                   <option value="master">Master</option>
                                   <option value="deluxe">Deluxe</option>
                                 </select>
                                 <label for="select3">Seleccioná el tipo de habitación</label>
+                              </div>
+                              <div class="form-floating">
+                                <input name="codigo" type="text" placeholder="Código">
+                                <label for="#">Código de descuento</label>
                               </div>
                               {% with mensajes = get_flashed_messages()%}
                               {% if mensajes%}
