@@ -4,26 +4,24 @@ from sqlalchemy.exc import SQLAlchemyError
 from datetime import datetime
 
 def calcular_noches(entrada, salida):
-    """
-    Dadas dos fechas, una de entrada y otra de salida, calcula cuantos
-    dias durará la estadía.
-    """ 
+    #Dadas dos fechas, una de entrada y otra de salida, calcula cuantos dias durará la estadía.
     return (datetime.strptime(salida, '%Y-%m-%d') - datetime.strptime(entrada, '%Y-%m-%d')).days
 
 app = Flask(__name__)
-engine = create_engine("mysql+mysqlconnector://sql10712305:MP6V7fqkm6@sql10.freemysqlhosting.net:3306/sql10712305") 
+#Create_engine (de la libreria SQLAlchemy) crea un motor de BDD, el cual administrara conexiones con la misma y ejecutara consultas SQL
+engine = create_engine("mysql+mysqlconnector://sql10712305:MP6V7fqkm6@sql10.freemysqlhosting.net:3306/sql10712305")
 
 @app.route('/habitaciones', methods = ['GET'])
 def obtener_habitaciones():
-    conn = engine.connect()
+    conn = engine.connect() #A traves del motor engine abre una conexion a la BDD y devuelve un objeto 'conn' con el que se pueden ejecutar consultas SQL
     try:
-        result = conn.execute(text("SELECT * FROM tipos_habitaciones"))
+        result = conn.execute(text("SELECT * FROM tipos_habitaciones")) #Selecciona todo de la tabla 'tipos_habitaciones'
     except SQLAlchemyError as err:
-        conn.close()
+        conn.close()    #Cierra la conexion con la BDD
         return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
     
     data = []
-    for row in result:
+    for row in result:  #Crea una lista de dicc con la infromacion de las habitaciones
         entity = {}
         entity['tipo'] = row.tipo
         entity['caracteristicas'] = row.caracteristicas
@@ -33,16 +31,16 @@ def obtener_habitaciones():
         entity['foto2'] = row.foto2
         entity['foto3'] = row.foto3
         entity['video'] = row.video
-
         data.append(entity)
-    return jsonify(data), 201
+    return jsonify(data), 201   #Devuelve en formato json el dicc con la informacion junto al codigo de consulta exitosa
 
 
 @app.route('/reservar', methods = ['POST'])
 def reservar():
     conn = engine.connect()
-    reserva = request.get_json()
+    reserva = request.get_json()    #Recibe la info del form enviada desde app.py
     
+    #Texto con una consulta SQL para encontrar una habitacion disponible del tipo y rango de fecha especificada en el form
     query = text(f"""
             SELECT h.numero FROM habitaciones h
             WHERE h.tipo = '{reserva['tipo']}'
@@ -53,59 +51,60 @@ def reservar():
             LIMIT 1
         """)
     
-    try:
+    try:    #Hace la consulta y devuelve si falla el intento 
         result = conn.execute(query)
     except SQLAlchemyError as err:
         conn.close()
         return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
     
-    habitacion = result.fetchone()
-    if habitacion is None:
+    habitacion = result.fetchone()  #Fetchone devuelve una fila del resultado como una tupla, si no hay filas devuelve 'None' 
+    if habitacion is None:  #Si no habia fila quiere decir que no encontro habitaciones que cumplan las condiciones, devuelve el siguiente mensaje
         return jsonify({'message': f"No hay habitaciones de tipo {reserva['tipo']} disponibles para esas fechas!"}), 404
 
-    try:
+    try:    #Busca la capacidad maxima de huespedes del tipo de habitacion seleccionada por el usuario
         result = conn.execute(text(f"SELECT capacidad FROM tipos_habitaciones WHERE tipo = '{reserva['tipo']}'"))
     except SQLAlchemyError as err:
         conn.close()
         return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
     capacidad = result.fetchone()
-    if int(capacidad[0]) < int(reserva["huespedes"]):
+    if int(capacidad[0]) < int(reserva["huespedes"]):   #Si la capacidad de la habitacion es menor a la solicitada por el usuario devuelve el siguiente mensaje
         return jsonify({'message': f"En una habitación de tipo {reserva['tipo']} solo entran hasta {capacidad[0]} personas!"}), 404
 
-    try:
+    try:    #Busca el precio para la habitacion especificada
         result = conn.execute(text(f"SELECT precio FROM tipos_habitaciones WHERE tipo = '{reserva['tipo']}'"))
     except SQLAlchemyError as err:
         conn.close()
         return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
     precio = result.fetchone()
-    noches = calcular_noches(reserva['entrada'], reserva['salida'])
-    valor_reserva = precio[0] * noches
-
+    noches = calcular_noches(reserva['entrada'], reserva['salida']) #Llama a funcion aux 'calcular_noches'
+    valor_reserva = precio[0] * noches  #Multiplica el precio de la habitacion por la cantidad de noches y obtiene valor total de la reserva
+    
+    #Modifica la query con un nuevo texto de consulta SQL que va a insertar la nueva reserva en la BDD
     query = text(f"""
             INSERT INTO reservas (usuario, tipo_habitacion, habitacion, entrada, salida, valor, huespedes)
             VALUES ({reserva['usuario']}, '{reserva['tipo']}', {habitacion[0]}, '{reserva['entrada']}', '{reserva['salida']}', '{valor_reserva}', {reserva['huespedes']})""")
-    try:
+    try:    #Intenta insertar los datos de la reserva, devuelve un mensaje si hay alguna excepcion
         conn.execute(query)
         conn.commit()
     except SQLAlchemyError as err:
         conn.close()
         return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
     conn.close()
-    return jsonify({'message': 'La reserva fue realizada correctamente!'}), 201
+    return jsonify({'message': 'La reserva fue realizada correctamente!'}), 201 #Devuelve un mensaje exitoso en caso de haber llegado a esta linea
 
 @app.route("/mis_reservas", methods = ['GET'])
 def obtener_info_reservas():
     conn = engine.connect()
-    usuario = request.get_json()
+    usuario = request.get_json()    #Recibe la data de la id del usuario en session enviada desde app.py
 
-    try:
+    try:    #Selecciona todas las reservas del usuario 
         result = conn.execute(text(f"SELECT * FROM reservas WHERE usuario='{usuario['id']}'"))
     except SQLAlchemyError as err:
         conn.close()
         return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
     
     data = []
-    for row in result:
+    for row in result:  #Crea una lista de dicc con la infromacion de las reservas del usuario
         entity = {}
         entity['numero'] = row.numero
         entity['usuario'] = row.usuario
@@ -121,20 +120,21 @@ def obtener_info_reservas():
 @app.route('/loguear_usuario', methods = ['POST'])
 def loguear_usuario():
     conn = engine.connect()
-    usuario = request.get_json()
+    usuario = request.get_json()    #Recibe la info del form login enviada desde app.py
     try:
+        #Busca en la BDD un email que coincida con el valor recibido de la casilla Usuario del form login
         result = conn.execute(text(f"SELECT contra FROM usuarios WHERE email='{usuario['user']}';"))
         row = result.fetchone()
-        if row is None:
+        if row is None: #Si no encuentra un email que coincida, busca por usuario, ya que ambas opciones son validas para logearse
             result = conn.execute(text(f"SELECT contra FROM usuarios WHERE usuario='{usuario['user']}';"))
             row = result.fetchone()
-            if row is None:
+            if row is None: #Si ya paso por la busqueda y no encontró el email ni usuario en la BDD, devuelve error usuario incorrecto
                 conn.close()
                 return jsonify({'message': f"Error, el usuario ingresado es incorrecto!"}), 404
-        if row[0] == usuario["contra"]:
+        if row[0] == usuario["contra"]: #Si llego hasta este if significa que econtró un usario, verifica si coincide la contra
             conn.close()
-            return jsonify({'message': f"El usuario '{usuario['user']}' es correcto!"}), 201
-        else:
+            return jsonify({'message': f"El usuario '{usuario['user']}' es correcto!"}), 201    #Si coincide manda 201 solicitud POST exitosa
+        else:   #Si no coincide la contra cae en este else y devuelve error contra incorrecta
             conn.close()
             return jsonify({'message': f"Error, la contrasena es incorrecta!"}), 404
     except SQLAlchemyError as err:
@@ -144,21 +144,22 @@ def loguear_usuario():
 @app.route('/registrar', methods = ['POST'])
 def registrar_usuario():
     conn = engine.connect()
-    usuario = request.get_json()
-    try:
+    usuario = request.get_json()    #Recibe la info del form signup enviada desde app.py
+    try:    #Intenta seleccionar la id de un presunto usuario con el email ingresado (para ver si ya existe)
         result = conn.execute(text(f"SELECT id FROM usuarios WHERE email='{usuario['email']}';"))
         row = result.fetchone()
-        if row is None:
-            result = conn.execute(text(f"SELECT id FROM usuarios WHERE usuario='{usuario['user']}';"))
+        if row is None: #Entra a este if si no existe el email en la BDD
+            result = conn.execute(text(f"SELECT id FROM usuarios WHERE usuario='{usuario['user']}';"))  #Ahora consulta por Usuario en vez de email
             row = result.fetchone()
-            if row is None:
+            if row is None: #Entra a este if si tampoco existe el usuario en la BDD
+                #Inserta el nuevo usuario y su informacion en la tabla usuarios de la BDD
                 result = conn.execute(text(f"""INSERT INTO usuarios (nombre, usuario, email, contra) VALUES 
                                    ('{usuario['nombre']}', '{usuario['user']}', '{usuario['email']}', '{usuario['contra']}');"""))
                 conn.commit()
-            else:
+            else:   #Si result.fetchone() no es igual a None, significa que ya existe un usuario con ese Usuario
                 conn.close()
                 return jsonify({'message': "Error, un usuario ya se encuentra registrado con ese nombre de usuario!"}), 404
-        else:
+        else:   #Si result.fetchone() no es igual a None, significa que ya existe un usuario con ese email
             conn.close()
             return jsonify({'message': "Error, un usuario ya se encuentra registrado con ese correo electrónico!"}), 404
     except SQLAlchemyError as err:
@@ -171,20 +172,20 @@ def registrar_usuario():
 def obtener_id():
     conn = engine.connect()
     usuario = request.get_json()
-    try:
+    try:    #Busca en la BDD el id del usuario que coinicida con el email logueado
         result = conn.execute(text(f"SELECT id FROM usuarios WHERE email='{usuario['user']}';"))
         row = result.fetchone()
-        if row is None:
+        if row is None: #Si no encuentra por email intenta buscar por usuario y obtener el id
             result = conn.execute(text(f"SELECT id FROM usuarios WHERE usuario='{usuario['user']}';"))
             row = result.fetchone()
     except SQLAlchemyError as err:
         conn.close()
         return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
     conn.close()
-    return jsonify({'id': row[0]}), 201
+    return jsonify({'id': row[0]}), 201 #Si no hubo error, devuelve el id del usuario junto al codigo de solicitud exitosa
 
 @app.route('/guardar_opinion', methods=['POST'])
-def guardar_opinion():
+def guardar_opinion():  #NO LA COMENTO PORQUE NO SE SI ESTÁ TERMINADA
     conn = engine.connect()
     try:
         opinion = request.get_json()
@@ -208,7 +209,7 @@ def guardar_opinion():
         return jsonify({'message': 'Se ha producido un error inesperado.'}), 500
 
 @app.route('/obtener_ultimas_opiniones', methods=['GET'])
-def obtener_ultimas_opiniones():
+def obtener_ultimas_opiniones():    #NO LA COMENTO PORQUE NO SE SI ESTÁ TERMINADA
     try:
         with engine.connect() as conn:
             result = conn.execute(text("SELECT usuario, resena, rating FROM opiniones ORDER BY id_opin DESC LIMIT 5"))
@@ -221,8 +222,8 @@ def obtener_ultimas_opiniones():
 @app.route('/realizar_contacto', methods=['POST'])
 def realizar_contacto():
     conn = engine.connect()
-    info = request.get_json()
-    try:
+    info = request.get_json()   #Recibe la info del form contacto enviada desde app.py
+    try:    #Inserta en la BDD la consulta del usuario
         conn.execute(text(f"INSERT INTO contacto (nombre, email, asunto, mensaje) VALUES ('{info['nombre']}', '{info['email']}', '{info['asunto']}', '{info['mensaje']}')"))
         conn.commit()
     except SQLAlchemyError as err:
@@ -234,7 +235,7 @@ def realizar_contacto():
 @app.route('/eliminar_reserva/<id>', methods=['DELETE'])
 def eliminar_reserva(id):
     conn = engine.connect()
-    try:
+    try:    #Busca la reserva por id y la elimina de la tabla reservas
         conn.execute(text(f"DELETE FROM reservas WHERE numero='{id}';"))
         conn.commit()
     except SQLAlchemyError as err:

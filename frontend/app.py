@@ -4,8 +4,8 @@ import requests
 import json
 
 app = Flask(__name__)
-app.secret_key = "85BA285153AFBAA9A864AEB84A7EE"
-app.permanent_session_lifetime = timedelta(minutes=60)
+app.secret_key = "85BA285153AFBAA9A864AEB84A7EE"    #Clave para cifrar y decifrar datos de sesión en las cookies del usuario
+app.permanent_session_lifetime = timedelta(minutes=60)  #Establece una duracion maxima de una hora para las sesiones abiertas
 
 @app.route("/")
 def index():
