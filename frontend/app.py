@@ -91,13 +91,17 @@ def login():
             return redirect(url_for("index"))
     if request.method == "POST":
         info = request.form.to_dict(flat=True)
-        res = requests.post('http://localhost:5001/loguear_usuario', json=info) #Manda la info del login a la API para verificar al usuario
+        res = requests.get('http://localhost:5001/loguear_usuario', json=info) #Manda la info del login a la API para verificar al usuario
         if res.status_code == 201:  #Si el usuario existe y es correcta la contraseña entra en este if
             session["usuario"] = request.form.get("user")   #Guarda el usuario/mail que se haya completado en el login
             res = requests.get('http://localhost:5001/id', json=info)   #Busca la id del usuario ingresado
             res = res.json()
             session["id"] = res["id"]   #Guarda la id encontrada en el objeto (diccionario) session
             return redirect(url_for("index"))
+        if res.status_code == 200:  #Si el usuario es administrador, entra en este if
+            session["usuario"] = request.form.get("user")
+            session["id"] = "admin"
+            return redirect(url_for("index")) #CAMBIAR!!!!!!
         else:
             flash(res.text[16:-4])  #Si hubo un error en el request post imprime un mensaje de error
     return render_template("login.html")
