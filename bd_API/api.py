@@ -126,23 +126,28 @@ def obtener_info_reservas():
         data.append(entity)
     return jsonify(data), 201
 
-@app.route('/loguear_usuario', methods = ['POST'])
+@app.route('/loguear_usuario', methods = ['GET'])
 def loguear_usuario():
     conn = engine.connect()
     usuario = request.get_json()    #Recibe la info del form login enviada desde app.py
     try:
-        #Busca en la BDD un email que coincida con el valor recibido de la casilla Usuario del form login
-        result = conn.execute(text(f"SELECT contra FROM usuarios WHERE email='{usuario['user']}';"))
+        #Busca en la BDD un email o usuario que coincida con el valor recibido de la casilla Usuario del form login
+        result = conn.execute(text(f"SELECT contra FROM usuarios WHERE email='{usuario['user']}' OR usuario='{usuario['user']}';"))
         row = result.fetchone()
-        if row is None: #Si no encuentra un email que coincida, busca por usuario, ya que ambas opciones son validas para logearse
-            result = conn.execute(text(f"SELECT contra FROM usuarios WHERE usuario='{usuario['user']}';"))
+        admin = False
+        if row is None: #Si no encuentra un email o usuario que coincida, busca en la tabla de administradores
+            result = conn.execute(text(f"SELECT contra FROM administradores WHERE email='{usuario['user']}' OR usuario='{usuario['user']}';"))
             row = result.fetchone()
-            if row is None: #Si ya paso por la busqueda y no encontró el email ni usuario en la BDD, devuelve error usuario incorrecto
+            admin = True
+            if row is None: #Si ya paso por la busqueda y no encontró el usuario en la BD, devuelve error usuario incorrecto
                 conn.close()
                 return jsonify({'message': f"Error, el usuario ingresado es incorrecto!"}), 404
         if row[0] == usuario["contra"]: #Si llego hasta este if significa que econtró un usario, verifica si coincide la contra
             conn.close()
-            return jsonify({'message': f"El usuario '{usuario['user']}' es correcto!"}), 201    #Si coincide manda 201 solicitud POST exitosa
+            if not admin:
+                return jsonify({'message': f"El usuario '{usuario['user']}' es correcto!"}), 201    #Si coincide manda 201 solicitud exitosa, usuario normal
+            else:
+                return jsonify({'message': f"El usuario '{usuario['user']}' es correcto y es administrador!"}), 200 #Si coincide manda 200 solicitud exitosa, usuario administrador
         else:   #Si no coincide la contra cae en este else y devuelve error contra incorrecta
             conn.close()
             return jsonify({'message': f"Error, la contrasena es incorrecta!"}), 404
