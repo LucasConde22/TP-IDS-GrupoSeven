@@ -34,109 +34,21 @@
         </div>
 				<div class="row">
         	<div class="col-md-6">
-        		<div class="pricing-entry d-flex ftco-animate">
+				{% for plato in platos %}
+				<div class="pricing-entry d-flex ftco-animate">
         			<div class="img" style="background-image: url('{{ url_for('static', filename='images/menu-2.jpg') }}');"></div>
         			<div class="desc pl-3">
 	        			<div class="d-flex text align-items-center">
-	        				<h3><span>Filete Mignon con Salsa de Trufas</span></h3>
-	        				<span class="price">$60.00</span>
+	        				<h3><span>{{plato['plato']}}</span></h3>
+	        				<span class="price">${{plato['precio']}}</span>
 	        			</div>
 	        			<div class="d-block">
-	        				<p>Un jugoso filete mignon, perfectamente cocido y cubierto con una rica salsa de trufas, acompañado de un puré de papas cremoso</p>
+	        				<p>{{plato['descripcion']}}</p>
 	        			</div>
         			</div>
         		</div>
-        		<div class="pricing-entry d-flex ftco-animate">
-        			<div class="img" style="background-image: url('{{ url_for('static', filename= 'images/menu-4.jpg')}}');"></div>
-        			<div class="desc pl-3">
-	        			<div class="d-flex text align-items-center">
-	        				<h3><span>Bife a la Parrilla con Papas</span></h3>
-	        				<span class="price">$59.00</span>
-	        			</div>
-	        			<div class="d-block">
-	        				<p>Un suculento corte de carne a la parrilla, cocido a la perfección, acompañado de papas doradas y sazonadas con hierbas frescas</p>
-	        			</div>
-	        		</div>
-        		</div>
-        		<div class="pricing-entry d-flex ftco-animate">
-        			<div class="img" style="background-image: url('{{ url_for('static', filename='images/menu-9.jpg') }}');"></div>
-        			<div class="desc pl-3">
-	        			<div class="d-flex text align-items-center">
-	        				<h3><span>Ravioles de Langosta</span></h3>
-	        				<span class="price">$30.00</span>
-	        			</div>
-	        			<div class="d-block">
-	        				<p>Ravioles hechos a mano, rellenos de langosta fresca y servidos con una salsa de mantequilla y limón, decorados con hierbas frescas</p>
-	        			</div>
-	        		</div>
-        		</div>
-        		<div class="pricing-entry d-flex ftco-animate">
-        			<div class="img" style="background-image: url('{{ url_for('static', filename= 'images/menu-5.jpg')}}');"></div>
-        			<div class="desc pl-3">
-	        			<div class="d-flex text align-items-center">
-	        				<h3><span>Pescado a la Parrilla con Ensalada</span></h3>
-	        				<span class="price">$20.00</span>
-	        			</div>
-	        			<div class="d-block">
-	        				<p>Un filete de pescado fresco a la parrilla, acompañado de una ensalada crujiente con verduras de temporada y aderezo de limón</p>
-	        			</div>
-	        		</div>
-        		</div>
-        	</div>
-
-        	<div class="col-md-6">
-        		<div class="pricing-entry d-flex ftco-animate">
-        			<div class="img" style="background-image: url('{{ url_for('static', filename= 'images/menu-1.jpg')}}');"></div>
-        			<div class="desc pl-3">
-	        			<div class="d-flex text align-items-center">
-	        				<h3><span>Cheesecake Frutos Rojos</span></h3>
-	        				<span class="price">$20.00</span>
-	        			</div>
-	        			<div class="d-block">
-	        				<p>Suave y cremoso cheesecake sobre una base crujiente, coronado con una mezcla de frutos rojos frescos y una ligera salsa de frambuesa</p>
-	        			</div>
-	        		</div>
-        		</div>
-        		<div class="pricing-entry d-flex ftco-animate">
-        			<div class="img" style="background-image: url('{{ url_for('static', filename= 'images/menu-10.jpg')}}');"></div>
-        			<div class="desc pl-3">
-	        			<div class="d-flex text align-items-center">
-	        				<h3><span>Crème Brûlée</span></h3>
-	        				<span class="price">$24.00</span>
-	        			</div>
-	        			<div class="d-block">
-	        				<p>Un clásico postre francés con una base de crema suave y sabor a vainilla, cubierto con una capa crujiente de azúcar caramelizado</p>
-	        			</div>
-	        		</div>
-        		</div>
-        		<div class="pricing-entry d-flex ftco-animate">
-        			<div class="img" style="background-image: url('{{ url_for('static', filename= 'images/menu-7.jpg')}}');"></div>
-        			<div class="desc pl-3">
-	        			<div class="d-flex text align-items-center">
-	        				<h3><span>Mousse de Malbec</span></h3>
-	        				<span class="price">$20.00</span>
-	        			</div>
-	        			<div class="d-block">
-	        				<p>Una suave mousse de Malbec, acompañada de una reducción de frutos rojos frescos, que aporta un toque de acidez y dulzura perfectamente equilibrados</p>
-	        			</div>
-	        		</div>
-        		</div>
-        		<div class="pricing-entry d-flex ftco-animate">
-        			<div class="img" style="background-image: url('{{ url_for('static', filename= 'images/menu-6.jpg')}}');"></div>
-        			<div class="desc pl-3">
-	        			<div class="d-flex text align-items-center">
-	        				<h3><span>Crêpes de Dulce de Leche</span></h3>
-	        				<span class="price">$15.00</span>
-	        			</div>
-	        			<div class="d-block">
-	        				<p>Delicados crepes finos y esponjosos, rellenos con dulce de leche artesanal, servidos con una pizca de azúcar impalpable</p>
-	        			</div>
-	        		</div>
-        		</div>
-        	</div>
-        </div>
-			</div>
-		</section>
+				{% endfor %}
+        		
 
 {% endblock %}
 
