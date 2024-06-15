@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Gestión de usuarios{% endblock %}
+{% block h1 %}Gestión de usuarios{% endblock %}
+{% block main_content %}
+
+
+
+    <section class="ftco-section bg-light">
+        {% with mensajes = get_flashed_messages()%}
+            {% if mensajes%}
+                {% for mensaje in mensajes%}
+                <div class="alert alert-success" role="alert" style="width:10cm; margin-left: 3cm;">
+                    {{ mensaje }}
+                </div>
+                {%endfor%}
+            {%endif%}
+        {%endwith%}
+        <div class="container">
+            {% if usuarios %}
+                <div class="row">
+                    {% for info in usuarios %}
+                        <div class="col-md-4 ftco-animate">
+                            <div class="room">
+                                <div class="text p-3 text-center">
+                                    <h3 class="mb-3">Usuario Nº{{ loop.index }}</h3>
+                                    <hr>
+                                    <p><strong>Nombre:</strong> {{ info['nombre'] }}</p>
+                                    <p><strong>Usuario: </strong>{{ info['usuario'] }}</p>
+                                    <p><strong>Email: </strong>{{ info['email'] }}</p>
+                                    <hr>
+                                    <a style="color: red" href="{{url_for('eliminar_usuario' ,id=info['id'])}}">Eliminar usuario </a><i style="color: red" class="bi bi-x-circle"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No se encontraton usuarios.</p>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}
