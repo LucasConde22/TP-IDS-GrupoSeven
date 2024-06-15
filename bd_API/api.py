@@ -126,6 +126,25 @@ def obtener_info_reservas():
         data.append(entity)
     return jsonify(data), 201
 
+@app.route("/obtener_usuarios", methods = ['GET'])
+def obtener_usuarios():
+    conn = engine.connect()
+    try:
+        result = conn.execute(text(f"SELECT * FROM usuarios"))
+    except SQLAlchemyError as err:
+        conn.close()
+        return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
+    
+    data = []
+    for row in result:
+        entity = {}
+        entity['id'] = row.id
+        entity['nombre'] = row.nombre
+        entity['usuario'] = row.usuario
+        entity['email'] = row.email
+        data.append(entity)
+    return jsonify(data), 201
+
 @app.route('/loguear_usuario', methods = ['GET'])
 def loguear_usuario():
     conn = engine.connect()
@@ -257,6 +276,18 @@ def eliminar_reserva(id):
         return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
     conn.close()
     return jsonify({'message': "La reserva fue cancelada correctamente!"}), 201
+
+@app.route('/eliminar_usuario/<id>', methods=['DELETE'])
+def eliminar_usuario(id):
+    conn = engine.connect()
+    try:    #Busca la reserva por id y la elimina de la tabla reservas
+        conn.execute(text(f"DELETE FROM usuarios WHERE id='{id}';"))
+        conn.commit()
+    except SQLAlchemyError as err:
+        conn.close()
+        return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
+    conn.close()
+    return jsonify({'message': "El usuario fue eliminado correctamente!"}), 201
 
 if __name__ == "__main__":
     app.run("0.0.0.0", port="5001", debug=True)

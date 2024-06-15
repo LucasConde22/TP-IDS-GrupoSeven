@@ -95,7 +95,7 @@
     			<div class="col-lg-12">
 						<div class="btn-reserva">
 							{% if 'usuario' in session and session['id'] == 'admin' %}
-								<a href="{{ url_for('reservaciones') }}"><button type="button" class="btn btn-primary btn-estilo">¡Administrá!</button></a>
+								<a href="{{ url_for('administracion') }}"><button type="button" class="btn btn-primary btn-estilo">¡Administrá!</button></a>
 							{% else %}
 							<a href="{{ url_for('reservaciones') }}"><button type="button" class="btn btn-primary btn-estilo">¡Reservá!</button></a>
 							{% endif %}

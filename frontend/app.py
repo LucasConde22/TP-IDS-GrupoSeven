@@ -41,6 +41,20 @@ def habitacion_deluxe():
 def restaurante():
     return render_template("restaurant.html")
 
+@app.route("/administracion")
+def administracion():
+    if not 'usuario' in session or session['id'] != 'admin':
+        return redirect(url_for("index"))
+    return render_template("administracion.html")
+
+@app.route("/gestion_usuarios")
+def gestion_usuarios():
+    if not 'usuario' in session or session['id'] != 'admin':
+        return redirect(url_for("index"))
+    res = requests.get('http://localhost:5001/obtener_usuarios')
+    res = res.json()
+    return render_template("gestion_usuarios.html", usuarios=res)
+
 @app.route("/contacto", methods=["GET", "POST"])
 def contacto():
     if request.method == "POST":
@@ -132,6 +146,15 @@ def cancelar_reserva(id):
     res = res.json()
     flash(res["message"])   #Imprime la respuesta de la solicitud, puede ser un mensaje exitoso o de error
     return redirect(url_for("mis_reservas"))
+
+@app.route("/eliminar_usuario/<id>")
+def eliminar_usuario(id):
+    if not 'usuario' in session or session['id'] != 'admin':
+        return redirect(url_for('index'))
+    res = requests.delete(f"http://localhost:5001/eliminar_usuario/{id}")   #Envia una request delete a la API con el parametro id (del usuario)
+    res = res.json()
+    flash(res["message"])   #Imprime la respuesta de la solicitud, puede ser un mensaje exitoso o de error
+    return redirect(url_for("gestion_usuarios"))
 
 @app.route("/opiniones", methods=["GET", "POST"])
 def opinion():
