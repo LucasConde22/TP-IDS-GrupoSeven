@@ -58,6 +58,8 @@ def contacto():
 
 @app.route("/reservaciones", methods=["GET", "POST"])
 def reservaciones():    #Misma logica que la funcion ya comentada 'contacto'
+    if "usuario" in session and session['id'] == 'admin':
+        return redirect(url_for("index"))
     if request.method == "POST":
         info = request.form.to_dict(flat=True)
         res = requests.post('http://localhost:5001/reservar', json=info)
@@ -115,7 +117,7 @@ def logout():   #Limpia el usuario e id del objeto session para que al querer lo
 @app.route("/mis_reservas")
 def mis_reservas():
     #Si no hay una sesion iniciada no deberia aparecer la pestana de mis reservas
-    if not 'usuario' in session:    #Aun asi si un usuario no logueado pone la url /mis_reservas lo envia a la pagina principal
+    if not 'usuario' in session or session['id'] == 'admin':    #Aun asi si un usuario no logueado pone la url /mis_reservas lo envia a la pagina principal
         return redirect(url_for('index'))
     data = {"id": session['id']}    #Crea un dicc con la key 'id' y de value el id del usuario en sesion
     res = requests.get('http://localhost:5001/mis_reservas', json=data) #Manda el dicc con el id del usuario para buscar sus reservas
@@ -124,7 +126,7 @@ def mis_reservas():
 
 @app.route("/cancelar_reserva/<id>")
 def cancelar_reserva(id):
-    if not 'usuario' in session:
+    if not 'usuario' in session or session['id'] == 'admin':
         return redirect(url_for('index'))
     res = requests.delete(f"http://localhost:5001/eliminar_reserva/{id}")   #Envia una request delete a la API con el parametro id (de la reserva)
     res = res.json()
@@ -133,7 +135,7 @@ def cancelar_reserva(id):
 
 @app.route("/opiniones", methods=["GET", "POST"])
 def opinion():
-    if not 'usuario' in session:
+    if not 'usuario' in session or session['id'] == 'admin':
         return redirect(url_for('index'))
     if request.method == "POST":
         #Obtiene texto de resena y numero (del 1 al 5) de rating del formulario

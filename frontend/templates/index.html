@@ -46,7 +46,9 @@
 	          <li class="nav-item"><a href="{{url_for('about')}}" class="nav-link">About</a></li>
 	          <li class="nav-item"><a href="{{url_for('contacto')}}" class="nav-link">Contacto</a></li>
 		{% if session['usuario'] %}
+		{% if session['id'] != 'admin' %}
 			<li class="nav-item"><a href="{{url_for('mis_reservas')}}" class="nav-link">Mis Reservas</a></li>
+		{% endif %}
 			  <li class="nav-item"><a href="{{url_for('logout')}}" class="nav-link">Cerrar sesión<i class="bi bi-box-arrow-in-right" style="margin-left: 0.2cm;"></i></a></li>
 		{% else %}
 			<li class="nav-item"><a href="{{url_for('login')}}" class="nav-link">Iniciar sesión<i class="bi bi-box-arrow-in-left" style="margin-left: 0.2cm;"></i></a></li>
@@ -92,7 +94,11 @@
     		<div class="row">
     			<div class="col-lg-12">
 						<div class="btn-reserva">
+							{% if 'usuario' in session and session['id'] == 'admin' %}
+								<a href="{{ url_for('reservaciones') }}"><button type="button" class="btn btn-primary btn-estilo">¡Administrá!</button></a>
+							{% else %}
 							<a href="{{ url_for('reservaciones') }}"><button type="button" class="btn btn-primary btn-estilo">¡Reservá!</button></a>
+							{% endif %}
 						</div>
 				</div>
 	    		</div>
@@ -303,7 +309,9 @@
 		{% if session['usuario'] %}
     		<div class="container_boton_opinion">
         		<a href="{{ url_for('opinion') }}">
-            		<button class="boton">¡Dejanos tu opinión!</button>
+					{% if not 'usuario' in session or session['id'] != 'admin' %}
+            			<button class="boton">¡Dejanos tu opinión!</button>
+					{% endif %}
         		</a>
     		</div>
 	   {% else %}
