@@ -33,14 +33,9 @@
         </div>
         <div class="row block-9">
           <div class="col-md-6 order-md-last d-flex">
-            {% with mensajes = get_flashed_messages()%}
-            {% if mensajes%}
-                {% for mensaje in mensajes%}
-                    <h2>{{mensaje}}</h2>
-                {%endfor%}
-            {%endif%}
-          {%endwith%}
+            
             <form action="{{url_for('contacto')}}" class="bg-white p-5 contact-form" method="post">
+            
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="Nombre" name="nombre">
               </div>
@@ -56,6 +51,15 @@
               <div class="form-group">
                 <input type="submit" value="Envia tu mensaje" class="btn btn-primary btn-blanco py-3 px-5">
               </div>
+              {% with mensajes = get_flashed_messages()%}
+              {% if mensajes%}
+                {% for mensaje in mensajes%}
+                
+                    <div class="alert alert-success" role="alert" style="height: 1.5cm;">{{mensaje}}</div>
+                
+                {%endfor%}
+              {%endif%}
+              {%endwith%}
             </form>
           
           </div>
