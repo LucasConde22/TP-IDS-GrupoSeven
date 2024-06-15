@@ -39,7 +39,9 @@ def habitacion_deluxe():
 
 @app.route("/restaurante")
 def restaurante():
-    return render_template("restaurant.html")
+    res = requests.get('http://localhost:5001/buscar_platos') 
+    res = res.json()
+    return render_template("restaurant.html",platos = res)
 
 @app.route("/administracion")
 def administracion():
