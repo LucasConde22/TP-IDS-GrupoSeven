@@ -40,7 +40,7 @@
                 <input type="text" class="form-control" placeholder="Nombre" name="nombre">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Email" name="email">
+                <input name="email" type="email" class="form-control" placeholder="Email">
               </div>
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="Asunto" name="asunto">
@@ -55,7 +55,7 @@
               {% if mensajes%}
                 {% for mensaje in mensajes%}
                 
-                    <div class="alert alert-success" role="alert" style="height: 1.5cm;">{{mensaje}}</div>
+                    <div class="alert alert-success" role="alert" style="height: 2cm;">{{mensaje}}</div>
                 
                 {%endfor%}
               {%endif%}
