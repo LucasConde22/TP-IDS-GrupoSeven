@@ -5,7 +5,12 @@ from datetime import datetime
 
 def calcular_noches(entrada, salida):
     #Dadas dos fechas, una de entrada y otra de salida, calcula cuantos dias durará la estadía.
-    return (datetime.strptime(salida, '%Y-%m-%d') - datetime.strptime(entrada, '%Y-%m-%d')).days
+    fecha_entrada = datetime.strptime(entrada, '%Y-%m-%d')
+    fecha_salida = datetime.strptime(salida, '%Y-%m-%d')
+    hoy = datetime.today().date()
+    if fecha_entrada.date() < hoy:
+        return 0
+    return (fecha_salida - fecha_entrada).days
 
 app = Flask(__name__)
 #Create_engine (de la libreria SQLAlchemy) crea un motor de BDD, el cual administrara conexiones con la misma y ejecutara consultas SQL
@@ -86,6 +91,9 @@ def reservar():
     descuento = descuento.fetchone()
     precio = result.fetchone()
     noches = calcular_noches(reserva['entrada'], reserva['salida']) #Llama a funcion aux 'calcular_noches'
+    if noches < 1:
+        conn.close()
+        return jsonify({'message': 'Debe ingresar fechas válidas!'}), 404
     valor_reserva = precio[0] * noches - (precio[0] * noches * descuento[0] * 0.01)  #Multiplica el precio de la habitacion por la cantidad de noches, hace el descuento correspondiente, y obtiene valor total de la reserva
     
     #Modifica la query con un nuevo texto de consulta SQL que va a insertar la nueva reserva en la BDD
@@ -288,6 +296,25 @@ def eliminar_usuario(id):
         return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
     conn.close()
     return jsonify({'message': "El usuario fue eliminado correctamente!"}), 201
+
+@app.route('/buscar_platos', methods=['GET'])
+def buscar_platos():
+    conn = engine.connect()  
+    try:   
+        result = conn.execute(text(f"SELECT * FROM menu;"))
+    except SQLAlchemyError as err:
+        conn.close()
+        return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
+    
+    platos = []
+    for row in result:  
+        entity = {}
+        entity['plato'] = row.plato
+        entity['descripcion'] = row.descripcion
+        entity['precio'] = row.precio
+        entity['imagenes'] = row.imagenes
+        platos.append(entity)
+    return jsonify(platos), 200
 
 if __name__ == "__main__":
     app.run("0.0.0.0", port="5001", debug=True)
