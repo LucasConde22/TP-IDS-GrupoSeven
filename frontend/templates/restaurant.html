@@ -36,38 +36,7 @@
         	<div class="col-md-6">
             {% for plato in platos %}
             <div class="pricing-entry d-flex ftco-animate">
-              {% if plato['plato'] == 'Bife a la Parrilla con Papas'%}
-              <div class="img" style="background-image: url('{{ url_for('static', filename='images/menu-4.jpg') }}');"></div>
-              {% endif %}
-
-              {% if plato['plato'] == 'Cheesecake Frutos Rojos'%}
-              <div class="img" style="background-image: url('{{ url_for('static', filename='images/menu-1.jpg') }}');"></div>
-              {% endif %}
-
-              {% if plato['plato'] == 'Crème Brûlée'%}
-              <div class="img" style="background-image: url('{{ url_for('static', filename='images/menu-10.jpg') }}');"></div>
-              {% endif %}
-
-              {% if plato['plato'] == 'Ravioles de Langosta'%}
-              <div class="img" style="background-image: url('{{ url_for('static', filename='images/menu-9.jpg') }}');"></div>
-              {% endif %}
-
-              {% if plato['plato'] == 'Crêpes de Dulce de Leche'%}
-              <div class="img" style="background-image: url('{{ url_for('static', filename='images/menu-6.jpg') }}');"></div>
-              {% endif %}
-
-              {% if plato['plato'] == 'Filete Mignon con Salsa de Trufas'%}
-              <div class="img" style="background-image: url('{{ url_for('static', filename='images/menu-2.jpg') }}');"></div>
-              {% endif %}
-
-              {% if plato['plato'] == 'Mousse de Malbec'%}
-              <div class="img" style="background-image: url('{{ url_for('static', filename='images/menu-7.jpg') }}');"></div>
-              {% endif %}
-
-              {% if plato['plato'] == 'Pescado a la Parrilla con Ensalada'%}
-              <div class="img" style="background-image: url('{{ url_for('static', filename='images/menu-5.jpg') }}');"></div>
-              {% endif %}
-
+              <div class="img" style="background-image: url('{{ url_for('static', filename='images/' + plato['imagenes']) }}');"></div>
                   <div class="desc pl-3">
                     <div class="d-flex text align-items-center">
                       <h3><span>{{plato['plato']}}</span></h3>

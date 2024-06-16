@@ -210,6 +210,7 @@ def buscar_platos():
         entity['plato'] = row.plato
         entity['descripcion'] = row.descripcion
         entity['precio'] = row.precio
+        entity['imagenes'] = row.imagenes
         platos.append(entity)
     return jsonify(platos), 200
 
