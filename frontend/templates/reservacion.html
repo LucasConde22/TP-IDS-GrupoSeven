@@ -21,21 +21,21 @@
                     <input name="usuario" type="text" value="{{ session['id'] }}" hidden> <!--No sacar!!!!-->
                         <div class="col-12">
                             <div class="form-floating date" id="date4" data-target-input="nearest">
-                                <label for="#">Fecha de Check In</label>
-                                <input name="entrada" type="date" placeholder="Check In">
+                                <input name="entrada" type="date" placeholder="Check In" class="form-control">
+                                <label for="#" style="font-size: 18px;">Fecha de Check In</label>
                             </div>
                         </div>
                             
                         </div>
                         <div class="col-12">
                             <div class="form-floating date" id="date4" data-target-input="nearest">
-                                <label for="#">Fecha de Check Out</label>
-                                <input name="salida" type="date" placeholder="Check Out">
+                                <input name="salida" type="date" placeholder="Check Out" class="form-control">
+                                <label for="#" style="font-size: 18px;">Fecha de Check Out</label>
                             </div>
                         </div>
-                        <div class="col-12"  style="margin-top: 40px;">
+                        <div class="col-12"  >
                             <div class="form-floating" style="font-size: large;">
-                                <select class="form-select" id="select1" name="huespedes" style="margin-right: 0.5cm;">
+                                <select class="form-control" id="select1" name="huespedes" style="margin-right: 0.5cm;">
                                   <option value="1">1</option>
                                   <option value="2">2</option>
                                   <option value="3">3</option>
@@ -49,7 +49,7 @@
                         
                         <div class="col-12">
                             <div class="form-floating" style="font-size: large;">
-                                <select class="form-select" id="select3", name="tipo" style="margin-right: 0.5cm;">
+                                <select class="form-control" id="select3", name="tipo" style="margin-right: 0.5cm;">
                                   <option value="simple">Simple</option>
                                   <option value="master">Master</option>
                                   <option value="deluxe">Deluxe</option>
@@ -82,8 +82,11 @@
                         </div>
                 </form>
                 {% else %}
-                <h2>Debe iniciar sesión para hacer una reserva:</h2>
-                <a href="{{ url_for('login') }}"><input type="submit" value="Iniciar sesión" class="btn btn-primary btn-blanco py-3 px-4 align-self-stretch"></a>
+                <div class="alert alert-warning" role="alert" style="margin-top: 1cm; margin-bottom: 0px;">
+                    <p style="font-size: 50px;text-align: center"><strong>¡Ups!</strong></p>
+                    <p style="font-size: 15px; text-align: center;">Por favor <strong>inicie sesión</strong> para hacer una reserva</p>
+                    <a href="{{ url_for('login') }}"><input type="submit" value="Iniciar sesión" class="btn btn-primary btn-blanco w-100 py-3 align-self-stretch"></a>
+                </div>
                 {% endif %}
             </div>
         </div>

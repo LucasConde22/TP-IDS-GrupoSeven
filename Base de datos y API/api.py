@@ -195,5 +195,25 @@ def obtener_id():
     conn.close()
     return jsonify({'id': row[0]}), 201
 
+@app.route('/buscar_platos', methods=['GET'])
+def buscar_platos():
+    conn = engine.connect()  
+    try:   
+        result = conn.execute(text(f"SELECT * FROM menu;"))
+    except SQLAlchemyError as err:
+        conn.close()
+        return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
+    
+    platos = []
+    for row in result:  
+        entity = {}
+        entity['plato'] = row.plato
+        entity['descripcion'] = row.descripcion
+        entity['precio'] = row.precio
+        entity['imagenes'] = row.imagenes
+        platos.append(entity)
+    return jsonify(platos), 200
+
+
 if __name__ == "__main__":
-    app.run("127.0.0.1", port="5000", debug=True)
+    app.run("127.0.0.1", port="5001", debug=True)
