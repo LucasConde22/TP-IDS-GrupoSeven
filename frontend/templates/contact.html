@@ -65,15 +65,6 @@
               <div class="form-group">
                 <input type="submit" value="Envia tu mensaje" class="btn btn-primary btn-blanco py-3 px-5">
               </div>
-              {% with mensajes = get_flashed_messages()%}
-              {% if mensajes%}
-                {% for mensaje in mensajes%}
-                
-                    <div class="alert alert-success" role="alert" style="height: 2cm;">{{mensaje}}</div>
-                
-                {%endfor%}
-              {%endif%}
-              {%endwith%}
             </form>
           
           </div>
