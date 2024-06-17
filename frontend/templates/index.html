@@ -137,27 +137,36 @@
 				</div>
 			</div>
 		</section>
-<section style="margin-top: 70px">
-	<div class="banner" style="background-image: url({{url_for('static', filename = 'images/Banner Clásico Ofertas y Descuentos Moderno Gris.png')}}); background-repeat: no-repeat;">
-		<div class="content">
-		  <div class="left">
-			<div class="info">
-				<h5>NEXUS HOTEL</h5>
-			  <div class="offer">
-				<div class="offer-text">
-				  <h2>CÓDIGO IDS</h2>
-				  <p>Disfrutá de un 10% de descuento en todas tus reservas</p>
-				  <a href="{{url_for('reservaciones')}}"><button class="boton-promocion">¡RESERVA YA!</button></a>
+	
+		
+	<section style="margin-top: 70px">
+		<div class="carousel-testimony owl-carousel ftco-owl">
+			{% for promocion, valores in promociones.items() %}
+			<div class="item">
+			<div class="banner" style="background-image: url({{url_for('static', filename = 'images/Banner Clásico Ofertas y Descuentos Moderno Gris.png')}}); background-repeat: no-repeat;">
+				<div class="contenido-oferta">
+					<div class="left-of">
+						<div class="info">
+							<h5>NEXUS HOTEL</h5>
+							<div class="offer">
+								<div class="offer-text">
+								<h2>CÓDIGO {{promocion}}</h2>
+								<p>Disfrutá de un {{valores['descuento']}}% de descuento en habitaciones: {{', '.join(valores['habitaciones'])}}</p>
+								<a href="{{url_for('reservaciones')}}"><button class="boton-promocion">¡Reservá ya!</button></a>
+								<div class="fecha-valida"><p>Válido hasta el {{valores['final'][:-13]}}</p></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="right-of">
+						<img src="{{url_for('static', filename= 'images/woman-pointing.png')}}" alt="Woman Pointing" class="woman-pointing">
+					</div>
 				</div>
-			  </div>
 			</div>
-		  </div>
-		  <div class="right">
-			<img src="{{url_for('static', filename= 'images/woman-pointing.png')}}" alt="Woman Pointing" class="woman-pointing">
-		  </div>
+			</div>
+			{% endfor %}
 		</div>
-	  </div>
-</section>
+	</section>
 
 	<section class="ftco-section">
       <div class="container">
