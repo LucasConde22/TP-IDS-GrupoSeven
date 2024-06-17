@@ -10,7 +10,7 @@ COPY . .
 RUN pip install -r frontend/src/requirements.txt
 
 # copia el archivo start que corre la app.py y la api.py y le da permisos
-COPY frontend/start.sh /app/start.sh
+COPY start.sh /app/start.sh
 RUN chmod +x /app/start.sh
 
 # Expone los puertos necesarios
