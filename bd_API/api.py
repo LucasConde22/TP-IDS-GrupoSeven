@@ -333,6 +333,7 @@ def obtener_ultimas_promociones():
         promociones[row.codigo]['descuento'] = row.descuento
         promociones[row.codigo]['final'] = row.fin
         
+    conn.close()
     return jsonify(promociones), 200
 
 
