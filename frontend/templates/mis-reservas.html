@@ -9,7 +9,7 @@
         {% with mensajes = get_flashed_messages()%}
             {% if mensajes%}
                 {% for mensaje in mensajes%}
-                <div class="alert alert-success" role="alert" style="width:10cm; margin-left: 3cm;">
+                <div class="alert alert-warning" role="alert" style="width:10cm;">
                     {{ mensaje }}
                 </div>
                 {%endfor%}
@@ -51,7 +51,9 @@
                     {% endfor %}
                 </div>
             {% else %}
-                <p>No tienes reservas actualmente.</p>
+            <div class="alert alert-warning" role="alert" width ="10cm;">
+                No tienes reservas actualmente.
+            </div>
             {% endif %}
         </div>
     </section>

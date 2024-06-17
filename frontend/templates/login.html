@@ -17,9 +17,15 @@
                     {% with mensajes = get_flashed_messages()%}
                     {% if mensajes%}
                         {% for mensaje in mensajes%}
-                        <div class="alert alert-warning col-12" role="alert" style="margin-bottom: 20px; width: 95% ;">
-                            {{ mensaje }}
-                        </div>
+                        {% if mensaje == "Usuario creado correctamente!" %}
+                                <div class="alert alert-success col-12" role="alert" style="margin-bottom: 10px;width: 94%;">
+                                    {{ mensaje }}
+                                </div>
+                            {% else %}
+                                <div class="alert alert-warning col-12" role="alert" style="margin-bottom: 10px;width: 94%;">
+                                    {{ mensaje }}
+                                </div>
+                            {%endif%}
                         {%endfor%}
                         {%endif%}
                         {%endwith%}
