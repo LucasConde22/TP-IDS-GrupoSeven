@@ -226,7 +226,7 @@ def obtener_id():
     return jsonify({'id': row[0]}), 201 #Si no hubo error, devuelve el id del usuario junto al codigo de solicitud exitosa
 
 @app.route('/guardar_opinion', methods=['POST'])
-def guardar_opinion():  #NO LA COMENTO PORQUE NO SE SI ESTÁ TERMINADA
+def guardar_opinion():
     conn = engine.connect()
     try:
         opinion = request.get_json()
@@ -250,7 +250,7 @@ def guardar_opinion():  #NO LA COMENTO PORQUE NO SE SI ESTÁ TERMINADA
         return jsonify({'message': 'Se ha producido un error inesperado.'}), 500
 
 @app.route('/obtener_ultimas_opiniones', methods=['GET'])
-def obtener_ultimas_opiniones():    #NO LA COMENTO PORQUE NO SE SI ESTÁ TERMINADA
+def obtener_ultimas_opiniones():
     try:
         with engine.connect() as conn:
             result = conn.execute(text("SELECT usuario, resena, rating FROM opiniones ORDER BY id_opin DESC LIMIT 5"))
