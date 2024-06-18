@@ -17,6 +17,7 @@ Para más detalles ver [Informe](Informe.pdf)
 - Python 3
 - Flask
 - Pip
+- Pipenv
 - Docker (opcional)
 - Docker compose (opcional)
 
@@ -42,11 +43,15 @@ Para instalar flask y las librerias necesarias ejecutar el siguiente comando den
 ```bash
 sh init.sh
 ```
-Si pip ni pipenv se encuentran instalados, ejecutar los siguientes comandos:
+Si pip no se encuentra instalado, ejecutar los siguientes comandos:
 ```bash
 sudo apt-get update
 sudo apt-get install python3-pip
-pip install pipenv --user
+```
+Luego, para instalar pipenv, ejecutar los siguientes comandos:
+```bash
+pip install --upgrade pip
+pip install pipenv
 ```
 
 ## Iniciar Página Web
