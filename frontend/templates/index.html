@@ -150,7 +150,11 @@
 								<div class="offer">
 									<div class="offer-text">
 									<h2>CÓDIGO {{promocion}}</h2>
+									{% if ', '.join(valores['habitaciones']) == 'simple, master, deluxe' %}
+										<p>Disfrutá de un {{valores['descuento']}}% de descuento en todas las habitaciones</p>
+									{% else %}
 									<p>Disfrutá de un {{valores['descuento']}}% de descuento en habitaciones: {{', '.join(valores['habitaciones'])}}</p>
+									{% endif %}
 									<a href="{{url_for('reservaciones')}}"><button class="boton-promocion">¡Reservá ya!</button></a>
 									<div class="fecha-valida"><p>Válido hasta el {{valores['final'][:-13]}}</p></div>
 									</div>
