@@ -14,16 +14,18 @@
         <div class="col-lg-6">
             <div class="wow fadeInUp" data-wow-delay="0.2s">
                 <form action="{{ url_for('signup') }}" method="post">
-                    {% with mensajes = get_flashed_messages()%}
+                    {% with mensajes = get_flashed_messages() %}
                     {% if mensajes%}
                         {% for mensaje in mensajes%}
-                        <p>{{mensaje}}</p>
+                            <div class="alert alert-warning col-12" role="alert" style="margin-bottom: 10px;width: 94%;">
+                                {{ mensaje }}
+                            </div>
                         {%endfor%}
                     {%endif%}
                     {%endwith%}
                     <div class="col-12">
                         <div class="form-floating date" id="date4" data-target-input="nearest">
-                            <input name="email" type="text" class="form-control" placeholder="correo@dominio">
+                            <input name="email" type="email" class="form-control" placeholder="correo@dominio">
                             <label for="#">Correo electrónico</label>
                         </div>
                     </div>
@@ -42,7 +44,7 @@
                     <div class="col-12">
                         <div class="form-floating date" id="date4" data-target-input="nearest">
                             <div class="password-container">
-                                <input name="contra" id="password" type="password" class="form-control" placeholder="Contraseña">
+                                <input name="contra" id="password" type="password" class="form-control" placeholder="Contraseña" minlength="8">
                                 <button type="button" id="togglePassword" class="btn btn-secondary">Mostrar</button>
                                 <label for="password">Contraseña</label>
                             </div>

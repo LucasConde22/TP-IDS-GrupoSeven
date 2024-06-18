@@ -17,19 +17,27 @@
                     {% with mensajes = get_flashed_messages()%}
                     {% if mensajes%}
                         {% for mensaje in mensajes%}
-                        <p>{{mensaje}}</p>
+                        {% if mensaje == "Usuario creado correctamente!" %}
+                                <div class="alert alert-success col-12" role="alert" style="margin-bottom: 10px;width: 94%;">
+                                    {{ mensaje }}
+                                </div>
+                            {% else %}
+                                <div class="alert alert-warning col-12" role="alert" style="margin-bottom: 10px;width: 94%;">
+                                    {{ mensaje }}
+                                </div>
+                            {%endif%}
                         {%endfor%}
                         {%endif%}
                         {%endwith%}
                         <div class="col-12">
                             <div class="form-floating date" id="date4" data-target-input="nearest">
-                                <input name="user" type="text" class="form-control" placeholder="Usuario">
+                                <input name="user" type="text" class="form-control" placeholder="Usuario" required>
                                 <label for="#">Tu usuario</label>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="password-container" id="date4" data-target-input="nearest">
-                                <input name="contra" type="password" class="form-control" placeholder="Contraseña" id="password">
+                                <input name="contra" type="password" class="form-control" placeholder="Contraseña" id="password" required>
                                 <button type="button" id="togglePassword" class="btn btn-secondary">Mostrar</button>
                                 <label for="#">Tu contraseña</label>
                             </div>

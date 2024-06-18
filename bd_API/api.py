@@ -316,5 +316,26 @@ def buscar_platos():
         platos.append(entity)
     return jsonify(platos), 200
 
+@app.route('/obtener_ultimas_promociones', methods=['GET'])
+def obtener_ultimas_promociones():
+    conn = engine.connect()  
+    try:   
+        result = conn.execute(text(f"SELECT * FROM promociones;"))
+    except SQLAlchemyError as err:
+        conn.close()
+        return jsonify({'message': 'Se ha producido un error: ' + str(err.__cause__)}), 500
+    
+    promociones = {}
+    for row in result:  
+        promociones[row.codigo]  = promociones.get(row.codigo,{})     
+        promociones[row.codigo] = promociones.get(row.codigo,{})
+        promociones[row.codigo]['habitaciones'] = promociones[row.codigo].get('habitaciones',[]) + [row.tipo_habitacion]
+        promociones[row.codigo]['descuento'] = row.descuento
+        promociones[row.codigo]['final'] = row.fin
+        
+    conn.close()
+    return jsonify(promociones), 200
+
+
 if __name__ == "__main__":
     app.run("0.0.0.0", port="5001", debug=True)

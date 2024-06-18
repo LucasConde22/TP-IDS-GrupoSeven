@@ -137,8 +137,40 @@
 				</div>
 			</div>
 		</section>
+	
+		
+	<section style="margin-top: 70px">
+		<div class="single-slider owl-carousel">
+			{% for promocion, valores in promociones.items() %}
+				<div class="item">
+					<div class="banner" style="background-image: url({{url_for('static', filename = 'images/Banner Clásico Ofertas y Descuentos Moderno Gris.png')}}); background-repeat: no-repeat;">
+						<div class="left">
+							<div class="texto-banner">
+								<h5 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">NEXUS HOTEL</h5>
+								<div class="offer">
+									<div class="offer-text">
+									<h2>CÓDIGO {{promocion}}</h2>
+									{% if ', '.join(valores['habitaciones']) == 'simple, master, deluxe' %}
+										<p>Disfrutá de un {{valores['descuento']}}% de descuento en todas las habitaciones</p>
+									{% else %}
+									<p>Disfrutá de un {{valores['descuento']}}% de descuento en habitaciones: {{', '.join(valores['habitaciones'])}}</p>
+									{% endif %}
+									<a href="{{url_for('reservaciones')}}"><button class="boton-promocion">¡Reservá ya!</button></a>
+									<div class="fecha-valida"><p>Válido hasta el {{valores['final'][:-13]}}</p></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="right-of">
+							<img src="{{url_for('static', filename= 'images/woman-pointing.png')}}" alt="Woman Pointing" class="woman-pointing">
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</section>
 
-		<section class="ftco-section">
+	<section class="ftco-section">
       <div class="container">
         <div class="row d-flex">
           <div class="col-md-3 d-flex align-self-stretch ftco-animate">
@@ -207,7 +239,7 @@
     		<div class="row">
     			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
     				<div class="room">
-    					<a href="{{url_for('habitaciones')}}" class="img d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static', filename = 'images/room-7.jpg')}});">
+    					<a href="{{url_for('habitacion_simple')}}" class="img d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static', filename = 'images/room-7.jpg')}});">
     						<div class="icon d-flex justify-content-center align-items-center">
     							<span class="icon-search2"></span>
     						</div>
@@ -222,7 +254,7 @@
     			</div>
     			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
     				<div class="room">
-    					<a href="{{url_for('habitaciones')}}" class="img d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static', filename = 'images/room-8.jpg')}});">
+    					<a href="{{url_for('habitacion_master')}}" class="img d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static', filename = 'images/room-8.jpg')}});">
     						<div class="icon d-flex justify-content-center align-items-center">
     							<span class="icon-search2"></span>
     						</div>
@@ -237,7 +269,7 @@
     			</div>
     			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
     				<div class="room">
-    					<a href="{{url_for('habitaciones')}}" class="img d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static', filename = 'images/room-2.jpg')}});">
+    					<a href="{{url_for('habitacion_deluxe')}}" class="img d-flex justify-content-center align-items-center" style="background-image: url({{url_for('static', filename = 'images/room-2.jpg')}});">
     						<div class="icon d-flex justify-content-center align-items-center">
     							<span class="icon-search2"></span>
     						</div>

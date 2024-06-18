@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 4.7.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 06-06-2024 a las 03:08:31
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Servidor: sql10.freemysqlhosting.net
+-- Tiempo de generación: 18-06-2024 a las 12:53:02
+-- Versión del servidor: 5.5.62-0ubuntu0.14.04.1
+-- Versión de PHP: 7.0.33-0ubuntu0.16.04.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,8 +19,101 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `tp_ids`
+-- Base de datos: `sql10712305`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `administradores`
+--
+
+CREATE TABLE `administradores` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+  `usuario` varchar(30) CHARACTER SET utf8mb4 NOT NULL,
+  `email` varchar(254) CHARACTER SET utf8mb4 NOT NULL,
+  `contra` varchar(128) CHARACTER SET utf8mb4 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `administradores`
+--
+
+INSERT INTO `administradores` (`id`, `nombre`, `usuario`, `email`, `contra`) VALUES
+(1, 'Administrador 1', 'admin1', 'administrador1@nexus.com', '12345678');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `contacto`
+--
+
+CREATE TABLE `contacto` (
+  `nombre` varchar(50) NOT NULL,
+  `email` varchar(254) NOT NULL,
+  `asunto` text NOT NULL,
+  `mensaje` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `contacto`
+--
+
+INSERT INTO `contacto` (`nombre`, `email`, `asunto`, `mensaje`) VALUES
+('Lucas Ariel Conde Cardó', 'lconde@fi.uba.ar', 'Consuta', 'Cómo hago una reserva?'),
+('Lucas Ariel Conde Cardó', 'conde.cardo.lucas@gmail.com', 'Consulta sobre cómo llegar', 'Cómo llego al hotel?'),
+('Juan', 'Juanma@gmail.com', 'Consulta', 'ejemplo consulta'),
+('fsfsdfsd', 'fqfwqfqwf', 'wfqwfs', 'fsdfsdf'),
+('Juan', 'Juanma@gmail.com', 'Consulta', 'gagassga'),
+('Juanafas', 'Juanma@gmfsaail.com', 'fasConsulta', 'gagassga'),
+('Juanafas', 'Juanma@gmfsaail.com', 'fasConsulta', 'gagassga'),
+('Juanafas', 'Juanma@gmfsaail.com', 'fasConsulta', 'gagassga'),
+('Juanafas', 'Juanma@gmfsaail.com', 'fasConsulta', 'asfas'),
+('ll', 'll', 'll', 'llll'),
+('Lola', 'lola@gmail.com', 'll', 'll'),
+('', '', '', 'll'),
+('', '', '', 'll'),
+('', '', '', 'f'),
+('', '', '', 'f'),
+('', '', '', 'f'),
+('', '', '', 'f'),
+('', '', '', 'f'),
+('', '', '', 'f'),
+('', '', '', 'f'),
+('', '', '', 'f'),
+('', '', '', 'f'),
+('', '', '', 'f'),
+('', '', '', 'f'),
+('', '', '', 'f'),
+('', '', '', 'f'),
+('', '', '', 'f'),
+('', '', '', 'f'),
+('', '', '', ''),
+('', '', '', ''),
+('', '', '', ''),
+('', '', '', ''),
+('', '', '', ''),
+('', '', '', ''),
+('', '', '', ''),
+('', '', '', ''),
+('', '', '', ''),
+('', '', '', ''),
+('Daniela', 'unemail@de.prueba.com', 'Una consultita', 'Hola! pregunta....'),
+('', '', '', ''),
+('', '', '', ''),
+('', '', '', ''),
+('', '', '', ''),
+('', '345678', '3ertyui', 'dfghjk'),
+('', '345678', '3ertyui', 'dfghjk'),
+('', 'hola@gmail.com', '', 'ygOSIABC'),
+('carlos', 'carlos123@gmail.com', '', 'hola'),
+('Lola', 'llola@l', 'll', ''),
+('Daniela Costa', 'unmail@de.prueba.com', 'Una consultita', 'Hola, quería consultar por ...'),
+('Daniela Costa', 'unmail@de.prueba.com', 'Una consultita', 'LLLLLLLLLLLLL'),
+('Daniela Costa', 'unmail@de.prueba.com', 'Una consultita', 'Un mensaje de consulta'),
+('Juanafas', 'Juanma@gmfsaail.com', 'fasConsulta', 'sdg'),
+('sdfsdg', 'sdgsdg@fdfs', 'sdgsdg', 'sdgsdg');
 
 -- --------------------------------------------------------
 
@@ -30,7 +124,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `habitaciones` (
   `numero` int(11) NOT NULL,
   `tipo` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `habitaciones`
@@ -56,6 +150,91 @@ INSERT INTO `habitaciones` (`numero`, `tipo`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `menu`
+--
+
+CREATE TABLE `menu` (
+  `plato` varchar(60) NOT NULL DEFAULT '',
+  `descripcion` varchar(160) DEFAULT NULL,
+  `precio` float DEFAULT NULL,
+  `imagenes` varchar(80) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `menu`
+--
+
+INSERT INTO `menu` (`plato`, `descripcion`, `precio`, `imagenes`) VALUES
+('Bife a la Parrilla con Papas', 'Un suculento corte de carne a la parrilla, cocido a la perfección, acompañado de papas doradas y sazonadas con hierbas frescas', 30, 'menu-2.jpg'),
+('Cheesecake Frutos Rojos', 'Suave y cremoso cheesecake sobre una base crujiente, coronado con una mezcla de frutos rojos frescos y una ligera salsa de frambuesa', 20, 'menu-1.jpg'),
+('Crème Brûlée', 'Un clásico postre francés con una base de crema suave y sabor a vainilla, cubierto con una capa crujiente de azúcar caramelizado', 24, 'menu-10.jpg'),
+('Crêpes de Dulce de Leche', 'Delicados crepes finos y esponjosos, rellenos con dulce de leche artesanal, servidos con una pizca de azúcar impalpable', 15, 'menu-6.jpg'),
+('Filete Mignon con Salsa de Trufas', 'Un jugoso filete mignon, perfectamente cocido y cubierto con una rica salsa de trufas, acompañado de un puré de papas cremoso', 60, 'menu-2.jpg'),
+('Mousse de Malbec', 'Una suave mousse de Malbec, acompañada de una reducción de frutos rojos frescos, que aporta un toque de acidez y dulzura perfectamente equilibrados', 20, 'menu-7.jpg'),
+('Pescado a la Parrilla con Ensalada', 'Un filete de pescado fresco a la parrilla, acompañado de una ensalada crujiente con verduras de temporada y aderezo de limón', 20, 'menu-5.jpg'),
+('Ravioles de Langosta', 'Ravioles hechos a mano, rellenos de langosta fresca y servidos con una salsa de mantequilla y limón, decorados con hierbas frescas', 30, 'menu-9.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `opiniones`
+--
+
+CREATE TABLE `opiniones` (
+  `id_opin` int(11) NOT NULL,
+  `usuario` varchar(30) NOT NULL,
+  `resena` varchar(400) NOT NULL,
+  `rating` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `opiniones`
+--
+
+INSERT INTO `opiniones` (`id_opin`, `usuario`, `resena`, `rating`) VALUES
+(1, 'test_usuario1', 'El hotel es muy lindo', 4),
+(2, 'test_usuario2', 'Hermosa experiencia muy lindo lugar.', 5),
+(3, 'test_usuario1', 'muy bueno el hotel', 5),
+(5, 'Usuario De Prueba', 'buenisimoooo', 5),
+(6, 'Usuario De Prueba', 'Muy lindo el hotel pero la comida es un poco cara', 4),
+(7, 'Usuario De Prueba', 'prueba', 4),
+(8, 'Lola', 'muy bueno!', 5),
+(9, 'Usuario De Prueba', 'trhr', 3),
+(10, 'Usuario De Prueba', 'muy bueno', 3),
+(11, 'Usuario De Prueba', 'muy bueno', 3),
+(12, 'Usuario De Prueba', 'eth', 3),
+(13, 'Usuario De Prueba', 'bueno', 4),
+(14, 'Usuario De Prueba', 'trj', 4),
+(15, 'Usuario De Prueba', 'ydk', 3),
+(16, 'Usuario De Prueba', 'muy buen hotel', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `promociones`
+--
+
+CREATE TABLE `promociones` (
+  `codigo` varchar(15) CHARACTER SET utf8mb4 NOT NULL,
+  `tipo_habitacion` varchar(20) CHARACTER SET utf8mb4 NOT NULL,
+  `descuento` int(11) NOT NULL,
+  `inicio` datetime NOT NULL,
+  `fin` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `promociones`
+--
+
+INSERT INTO `promociones` (`codigo`, `tipo_habitacion`, `descuento`, `inicio`, `fin`) VALUES
+('IDS', 'simple', 10, '2024-06-12 00:00:00', '2024-06-30 00:00:00'),
+('IDS', 'master', 10, '2024-06-12 00:00:00', '2024-06-30 00:00:00'),
+('IDS', 'deluxe', 10, '2024-06-12 00:00:00', '2024-06-30 00:00:00'),
+('NEXUS', 'deluxe', 25, '2024-06-12 00:00:00', '2024-06-30 00:00:00');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `reservas`
 --
 
@@ -68,14 +247,25 @@ CREATE TABLE `reservas` (
   `salida` date NOT NULL,
   `valor` int(11) NOT NULL,
   `huespedes` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `reservas`
 --
 
 INSERT INTO `reservas` (`numero`, `usuario`, `tipo_habitacion`, `habitacion`, `entrada`, `salida`, `valor`, `huespedes`) VALUES
-(31, 1, 'master', 201, '2024-06-07', '2024-06-18', 385, 2);
+(33, 1, 'deluxe', 301, '2024-06-24', '2024-06-30', 480, 2),
+(58, 1, 'master', 201, '2024-10-15', '2024-10-25', 350, 4),
+(59, 1, 'master', 202, '2024-10-15', '2024-10-25', 350, 4),
+(60, 1, 'master', 203, '2024-10-15', '2024-10-25', 315, 4),
+(61, 2, 'deluxe', 301, '2024-10-20', '2024-10-25', 400, 4),
+(62, 2, 'deluxe', 302, '2024-10-20', '2024-10-25', 300, 4),
+(66, 1, 'deluxe', 301, '2024-06-13', '2024-06-24', 660, 6),
+(68, 1, 'simple', 101, '2024-09-19', '2024-08-23', -608, 1),
+(69, 1, 'simple', 102, '2024-09-19', '2024-09-23', 90, 1),
+(70, 1, 'simple', 101, '2024-06-13', '2024-06-19', 150, 1),
+(71, 9, 'simple', 102, '2024-06-13', '2024-06-14', 23, 1),
+(76, 1, 'deluxe', 302, '2024-06-16', '2024-06-20', 320, 1);
 
 -- --------------------------------------------------------
 
@@ -88,12 +278,12 @@ CREATE TABLE `tipos_habitaciones` (
   `caracteristicas` text NOT NULL,
   `capacidad` int(11) NOT NULL,
   `precio` int(11) NOT NULL,
-  `foto1` text DEFAULT NULL,
-  `foto2` text DEFAULT NULL,
-  `foto3` text DEFAULT NULL,
-  `foto4` text DEFAULT NULL,
-  `video` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `foto1` text,
+  `foto2` text,
+  `foto3` text,
+  `foto4` text,
+  `video` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tipos_habitaciones`
@@ -116,7 +306,7 @@ CREATE TABLE `usuarios` (
   `usuario` varchar(30) NOT NULL,
   `email` varchar(254) NOT NULL,
   `contra` varchar(128) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -124,31 +314,28 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `nombre`, `usuario`, `email`, `contra`) VALUES
 (1, 'Usuario De Prueba', 'test_usuario1', 'test_usuario1@ids.com', '12345678'),
-(2, 'Usuario De Prueba 2', 'test_usuario2', 'abcd@qwerty.com', '12345678');
-
-
---
--- Estructura de la tabla `opiniones`
---
-
-CREATE TABLE `opiniones` (
-  `id_opin` int(11) NOT NULL,
-  `usuario` varchar(30) NOT NULL,
-  `resena` varchar(400) NOT NULL,
-  `rating` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `opiniones`
---
-
-INSERT INTO `opiniones` (`id_opin`, `usuario`, `resena`, `rating`) VALUES
-(1, 'test_usuario1', 'El hotel es muy lindo', 4),
-(2, 'test_usuario2', 'Hermosa experiencia muy lindo lugar.', 5);
+(2, 'Usuario De Prueba 2', 'test_usuario2', 'abcd@qwerty.com', '12345678'),
+(3, 'Lucas Ariel Conde Cardó', 'lucasconde_22', 'lconde@fi.uba.ar', '12345678'),
+(8, 'Usuario de Prueba 3', 'test_usuario3', '123456789@abc.com', 'qwerty123'),
+(9, 'Lola', 'Lola', 'lola@gmail.com', '123'),
+(12, 'prueba2', 'prueba2', 'prueba@ll', '123'),
+(13, '', '', 'hola@gmail.com', ''),
+(14, 'Daniela Costa', 'un_usuario', 'unmail@de.prueba.com', '12345678'),
+(15, 'Hugo Mendez', 'un_usuario2', 'unmail2@de.prueba.com', '12345678'),
+(22, 'Brenda Fernández', 'un_usuario3', 'unmail3@de.prueba.com', '13245678'),
+(24, 'Franco Pérez', 'un_usuario4', 'unmail4@de.prueba.com', '12345678'),
+(25, 'Franco Pérez', 'un_usuario5', 'unmail5@de.prueba.com', '12345678'),
+(26, 'Martina Riccardi', 'Martina_', 'martina@gmail.com', '12345678');
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `administradores`
+--
+ALTER TABLE `administradores`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `habitaciones`
@@ -156,6 +343,24 @@ INSERT INTO `opiniones` (`id_opin`, `usuario`, `resena`, `rating`) VALUES
 ALTER TABLE `habitaciones`
   ADD PRIMARY KEY (`numero`),
   ADD KEY `tipo_fk` (`tipo`);
+
+--
+-- Indices de la tabla `menu`
+--
+ALTER TABLE `menu`
+  ADD PRIMARY KEY (`plato`);
+
+--
+-- Indices de la tabla `opiniones`
+--
+ALTER TABLE `opiniones`
+  ADD PRIMARY KEY (`id_opin`);
+
+--
+-- Indices de la tabla `promociones`
+--
+ALTER TABLE `promociones`
+  ADD KEY `tipo` (`tipo_habitacion`);
 
 --
 -- Indices de la tabla `reservas`
@@ -179,37 +384,29 @@ ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `opiniones`
---
-
-ALTER TABLE `opiniones`
-  ADD PRIMARY KEY (`id_opin`);
-
---
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
+-- AUTO_INCREMENT de la tabla `administradores`
+--
+ALTER TABLE `administradores`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `opiniones`
+--
+ALTER TABLE `opiniones`
+  MODIFY `id_opin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+--
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `numero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
-
+  MODIFY `numero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
-
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
-
---
--- AUTO_INCREMENT de la tabla `opinion`
---
-
-ALTER TABLE `opiniones`
-  MODIFY `id_opin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- Restricciones para tablas volcadas
 --
@@ -219,6 +416,12 @@ ALTER TABLE `opiniones`
 --
 ALTER TABLE `habitaciones`
   ADD CONSTRAINT `habitaciones_ibfk_1` FOREIGN KEY (`tipo`) REFERENCES `tipos_habitaciones` (`tipo`);
+
+--
+-- Filtros para la tabla `promociones`
+--
+ALTER TABLE `promociones`
+  ADD CONSTRAINT `promociones_ibfk_1` FOREIGN KEY (`tipo_habitacion`) REFERENCES `tipos_habitaciones` (`tipo`);
 
 --
 -- Filtros para la tabla `reservas`

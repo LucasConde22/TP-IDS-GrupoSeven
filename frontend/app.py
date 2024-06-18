@@ -10,11 +10,21 @@ app.permanent_session_lifetime = timedelta(minutes=60)  #Establece una duracion 
 @app.route("/")
 def index():
     res = requests.get('http://localhost:5001/obtener_ultimas_opiniones')   #Solicitud a API para obtener datos de la BDD
-    if res.status_code == 200:  #Verifica que la solicitud fue exitosa
+    res2 = requests.get('http://localhost:5001/obtener_ultimas_promociones')
+    if res.status_code == 200 and res2.status_code == 200:  #Verifica que la solicitud fue exitosa
         opiniones = res.json()  #Pasamos la respuesta a json para poder manipular la información
-        return render_template("index.html", opiniones=opiniones)   #Renderizamos la pagina principal pasándole por parametro las opiniones de la web
+        promociones = res2.json()
+        return render_template("index.html", opiniones=opiniones, promociones=promociones)   #Renderizamos la pagina principal pasándole por parametro las opiniones de la web
+    elif res.status_code == 200 and res2.status_code != 200:
+        opiniones = res.json()
+        flash("Error al obtener las últimas promociones")
+        return render_template("index.html", opiniones=opiniones,)
+    elif res.status_code != 200 and res2.status_code == 200:
+        promociones = res2.json()
+        flash("Error al obtener las últimas opiniones")
+        return render_template("index.html", promociones=promociones)
     else:
-        flash("Error al obtener las últimas opiniones") #Utilizamos flash para enviar un mensaje temporal de error al usuario
+        flash("Error al obtener las últimas opiniones y promociones") #Utilizamos flash para enviar un mensaje temporal de error al usuario
         return render_template("index.html")
 
 @app.route("/about")
