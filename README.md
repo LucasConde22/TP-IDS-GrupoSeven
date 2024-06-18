@@ -42,10 +42,11 @@ Para instalar flask y las librerias necesarias ejecutar el siguiente comando den
 ```bash
 sh init.sh
 ```
-Si pip no se encuentra instalado, ejecutar los siguientes comandos:
+Si pip ni pipenv se encuentran instalados, ejecutar los siguientes comandos:
 ```bash
 sudo apt-get update
 sudo apt-get install python3-pip
+pip install pipenv --user
 ```
 
 ## Iniciar Página Web
