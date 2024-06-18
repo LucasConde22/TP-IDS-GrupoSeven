@@ -701,19 +701,21 @@ mark,
   position: relative;
   z-index: 1;
   color: #000;
+  margin-top: 2.5cm;
   margin-left: 7cm;
-  margin-top: 1cm;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
 }
-
-.info h2{
+.fecha-valida{
+  margin-left: -7cm;
+  margin-top: 20px;
+}
+.texto-banner  h2{
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bold;
   font-size: 50px;
 }
 
-.info h5{
+.texto-banner  h5{
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bold;
   margin-left: 3px;
